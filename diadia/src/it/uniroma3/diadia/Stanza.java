@@ -1,10 +1,10 @@
 
-
 package it.uniroma3.diadia;
 
 
 /**
- * Classe Stanza - una stanza in un gioco di ruolo.
+ * Stanza:
+ * Questa classe modella una stanza in un gioco di ruolo.
  * Una stanza e' un luogo fisico nel gioco.
  * E' collegata ad altre stanze attraverso delle uscite.
  * Ogni uscita e' associata ad una direzione.
@@ -28,7 +28,7 @@ public class Stanza {
 
 	/**
 	 * Crea una stanza. Non ci sono stanze adiacenti, non ci sono attrezzi.
-	 * @param nome il nome della stanza
+	 * @param nome Il nome della stanza
 	 */
 	public Stanza(String nome) {
 		this.nome = nome;
@@ -41,9 +41,8 @@ public class Stanza {
 
 	/**
 	 * Imposta una stanza adiacente.
-	 *
-	 * @param direzione direzione in cui sara' posta la stanza adiacente.
-	 * @param stanza stanza adiacente nella direzione indicata dal primo parametro.
+	 * @param direzione Direzione in cui sara' posta la stanza adiacente.
+	 * @param stanza Stanza adiacente nella direzione indicata dal primo parametro.
 	 */
 	public void impostaStanzaAdiacente(String direzione, Stanza stanza) {
 		boolean aggiornato = false;
@@ -74,7 +73,7 @@ public class Stanza {
 
 	/**
 	 * Restituisce la nome della stanza.
-	 * @return il nome della stanza
+	 * @return Il nome della stanza
 	 */
 	public String getNome() {
 		return this.nome;
@@ -82,7 +81,7 @@ public class Stanza {
 
 	/**
 	 * Restituisce la descrizione della stanza.
-	 * @return la descrizione della stanza
+	 * @return La descrizione della stanza
 	 */
 	public String getDescrizione() {
 		return this.toString();
@@ -90,7 +89,7 @@ public class Stanza {
 
 	/**
 	 * Restituisce la collezione di attrezzi presenti nella stanza.
-	 * @return la collezione di attrezzi nella stanza.
+	 * @return La collezione di attrezzi nella stanza.
 	 */
 	public Attrezzo[] getAttrezzi() {
 		return this.attrezzi;
@@ -98,8 +97,8 @@ public class Stanza {
 
 	/**
 	 * Mette un attrezzo nella stanza.
-	 * @param attrezzo l'attrezzo da mettere nella stanza.
-	 * @return true se riesce ad aggiungere l'attrezzo, false atrimenti.
+	 * @param attrezzo L'attrezzo da mettere nella stanza.
+	 * @return Restituisce TRUE se riesce ad aggiungere l'attrezzo, altrimenti FALSE
 	 */
 	public boolean addAttrezzo(Attrezzo attrezzo) {
 		if (this.numeroAttrezzi < NUMERO_MASSIMO_ATTREZZI) {
@@ -115,7 +114,7 @@ public class Stanza {
 	/**
 	 * Restituisce una rappresentazione stringa di questa stanza,
 	 * stampadone la descrizione, le uscite e gli eventuali attrezzi contenuti
-	 * @return la rappresentazione stringa
+	 * @return Restituisce una stringa
 	 */
 	public String toString() {
 		StringBuilder risultato = new StringBuilder();
@@ -140,7 +139,7 @@ public class Stanza {
 
 	/**
 	 * Controlla se un attrezzo esiste nella stanza (uguaglianza sul nome).
-	 * @return true se l'attrezzo esiste nella stanza, false altrimenti.
+	 * @return Restituisce TRUE se l'attrezzo esiste nella stanza, altrimenti FALSE 
 	 */
 	public boolean hasAttrezzo(String nomeAttrezzo) {
 		boolean trovato;
@@ -155,8 +154,7 @@ public class Stanza {
 	/**
 	 * Restituisce l'attrezzo nomeAttrezzo se presente nella stanza.
 	 * @param nomeAttrezzo
-	 * @return l'attrezzo presente nella stanza.
-	 * 		   null se l'attrezzo non e' presente.
+	 * @return l'attrezzo presente nella stanza, NULL se l'attrezzo non e' presente.
 	 */
 	public Attrezzo getAttrezzo(String nomeAttrezzo) {
 		Attrezzo attrezzoCercato;
@@ -171,7 +169,7 @@ public class Stanza {
 	/**
 	 * Rimuove un attrezzo dalla stanza (ricerca in base al nome).
 	 * @param attrezzo
-	 * @return true se l'attrezzo e' stato rimosso, false altrimenti
+	 * @return Restituisce TRUE se l'attrezzo e' stato rimosso, altrimenti FALSE
 	 */
 	public boolean removeAttrezzo(Attrezzo attrezzo) {
 		// TODO da implementare

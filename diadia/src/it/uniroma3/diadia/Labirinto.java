@@ -1,13 +1,33 @@
-package it.uniroma3.diadia;
 
+package it.uniroma3.diadia;
+/**
+ * Labirinto:
+ * Questa classe modella un labirinto.
+ * Un labirinto è caratterizzato da due stanze principali: "entrata" e "uscita"; 
+ * le altre stanze vengono generate e connesse tra loro a partire da quelle principali
+ * 
+ * @author Simone
+ * @see Stanza
+ * @version base
+ */
 public class Labirinto {
 	private Stanza entrata;
 	private Stanza uscita;
 	
+	/**
+	 * Crea un labirinto 
+	 */
 	public Labirinto(){
 		initLabirinto();
 	}
 	
+	/**
+	 * Inizializza il labirinto a partire da un "template"
+	 * impostando le stanze principali "entrata" e "uscita",
+	 * collegando tra loro le stanze secondarie
+	 * e generando gli attrezzi che figurano all'interno di esse
+	 * @see Attrezzo
+	 */
 	private void initLabirinto() {
 
 		/* crea gli attrezzi */
@@ -43,19 +63,39 @@ public class Labirinto {
 		this.setEntrata(atrio); 
 		this.setUscita(biblioteca);
 	}
-
+	
+	/**
+	 * Restituisce la stanza iniziale "entrata"
+	 * @return Restituisce un oggetto della classe stanza: entrata
+	 * @see Stanza
+	 */
 	public Stanza getEntrata() {
 		return this.entrata;
 	}
-
+	
+	/**
+	 * Imposta la stanza iniale
+	 * @param entrata Oggetto della classe stanza 
+	 * @see stanza
+	 */
 	private void setEntrata(Stanza entrata) {
 		this.entrata = entrata;
 	}
 	
+	/**
+	 * Restituisce la stanza finale "uscita"
+	 * @return Restituisce un oggetto della classe stanza: uscita
+	 * @see Stanza
+	 */
 	public Stanza getUscita() {
 		return this.uscita;
 	}
-
+	
+	/**
+	 * Imposta la stanza finale
+	 * @param uscita Oggetto della classe stanza 
+	 * @see stanza
+	 */
 	private void setUscita(Stanza uscita) {
 		this.uscita = uscita;
 	}

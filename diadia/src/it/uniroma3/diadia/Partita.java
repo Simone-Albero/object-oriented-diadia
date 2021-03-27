@@ -3,11 +3,10 @@ package it.uniroma3.diadia;
 
 /**
  * Partita:
- * Questa classe modella una partita del gioco
+ * Questa classe modella una partita del gioco.
  * Partita è caratterizzara da un "Labirinto" in cui sono situate le stanze del gioco,
  * una "stanzaVincente" considerata come la stanza finale del gioco
  * una "stanzaCorrente" considerata come la stanza in cui è situato il giocatore
- * un intero "cfu" considerato come il punteggio
  * e una variabile bolleana "finita" che dichiara la fine del gioco
  * 
  * @author  docente di POO
@@ -18,13 +17,11 @@ package it.uniroma3.diadia;
 
 public class Partita {
 
-	static final private int CFU_INIZIALI = 20;
-
 	private Labirinto labirinto;
+	private Giocatore giocatore;
 	private Stanza stanzaCorrente;
 	private Stanza stanzaVincente;
 	private boolean finita;
-	private int cfu;
 	
 	/**
 	 * Genere la Partita a partire da un labirinto ed imposta il punteggio iniziale
@@ -32,10 +29,10 @@ public class Partita {
 	 */
 	public Partita(){
 		this.labirinto = new Labirinto();
+		this.giocatore = new Giocatore();
 		this.setStanzaCorrente(this.labirinto.getEntrata());  
 		this.setStanzaVincente(this.labirinto.getUscita());
 		this.finita = false;
-		this.cfu = CFU_INIZIALI;
 	}
 
 	/**
@@ -87,7 +84,7 @@ public class Partita {
 	 * @return Restituisce il booleano TRUE se la partita e' stata vinta, altrimenti FALSE
 	 */
 	public boolean isFinita() {
-		return finita || vinta() || (cfu == 0);
+		return finita || vinta() || (this.giocatore.getCfu() == 0);
 	}
 
 	/**
@@ -97,19 +94,9 @@ public class Partita {
 		this.finita = true;
 	}
 	
-	/**
-	 * Restituisce il punteggio del giocatore 
-	 * @return Restituisce un intero: cfu
-	 */
-	public int getCfu() {
-		return this.cfu;
+	public Giocatore getGiocatore() {
+		return this.giocatore;
 	}
 	
-	/**
-	 * Imposta il punteggio del giocatore
-	 * @param cfu Intero che rappresenta il punteggio del giocatore
-	 */
-	public void setCfu(int cfu) {
-		this.cfu = cfu;		
-	}	
+	
 }

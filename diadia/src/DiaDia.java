@@ -28,7 +28,7 @@ public class DiaDia {
 			"o regalarli se pensi che possano ingraziarti qualcuno.\n\n"+
 			"Per conoscere le istruzioni usa il comando 'aiuto'.";
 
-	static final private String[] elencoComandi = {"vai", "aiuto", "fine"};
+	static final private String[] elencoComandi = {"vai", "aiuto", "fine", "prendi", "posa"};
 
 	private Partita partita;
 
@@ -67,6 +67,10 @@ public class DiaDia {
 			this.vai(comandoDaEseguire.getParametro(), scannerDiLinee);
 		else if (comandoDaEseguire.getNome().equals("aiuto"))
 			this.aiuto();
+		else if (comandoDaEseguire.getNome().equals("prendi"))
+			this.prendi(comandoDaEseguire.getParametro(), scannerDiLinee);
+		else if (comandoDaEseguire.getNome().equals("posa"))
+			this.posa(comandoDaEseguire.getParametro(), scannerDiLinee);
 		else
 			System.out.println("Comando sconosciuto");
 		}
@@ -126,6 +130,58 @@ public class DiaDia {
 		System.out.println("Grazie di aver giocato!");  // si desidera smettere
 	}
 
+	/**
+	 * 
+	 * @param nomeAttrezzo
+	 * @param scannerDiLinee
+	 */
+	private void prendi(String nomeAttrezzo, Scanner scannerDiLinee) {
+		
+		if(nomeAttrezzo==null) {
+			System.out.println("Cosa vuoi prendere ?");
+			nomeAttrezzo = scannerDiLinee.nextLine();
+		}
+		
+		Attrezzo a= partita.getStanzaCorrente().getAttrezzo(nomeAttrezzo);
+		if(a!=null) {
+			if(partita.getGiocatore().storeAttrezzo(a)) {
+				partita.getStanzaCorrente().removeAttrezzo(a);
+				System.out.println("Attrezzo preso con successo!");
+			}
+			else
+				System.out.println("Inventario pieno!");
+		}
+		else
+			System.out.println("Attrezzo inesistente!");
+	}
+	
+	/**
+	 * 
+	 * @param nomeAttrezzo
+	 * @param scannerDiLinee
+	 */
+	private void posa(String nomeAttrezzo, Scanner scannerDiLinee) {
+		
+		if(nomeAttrezzo==null) {
+			System.out.println("Cosa vuoi posare ?");
+			nomeAttrezzo = scannerDiLinee.nextLine();
+		}
+		
+		Attrezzo a = partita.getGiocatore().getBorsa().getAttrezzo(nomeAttrezzo);
+		if(a!=null) {
+			if(partita.getStanzaCorrente().addAttrezzo(a)) {
+				partita.getGiocatore().dropAttrezzo(nomeAttrezzo);
+				System.out.println("Attrezzo posato con successo!");
+			}
+			else 
+				System.out.println("Impossibile posare l'attrezzo!");
+		}
+		else
+			System.out.println("Attrezzo inesistente!");
+	}
+	
+	
+	
 	public static void main(String[] argc) {
 		DiaDia gioco = new DiaDia();
 		gioco.gioca();

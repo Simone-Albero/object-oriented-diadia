@@ -43,9 +43,12 @@ public class Giocatore {
 		return this.inventario;
 	}
 	
-	public void addAttrezzo(Attrezzo attrezzo) {
-		this.inventario.addAttrezzo(attrezzo);
+	public boolean storeAttrezzo(Attrezzo attrezzo) {
+		return this.inventario.addAttrezzo(attrezzo);
 	}
 	
+	public void dropAttrezzo(String  nomeAttrezzo) {
+		this.inventario.removeAttrezzo(nomeAttrezzo);
+	}
 	
 }

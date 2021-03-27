@@ -111,9 +111,23 @@ public class Borsa {
 		return this.getAttrezzo(nomeAttrezzo)!=null;
 	}
 	
+	/**
+	 * Rimuove e restituisce un attrezzo dalla borsa (ricerca in base al nome).
+	 * @param nomeAttrezzo Stringa che rappresenta il nome dell'attrezzo
+	 * @return Restituisce un instanza della classe Attrezzo
+	 * @see Attrezzo
+	 */
 	public Attrezzo removeAttrezzo(String nomeAttrezzo) {
 		Attrezzo a = null;
-		// ---> TODO (implementare questo metodo) <---
+		for(int i=0; i<this.numeroAttrezzi; i++) {
+			if(this.attrezzi[i].getNome().equals(nomeAttrezzo)) {
+				a = this.attrezzi[i];
+				this.attrezzi[i] = this.attrezzi[this.numeroAttrezzi-1];
+				this.attrezzi[this.numeroAttrezzi-1] = null;
+				this.numeroAttrezzi--;
+				return a;
+			}		
+		}		
 		return a;
 	}
 	

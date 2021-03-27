@@ -5,6 +5,7 @@ package it.uniroma3.diadia;
  * Partita:
  * Questa classe modella una partita del gioco.
  * Partita è caratterizzara da un "Labirinto" in cui sono situate le stanze del gioco,
+ * da un Giocatore responasbile della gestione del punteggio e dell'inventario,
  * una "stanzaVincente" considerata come la stanza finale del gioco
  * una "stanzaCorrente" considerata come la stanza in cui è situato il giocatore
  * e una variabile bolleana "finita" che dichiara la fine del gioco

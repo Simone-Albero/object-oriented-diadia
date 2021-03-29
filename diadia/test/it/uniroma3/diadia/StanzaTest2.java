@@ -1,5 +1,6 @@
-import it.uniroma3.diadia.Attrezzo;
-import it.uniroma3.diadia.Stanza;
+package it.uniroma3.diadia;
+import it.uniroma3.diadia.ambienti.Stanza;
+import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class StanzaTest2 {
 

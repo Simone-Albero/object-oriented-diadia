@@ -1,6 +1,9 @@
 
 package it.uniroma3.diadia;
 
+import it.uniroma3.diadia.ambienti.*;
+import it.uniroma3.diadia.giocatore.Giocatore;
+
 /**
  * Partita:
  * Questa classe modella una partita del gioco.

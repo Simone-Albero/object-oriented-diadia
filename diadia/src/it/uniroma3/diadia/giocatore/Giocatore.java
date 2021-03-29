@@ -1,5 +1,8 @@
 
-package it.uniroma3.diadia;
+package it.uniroma3.diadia.giocatore;
+
+import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.ambienti.Stanza;
 
 /**
  * Giocatore:
@@ -43,12 +46,34 @@ public class Giocatore {
 		return this.inventario;
 	}
 	
-	public boolean storeAttrezzo(Attrezzo attrezzo) {
-		return this.inventario.addAttrezzo(attrezzo);
+	public boolean storeAttrezzo(String nomeAttrezzo, Stanza stanzaCorrente) {
+		Attrezzo a= stanzaCorrente.getAttrezzo(nomeAttrezzo);
+		if(a!=null) {
+			if(this.inventario.addAttrezzo(a)) {
+				stanzaCorrente.removeAttrezzo(a);
+				return true;
+			}
+			else
+				return false;
+		}
+		else
+			return false;
 	}
 	
-	public void dropAttrezzo(String  nomeAttrezzo) {
-		this.inventario.removeAttrezzo(nomeAttrezzo);
+	public boolean dropAttrezzo(String  nomeAttrezzo, Stanza stanzaCorrente) {
+		
+		Attrezzo a = this.inventario.getAttrezzo(nomeAttrezzo);
+		if(a!=null) {
+			if(stanzaCorrente.addAttrezzo(a)) {
+				this.inventario.removeAttrezzo(nomeAttrezzo);
+				return true;
+			}
+			else 
+				return false;
+		}
+		else
+			return false;
 	}
+
 	
 }

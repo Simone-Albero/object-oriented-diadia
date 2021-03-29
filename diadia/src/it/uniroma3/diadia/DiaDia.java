@@ -1,7 +1,10 @@
 
+package it.uniroma3.diadia;
+
 import java.util.Scanner;
 
-import it.uniroma3.diadia.*;
+import it.uniroma3.diadia.ambienti.Stanza;
+
 
 
 /**
@@ -142,17 +145,11 @@ public class DiaDia {
 			nomeAttrezzo = scannerDiLinee.nextLine();
 		}
 		
-		Attrezzo a= partita.getStanzaCorrente().getAttrezzo(nomeAttrezzo);
-		if(a!=null) {
-			if(partita.getGiocatore().storeAttrezzo(a)) {
-				partita.getStanzaCorrente().removeAttrezzo(a);
-				System.out.println("Attrezzo preso con successo!");
-			}
-			else
-				System.out.println("Inventario pieno!");
-		}
+		boolean flag= partita.getGiocatore().storeAttrezzo(nomeAttrezzo, partita.getStanzaCorrente());
+		if(flag)
+			System.out.println("Attrezzo preso con successo!");
 		else
-			System.out.println("Attrezzo inesistente!");
+			System.out.println("Impossibile prendere l'attrezzo!");
 	}
 	
 	/**
@@ -167,17 +164,12 @@ public class DiaDia {
 			nomeAttrezzo = scannerDiLinee.nextLine();
 		}
 		
-		Attrezzo a = partita.getGiocatore().getBorsa().getAttrezzo(nomeAttrezzo);
-		if(a!=null) {
-			if(partita.getStanzaCorrente().addAttrezzo(a)) {
-				partita.getGiocatore().dropAttrezzo(nomeAttrezzo);
-				System.out.println("Attrezzo posato con successo!");
-			}
-			else 
-				System.out.println("Impossibile posare l'attrezzo!");
-		}
+		boolean flag =  partita.getGiocatore().dropAttrezzo(nomeAttrezzo, partita.getStanzaCorrente());
+		
+		if(flag)
+			System.out.println("Attrezzo posato con successo!");
 		else
-			System.out.println("Attrezzo inesistente!");
+			System.out.println("Impossibile posare l'attrezzo!");
 	}
 	
 	

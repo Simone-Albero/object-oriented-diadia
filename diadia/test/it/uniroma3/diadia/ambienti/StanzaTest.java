@@ -10,7 +10,7 @@ public class StanzaTest {
 	
 	private Stanza stanze[];
 	private Stanza stanza;
-	private Attrezzo attrezo;
+	private Attrezzo attrezzi[];
 	
 	@Before
 	public void setUp() {
@@ -20,9 +20,13 @@ public class StanzaTest {
 		this.stanze[0].impostaStanzaAdiacente("nord", stanze[1]);
 		
 		this.stanza = new Stanza("atrio");
-		this.attrezo = new Attrezzo("osso", 10); 
-		stanza.addAttrezzo(this.attrezo); 
-		
+		this.attrezzi = new Attrezzo[3];
+		this.attrezzi[0] = new Attrezzo("osso", 10);
+		this.attrezzi[1] = new Attrezzo("martello", 10); 
+		this.attrezzi[2] = new Attrezzo("libro", 10); 
+		stanza.addAttrezzo(this.attrezzi[0]); 
+		stanza.addAttrezzo(this.attrezzi[1]); 
+		stanza.addAttrezzo(this.attrezzi[2]); 
 	}
 	
 	
@@ -43,7 +47,7 @@ public class StanzaTest {
 	
 	@Test
 	public void testGetAttrezzoNonNullo() {
-		assertEquals(this.attrezo , this.stanza.getAttrezzo("osso"));
+		assertEquals(this.attrezzi[1] , this.stanza.getAttrezzo("martello"));
 	}
 	
 	@Test
@@ -55,5 +59,36 @@ public class StanzaTest {
 	public void testGetAttrezzoInesistente() {
 		assertEquals(null , this.stanza.getAttrezzo("pippo"));
 	}
-
+	
+	@Test
+	public void testHasAttrezzoNonNullo() {
+		assertEquals(true , this.stanza.hasAttrezzo("libro"));
+	}
+	
+	@Test
+	public void testHasAttrezzoNullo() {
+		assertEquals(false , this.stanza.hasAttrezzo(null));
+	}
+	
+	@Test
+	public void testHasAttrezzoInesistente() {
+		assertEquals(false , this.stanza.hasAttrezzo("pippo"));
+	}
+	
+	@Test
+	public void testRemoveAttrezzoNonNullo() {
+		assertEquals(true , this.stanza.removeAttrezzo(this.attrezzi[2]));
+	}
+	
+	@Test
+	public void testRemoveAttrezzoNullo() {
+		assertEquals(false , this.stanza.removeAttrezzo(null));
+	}
+	
+	@Test
+	public void testRemoveAttrezzoInesistente() {
+		assertEquals(false , this.stanza.removeAttrezzo(new Attrezzo("pippo", 1)));
+	}
+	
+	
 }

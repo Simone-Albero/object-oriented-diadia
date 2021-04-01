@@ -1,11 +1,7 @@
 
 package it.uniroma3.diadia;
 
-import java.util.Scanner;
-
 import it.uniroma3.diadia.ambienti.Stanza;
-
-
 
 /**
  * Classe principale di diadia, un semplice gioco di ruolo ambientato al dia.
@@ -29,28 +25,31 @@ public class DiaDia {
 			"Ci sono attrezzi che potrebbero servirti nell'impresa:\n"+
 			"puoi raccoglierli, usarli, posarli quando ti sembrano inutili\n" +
 			"o regalarli se pensi che possano ingraziarti qualcuno.\n\n"+
-			"Per conoscere le istruzioni usa il comando 'aiuto'.";
+			"Per conoscere le istruzioni usa il comando 'aiuto'.\n";
 
-	static final private String[] elencoComandi = {"vai", "aiuto", "fine", "prendi", "posa"};
+	static final private String[] elencoComandi = {"vai: ti fa cambiare stanza a partire da una direzione", 
+												   "aiuto: lista dei comandi diponibili", 
+												   "fine: termina la partita", 
+												   "prendi: ti fa raccoglere un oggetto da una stanza se possibile", 
+												   "posa: ti fa posare un oggetto in una stanza se possibile"};
 
 	private Partita partita;
+	private IOConsole console;
 
-	public DiaDia() {
+	public DiaDia(IOConsole console) {
 		this.partita = new Partita();
+		this.console = console;
 	}
-
+	
 	public void gioca() {
 		String istruzione; 
-		Scanner scannerDiLinee;
-
-		System.out.println(MESSAGGIO_BENVENUTO);
-		scannerDiLinee = new Scanner(System.in);		
-		do 
-			istruzione = scannerDiLinee.nextLine();
+		this.console.mostraMessaggio(MESSAGGIO_BENVENUTO);
+		this.console.mostraMessaggio("Attualmente ti trovi qui:\n"+partita.getStanzaCorrente().getDescrizione());
+	
+		do
+			istruzione= this.console.leggiRiga();
 			
-		while (!processaIstruzione(istruzione, scannerDiLinee));
-
-		scannerDiLinee.close();
+		while (!processaIstruzione(istruzione));
 	}   
 
 
@@ -59,32 +58,38 @@ public class DiaDia {
 	 *
 	 * @return true se l'istruzione e' eseguita e il gioco continua, false altrimenti
 	 */
-	private boolean processaIstruzione(String istruzione, Scanner scannerDiLinee) {
+	private boolean processaIstruzione(String istruzione) {
 		Comando comandoDaEseguire = new Comando(istruzione);
-		
+
 		if(comandoDaEseguire.getNome()!=null) {
-		if (comandoDaEseguire.getNome().equals("fine")) {
-			this.fine(); 
-			return true;
-		} else if (comandoDaEseguire.getNome().equals("vai"))
-			this.vai(comandoDaEseguire.getParametro(), scannerDiLinee);
-		else if (comandoDaEseguire.getNome().equals("aiuto"))
-			this.aiuto();
-		else if (comandoDaEseguire.getNome().equals("prendi"))
-			this.prendi(comandoDaEseguire.getParametro(), scannerDiLinee);
-		else if (comandoDaEseguire.getNome().equals("posa"))
-			this.posa(comandoDaEseguire.getParametro(), scannerDiLinee);
-		else
-			System.out.println("Comando sconosciuto");
+			if (comandoDaEseguire.getNome().equals("fine")) {
+				this.fine(); 
+				return true;
+			} 
+			else if (comandoDaEseguire.getNome().equals("vai"))
+				this.vai(comandoDaEseguire.getParametro());
+			
+			else if (comandoDaEseguire.getNome().equals("aiuto"))
+				this.aiuto();
+			
+			else if (comandoDaEseguire.getNome().equals("prendi"))
+				this.prendi(comandoDaEseguire.getParametro());
+			
+			else if (comandoDaEseguire.getNome().equals("posa"))
+				this.posa(comandoDaEseguire.getParametro());
+			
+			else
+				this.console.mostraMessaggio("Comando sconosciuto");
 		}
-		
+
 		else
-			System.out.println("Inserire un comando");
+			this.console.mostraMessaggio("Inserire un comando");
 
 		if (this.partita.vinta()) {
-			System.out.println("Hai vinto!");
+			this.console.mostraMessaggio("Hai vinto!");
 			return true;
-		} else
+		}
+		else
 			return false;
 	}   
 
@@ -95,42 +100,40 @@ public class DiaDia {
 	 * Stampa informazioni di aiuto.
 	 */
 	private void aiuto() {
+		this.console.mostraMessaggio("Ecco i comandi che hai a disposizione:\n");
 		for(int i=0; i< elencoComandi.length; i++) 
-			System.out.print(elencoComandi[i]+" ");
-		System.out.println();
+			this.console.mostraMessaggio(elencoComandi[i]+" ");
+		//this.console.mostraMessaggio(null);
 	}
 
 	/**
 	 * Cerca di andare in una direzione. Se c'e' una stanza ci entra 
 	 * e ne stampa il nome, altrimenti stampa un messaggio di errore
 	 */
-	private void vai(String direzione, Scanner scannerDiLinee) {
-		
-		
+	private void vai(String direzione) {
 		if(direzione==null) {
-			System.out.println("Dove vuoi andare ?");
-			direzione = scannerDiLinee.nextLine();
+			this.console.mostraMessaggio("Dove vuoi andare?");
+			direzione = this.console.leggiRiga();
 		}
 		
 		Stanza prossimaStanza = null;
 		prossimaStanza = this.partita.getStanzaCorrente().getStanzaAdiacente(direzione);
 		if (prossimaStanza == null)
-			System.out.println("Direzione inesistente");
+			this.console.mostraMessaggio("Direzione inesistente!");
 		else {
 			this.partita.setStanzaCorrente(prossimaStanza);
 			int cfu = this.partita.getGiocatore().getCfu();
 			this.partita.getGiocatore().setCfu(cfu--);
 		}
 		
-		System.out.println(partita.getStanzaCorrente().getDescrizione());
-		
+		this.console.mostraMessaggio(partita.getStanzaCorrente().getDescrizione());
 	}
 
 	/**
 	 * Comando "Fine".
 	 */
 	private void fine() {
-		System.out.println("Grazie di aver giocato!");  // si desidera smettere
+		this.console.mostraMessaggio("Grazie di aver giocato!");  // si desidera smettere
 	}
 
 	/**
@@ -138,18 +141,18 @@ public class DiaDia {
 	 * @param nomeAttrezzo
 	 * @param scannerDiLinee
 	 */
-	private void prendi(String nomeAttrezzo, Scanner scannerDiLinee) {
+	private void prendi(String nomeAttrezzo) {
 		
 		if(nomeAttrezzo==null) {
-			System.out.println("Cosa vuoi prendere ?");
-			nomeAttrezzo = scannerDiLinee.nextLine();
+			this.console.mostraMessaggio("Cosa vuoi prendere?");
+			nomeAttrezzo = this.console.leggiRiga();
 		}
 		
 		boolean flag= partita.getGiocatore().storeAttrezzo(nomeAttrezzo, partita.getStanzaCorrente());
 		if(flag)
-			System.out.println("Attrezzo preso con successo!");
+			this.console.mostraMessaggio("Attrezzo preso con successo!");
 		else
-			System.out.println("Impossibile prendere l'attrezzo!");
+			this.console.mostraMessaggio("Impossibile prendere l'attrezzo!");
 	}
 	
 	/**
@@ -157,25 +160,27 @@ public class DiaDia {
 	 * @param nomeAttrezzo
 	 * @param scannerDiLinee
 	 */
-	private void posa(String nomeAttrezzo, Scanner scannerDiLinee) {
+	private void posa(String nomeAttrezzo) {
 		
 		if(nomeAttrezzo==null) {
-			System.out.println("Cosa vuoi posare ?");
-			nomeAttrezzo = scannerDiLinee.nextLine();
+			this.console.mostraMessaggio("Cosa vuoi posare?");
+			nomeAttrezzo = this.console.leggiRiga();
 		}
 		
 		boolean flag =  partita.getGiocatore().dropAttrezzo(nomeAttrezzo, partita.getStanzaCorrente());
 		
 		if(flag)
-			System.out.println("Attrezzo posato con successo!");
+			this.console.mostraMessaggio("Attrezzo posato con successo!");
 		else
-			System.out.println("Impossibile posare l'attrezzo!");
+			this.console.mostraMessaggio("Impossibile posare l'attrezzo!");
 	}
 	
 	
 	
 	public static void main(String[] argc) {
-		DiaDia gioco = new DiaDia();
+		IOConsole console = new IOConsole();
+		DiaDia gioco = new DiaDia(console);
+		
 		gioco.gioca();
 	}
 }

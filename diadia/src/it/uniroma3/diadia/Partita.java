@@ -80,7 +80,7 @@ public class Partita {
 	 * @return Restituisce il booleano TRUE se il giocatore e' nella stanza vincente, altrimenti FALSE
 	 */
 	public boolean vinta() {
-		return this.getStanzaCorrente()== this.getStanzaVincente();
+		return this.getStanzaCorrente() == this.getStanzaVincente();
 	}
 
 	/**

@@ -27,11 +27,11 @@ public class DiaDia {
 			"o regalarli se pensi che possano ingraziarti qualcuno.\n\n"+
 			"Per conoscere le istruzioni usa il comando 'aiuto'.\n";
 
-	static final private String[] elencoComandi = {"vai: ti fa cambiare stanza a partire da una direzione", 
+	static final private String[] elencoComandi = {"vai: permette di cambiare stanza a partire da una direzione", 
 												   "aiuto: lista dei comandi diponibili", 
 												   "fine: termina la partita", 
-												   "prendi: ti fa raccoglere un oggetto da una stanza se possibile", 
-												   "posa: ti fa posare un oggetto in una stanza se possibile"};
+												   "prendi: permette di raccoglere un oggetto da una stanza se possibile", 
+												   "posa: permette di posare un oggetto in una stanza se possibile"};
 
 	private Partita partita;
 	private IOConsole console;
@@ -103,7 +103,6 @@ public class DiaDia {
 		this.console.mostraMessaggio("Ecco i comandi che hai a disposizione:\n");
 		for(int i=0; i< elencoComandi.length; i++) 
 			this.console.mostraMessaggio(elencoComandi[i]+" ");
-		//this.console.mostraMessaggio(null);
 	}
 
 	/**

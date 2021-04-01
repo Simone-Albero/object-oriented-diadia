@@ -28,11 +28,11 @@ public class DiaDia {
 			"o regalarli se pensi che possano ingraziarti qualcuno.\n\n"+
 			"Per conoscere le istruzioni usa il comando 'aiuto'.\n";
 
-	static final private String[] elencoComandi = {"vai: permette di cambiare stanza a partire da una direzione", 
-												   "aiuto: lista dei comandi diponibili", 
-												   "fine: termina la partita", 
-												   "prendi: permette di raccoglere un oggetto da una stanza se possibile", 
-												   "posa: permette di posare un oggetto in una stanza se possibile"};
+	static final private String[] elencoComandi = {"- vai: Permette di cambiare stanza inserendo la direzione in cui ci si vuole spostare", 
+												   "- aiuto: Lista dei comandi diponibili", 
+												   "- fine: Termina la partita", 
+												   "- prendi: Permette se possibile di prendere un oggetto da una stanza", 
+												   "- posa: Permette se possibile di posare un oggetto in una stanza"};
 
 	private Partita partita;
 	private IOConsole console;
@@ -101,7 +101,7 @@ public class DiaDia {
 	 * Stampa informazioni di aiuto.
 	 */
 	private void aiuto() {
-		this.console.mostraMessaggio("Ecco i comandi che hai a disposizione:\n");
+		this.console.mostraMessaggio("Ecco i comandi che hai a disposizione:");
 		for(int i=0; i< elencoComandi.length; i++) 
 			this.console.mostraMessaggio(elencoComandi[i]+" ");
 	}
@@ -114,7 +114,7 @@ public class DiaDia {
 		if(direzione==null) {
 			this.console.mostraMessaggio("Ecco le direzioni in cui puoi andare:");
 			for(String currDirezione : this.partita.getStanzaCorrente().getDirezioni())
-				this.console.mostraMessaggio(currDirezione);
+				this.console.mostraMessaggio("- "+currDirezione);
 			
 			this.console.mostraMessaggio("Dove vuoi andare?");
 			direzione = this.console.leggiRiga();
@@ -123,14 +123,14 @@ public class DiaDia {
 		Stanza prossimaStanza = null;
 		prossimaStanza = this.partita.getStanzaCorrente().getStanzaAdiacente(direzione);
 		if (prossimaStanza == null)
-			this.console.mostraMessaggio("Direzione inesistente!");
+			this.console.mostraMessaggio("Direzione inesistente!\n");
 		else {
 			this.partita.setStanzaCorrente(prossimaStanza);
 			int cfu = this.partita.getGiocatore().getCfu();
 			this.partita.getGiocatore().setCfu(cfu--);
 		}
 		
-		this.console.mostraMessaggio(partita.getStanzaCorrente().getDescrizione());
+		this.console.mostraMessaggio("Attualmente ti trovi qui:\n"+partita.getStanzaCorrente().getDescrizione());
 	}
 
 	/**
@@ -148,10 +148,10 @@ public class DiaDia {
 	private void prendi(String nomeAttrezzo) {
 		
 		if(nomeAttrezzo==null) {
-			this.console.mostraMessaggio("Nella stanza ci sono i seguenti attrezzi: ");
+			this.console.mostraMessaggio("Ecco gli attrezzi che puoi prendere: ");
 			for(Attrezzo attrezzo : this.partita.getStanzaCorrente().getAttrezzi())
 					if(attrezzo != null)
-						this.console.mostraMessaggio(attrezzo.toString());
+						this.console.mostraMessaggio("- "+attrezzo.toString());
 			this.console.mostraMessaggio("Cosa vuoi prendere?");
 			nomeAttrezzo = this.console.leggiRiga();
 		}
@@ -171,7 +171,7 @@ public class DiaDia {
 	private void posa(String nomeAttrezzo) {
 		
 		if(nomeAttrezzo==null) {
-			this.console.mostraMessaggio("Nella borsa ci sono i seguenti attrezzi: ");
+			this.console.mostraMessaggio("Ecco gli attrezzi che puoi posare: ");
 			this.console.mostraMessaggio(this.partita.getGiocatore().getBorsa().toString());
 			this.console.mostraMessaggio("Cosa vuoi posare?");
 			nomeAttrezzo = this.console.leggiRiga();

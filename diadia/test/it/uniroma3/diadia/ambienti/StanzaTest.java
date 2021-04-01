@@ -31,12 +31,12 @@ public class StanzaTest {
 	
 	
 	@Test
-	public void testGetStanzaAdiacenteNonNulla() { 
+	public void testGetStanzaAdiacenteEsistente() { 
 		assertEquals(this.stanze[1], this.stanze[0].getStanzaAdiacente("nord"));
 	}
 	
 	@Test
-	public void testGetStanzaAdiacenteNulla() {
+	public void testGetStanzaAdiacenteInesistente() {
 		assertEquals(null, this.stanze[0].getStanzaAdiacente("sud"));
 	}
 	
@@ -46,7 +46,7 @@ public class StanzaTest {
 	}
 	
 	@Test
-	public void testGetAttrezzoNonNullo() {
+	public void testGetAttrezzoEsistente() {
 		assertEquals(this.attrezzi[1] , this.stanza.getAttrezzo("martello"));
 	}
 	
@@ -61,7 +61,7 @@ public class StanzaTest {
 	}
 	
 	@Test
-	public void testHasAttrezzoNonNullo() {
+	public void testHasAttrezzoEsistente() {
 		assertEquals(true , this.stanza.hasAttrezzo("libro"));
 	}
 	
@@ -76,7 +76,7 @@ public class StanzaTest {
 	}
 	
 	@Test
-	public void testRemoveAttrezzoNonNullo() {
+	public void testRemoveAttrezzoEsistente() {
 		assertEquals(true , this.stanza.removeAttrezzo(this.attrezzi[2]));
 	}
 	

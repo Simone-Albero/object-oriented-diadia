@@ -18,12 +18,12 @@ public class Giocatore {
 	
 	static final private int CFU_INIZIALI = 20;
 	
-	private Borsa inventario;
+	private Borsa borsa;
 	private int cfu;
 	
 	public Giocatore() {
 		this.cfu = CFU_INIZIALI;
-		this.inventario = new Borsa(); 
+		this.borsa = new Borsa(); 
 	}
 	
 	/**
@@ -43,13 +43,13 @@ public class Giocatore {
 	}	
 	
 	public Borsa getBorsa() {
-		return this.inventario;
+		return this.borsa;
 	}
 	
 	public boolean storeAttrezzo(String nomeAttrezzo, Stanza stanzaCorrente) {
 		Attrezzo a= stanzaCorrente.getAttrezzo(nomeAttrezzo);
 		if(a!=null) {
-			if(this.inventario.addAttrezzo(a)) {
+			if(this.borsa.addAttrezzo(a)) {
 				stanzaCorrente.removeAttrezzo(a);
 				return true;
 			}
@@ -62,10 +62,10 @@ public class Giocatore {
 	
 	public boolean dropAttrezzo(String  nomeAttrezzo, Stanza stanzaCorrente) {
 		
-		Attrezzo a = this.inventario.getAttrezzo(nomeAttrezzo);
+		Attrezzo a = this.borsa.getAttrezzo(nomeAttrezzo);
 		if(a!=null) {
 			if(stanzaCorrente.addAttrezzo(a)) {
-				this.inventario.removeAttrezzo(nomeAttrezzo);
+				this.borsa.removeAttrezzo(nomeAttrezzo);
 				return true;
 			}
 			else 

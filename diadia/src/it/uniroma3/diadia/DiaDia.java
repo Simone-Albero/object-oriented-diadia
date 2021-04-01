@@ -2,6 +2,7 @@
 package it.uniroma3.diadia;
 
 import it.uniroma3.diadia.ambienti.Stanza;
+import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 /**
  * Classe principale di diadia, un semplice gioco di ruolo ambientato al dia.
@@ -111,6 +112,10 @@ public class DiaDia {
 	 */
 	private void vai(String direzione) {
 		if(direzione==null) {
+			this.console.mostraMessaggio("Ecco le direzioni in cui puoi andare:");
+			for(String currDirezione : this.partita.getStanzaCorrente().getDirezioni())
+				this.console.mostraMessaggio(currDirezione);
+			
 			this.console.mostraMessaggio("Dove vuoi andare?");
 			direzione = this.console.leggiRiga();
 		}
@@ -143,6 +148,10 @@ public class DiaDia {
 	private void prendi(String nomeAttrezzo) {
 		
 		if(nomeAttrezzo==null) {
+			this.console.mostraMessaggio("Nella stanza ci sono i seguenti attrezzi: ");
+			for(Attrezzo attrezzo : this.partita.getStanzaCorrente().getAttrezzi())
+					if(attrezzo != null)
+						this.console.mostraMessaggio(attrezzo.toString());
 			this.console.mostraMessaggio("Cosa vuoi prendere?");
 			nomeAttrezzo = this.console.leggiRiga();
 		}
@@ -162,6 +171,8 @@ public class DiaDia {
 	private void posa(String nomeAttrezzo) {
 		
 		if(nomeAttrezzo==null) {
+			this.console.mostraMessaggio("Nella borsa ci sono i seguenti attrezzi: ");
+			this.console.mostraMessaggio(this.partita.getGiocatore().getBorsa().toString());
 			this.console.mostraMessaggio("Cosa vuoi posare?");
 			nomeAttrezzo = this.console.leggiRiga();
 		}

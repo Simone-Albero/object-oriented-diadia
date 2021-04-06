@@ -1,11 +1,11 @@
 package it.uniroma3.diadia;
 
+import it.uniroma3.diadia.ambienti.Stanza;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import it.uniroma3.diadia.ambienti.Stanza;
 
 public class PartitaTest {
 	
@@ -18,19 +18,19 @@ public class PartitaTest {
 	
 	
 	@Test
-	public void testVintaPartitaVinta() {
+	public void testVintaSuPartitaVinta() {
 		this.partita.setStanzaCorrente(this.partita.getStanzaVincente());
 		assertEquals(true, this.partita.vinta());
 	}
 	
 	@Test
-	public void testVintaPartitaNonVinta() {
+	public void testVintaSuPartitaNonVinta() {
 		this.partita.setStanzaCorrente(new Stanza("Bagno"));
 		assertEquals(false, this.partita.vinta());
 	}
 	
 	@Test
-	public void testVintaStanzaCorrenteNulla() {
+	public void testVintaSuStanzaCorrenteNulla() {
 		this.partita.setStanzaCorrente(null);
 		assertEquals(false, this.partita.vinta());
 	}

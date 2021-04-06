@@ -139,7 +139,7 @@ public class Labirinto {
 	 * @return Restituisce TRUE se è possibile aggiungere la stanza, altrimenti FALSE
 	 * @see Stanza
 	 */
-	private boolean addStanza(Stanza stanza) {
+	public boolean addStanza(Stanza stanza) {
 		if(stanza == null)
 			return false;
 					
@@ -158,13 +158,14 @@ public class Labirinto {
 	 * @return Restituisce TRUE se è possibile aggiungere l'attrezzo, altrimenti FALSE
 	 * @see Attrezzo
 	 */
-	private boolean addAttrezzo(Attrezzo attrezzo) {
+	public boolean addAttrezzo(Attrezzo attrezzo) {
 		if(attrezzo == null)
 			return false;
 		
 		if(this.nAttrezzi < this.maxAttrezzi) {
 			this.attrezzi[this.nAttrezzi]= attrezzo;
 			this.nAttrezzi++;
+			return true;
 		}
 		
 		return false;

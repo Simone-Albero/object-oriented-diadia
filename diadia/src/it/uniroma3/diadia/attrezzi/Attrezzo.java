@@ -20,8 +20,8 @@ public class Attrezzo {
 
 	/**
 	 * Crea un attrezzo
-	 * @param nome Il nome che identifica l'attrezzo
-	 * @param peso Il peso dell'attrezzo
+	 * @param nome Stringa che identifica il nome dell'attrezzo
+	 * @param peso Intero che identifica Il peso dell'attrezzo
 	 */
 	public Attrezzo(String nome, int peso) {
 		this.peso = peso;
@@ -29,23 +29,23 @@ public class Attrezzo {
 	}
 
 	/**
-	 * Restituisce il nome identificatore dell'attrezzo
-	 * @return Restituisce una stringa: nome
+	 * Riporta il nome identificatore dell'attrezzo
+	 * @return Restituisce una stringa
 	 */
 	public String getNome() {
 		return this.nome;
 	}
 
 	/**
-	 * Restituisce il peso dell'attrezzo
-	 * @return Restituisce un intero: peso
+	 * Riporta il peso dell'attrezzo
+	 * @return Restituisce un intero
 	 */
 	public int getPeso() {
 		return this.peso;
 	}
 
 	/**
-	 * Restituisce una rappresentazione stringa di questo attrezzo
+	 * Riporta una rappresentazione stringa di questo attrezzo
 	 * @return Restituisce una stringa
 	 */
 	public String toString() {

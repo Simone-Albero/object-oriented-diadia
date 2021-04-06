@@ -27,8 +27,8 @@ public class Giocatore {
 	}
 	
 	/**
-	 * Restituisce il punteggio del giocatore 
-	 * @return Restituisce un intero: cfu
+	 * Riporta il punteggio del giocatore 
+	 * @return Restituisce un intero
 	 */
 	public int getCfu() {
 		return this.cfu;
@@ -36,16 +36,29 @@ public class Giocatore {
 	
 	/**
 	 * Imposta il punteggio del giocatore
-	 * @param cfu Intero che rappresenta il punteggio del giocatore
+	 * @param cfu Intero che identifica il punteggio del giocatore
 	 */
 	public void setCfu(int cfu) {
 		this.cfu = cfu;		
 	}	
 	
+	/**
+	 * Riporta l'inventario del giocatore
+	 * @return Restituisce un oggetto istanza della classe Borsa
+	 * @see Borsa
+	 */
 	public Borsa getBorsa() {
 		return this.borsa;
 	}
 	
+	/**
+	 * Aggiunge, se possibile, un attrezzo nell'inventario del giocatore 
+	 * @param nomeAttrezzo Stringa che identifica il nome dell'attrezzo
+	 * @param stanzaCorrente Oggetto istanza della classe Stanza che identifica la stanza in cui si trova il giocatore
+	 * @return Restituisce il booleano TRUE se è possibile aggiungere l'attrezzo all'inventario, altrimenti FALSE
+	 * @see Borsa
+	 * @see Stanza
+	 */
 	public boolean storeAttrezzo(String nomeAttrezzo, Stanza stanzaCorrente) {
 		if(stanzaCorrente == null)
 			return false;
@@ -63,6 +76,14 @@ public class Giocatore {
 			return false;
 	}
 	
+	/**
+	 * Lascia, se possibile, un attrezzo nella stanza in cui è situato il giocatore
+	 * @param nomeAttrezzo Stringa che identifica il nome dell'attrezzo
+	 * @param stanzaCorrente Oggetto istanza della classe Stanza che identifica la stanza in cui si trova il giocatore
+	 * @return Restituisce il booleano TRUE se è possibile lasciare l'attrezzo nella stanza, altrimenti FALSE
+	 * @see Borsa
+	 * @see Stanza
+	 */
 	public boolean dropAttrezzo(String  nomeAttrezzo, Stanza stanzaCorrente) {
 		
 		Attrezzo a = this.borsa.getAttrezzo(nomeAttrezzo);

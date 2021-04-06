@@ -68,8 +68,8 @@ public class Labirinto {
 	}
 	
 	/**
-	 * Restituisce la stanza iniziale "entrata"
-	 * @return Restituisce un oggetto della classe stanza: entrata
+	 * Riporta la stanza iniziale "entrata"
+	 * @return Restituisce un oggetto istanza della classe Stanza
 	 * @see Stanza
 	 */
 	public Stanza getEntrata() {
@@ -77,17 +77,17 @@ public class Labirinto {
 	}
 	
 	/**
-	 * Imposta la stanza iniale
-	 * @param entrata Oggetto della classe stanza 
-	 * @see stanza
+	 * Imposta la stanza iniziale "entrata"
+	 * @param entrata Oggetto istanza della classe Stanza 
+	 * @see Stanza
 	 */
 	private void setEntrata(Stanza entrata) {
 		this.entrata = entrata;
 	}
 	
 	/**
-	 * Restituisce la stanza finale "uscita"
-	 * @return Restituisce un oggetto della classe stanza: uscita
+	 * Riporta la stanza finale "uscita"
+	 * @return Restituisce un oggetto istanza della classe Stanza
 	 * @see Stanza
 	 */
 	public Stanza getUscita() {
@@ -95,8 +95,8 @@ public class Labirinto {
 	}
 	
 	/**
-	 * Imposta la stanza finale
-	 * @param uscita Oggetto della classe stanza 
+	 * Imposta la stanza finale "uscita"
+	 * @param uscita Oggetto istanza della classe Stanza 
 	 * @see stanza
 	 */
 	private void setUscita(Stanza uscita) {

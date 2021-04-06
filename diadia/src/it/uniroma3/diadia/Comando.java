@@ -40,16 +40,16 @@ public class Comando {
 	}
 	
 	/**
-	 * Restituisce il nome del comando
-	 * @return Restituisce una stringa: comando
+	 * Riporta il nome del comando
+	 * @return Restituisce una stringa
 	 */
 	public String getNome() {
 		return this.nome;
 	}
 	
 	/**
-	 * Restituisce il parametro associato ad un comando
-	 * @return Restiuisce una stringa: parametro
+	 * Riporta il parametro associato ad un comando
+	 * @return Restiuisce una stringa
 	 */
 	public String getParametro() {
 		return this.parametro;

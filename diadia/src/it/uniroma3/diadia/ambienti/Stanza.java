@@ -28,8 +28,9 @@ public class Stanza {
 	private String[] direzioni;
 
 	/**
-	 * Crea una stanza. Non ci sono stanze adiacenti, non ci sono attrezzi.
-	 * @param nome Il nome della stanza
+	 * Crea una stanza a partire da un nome. 
+	 * Non ci sono stanze adiacenti, non ci sono attrezzi.
+	 * @param nome Stringa che identifica il nome della stanza
 	 */
 	public Stanza(String nome) {
 		this.nome = nome;
@@ -42,8 +43,8 @@ public class Stanza {
 
 	/**
 	 * Imposta una stanza adiacente.
-	 * @param direzione Direzione in cui sara' posta la stanza adiacente.
-	 * @param stanza Stanza adiacente nella direzione indicata dal primo parametro.
+	 * @param direzione Stringa che identifica la direzione della stanza adiacente.
+	 * @param stanza Stringa che identifica la stanza adiacente.
 	 */
 	public void impostaStanzaAdiacente(String direzione, Stanza stanza) {
 		boolean aggiornato = false;
@@ -61,8 +62,8 @@ public class Stanza {
 	}
 
 	/**
-	 * Restituisce la stanza adiacente nella direzione specificata
-	 * @param direzione
+	 * Riporta la stanza nella direzione specificata
+	 * @param direzione Stringa che identifica la direzione
 	 */
 	public Stanza getStanzaAdiacente(String direzione) {
 		Stanza stanza = null;
@@ -73,24 +74,25 @@ public class Stanza {
 	}
 
 	/**
-	 * Restituisce la nome della stanza.
-	 * @return Il nome della stanza
+	 * Riporta il nome della stanza.
+	 * @return Restituisce una stringa 
 	 */
 	public String getNome() {
 		return this.nome;
 	}
 
 	/**
-	 * Restituisce la descrizione della stanza.
-	 * @return La descrizione della stanza
+	 * Riporta la descrizione della stanza.
+	 * @return Restituisce una stringa 
 	 */
 	public String getDescrizione() {
 		return this.toString();
 	}
 
 	/**
-	 * Restituisce la collezione di attrezzi presenti nella stanza.
-	 * @return La collezione di attrezzi nella stanza.
+	 * Riporta la collezione di attrezzi presenti nella stanza.
+	 * @return Restituisce un array di oggetti istanza della classe Attrezzo
+	 * @see Attrezzo
 	 */
 	public Attrezzo[] getAttrezzi() {
 		return this.attrezzi;
@@ -98,7 +100,7 @@ public class Stanza {
 
 	/**
 	 * Mette un attrezzo nella stanza.
-	 * @param attrezzo L'attrezzo da mettere nella stanza.
+	 * @param attrezzo Oggetto istanza della classe Attrezzo che identifica l'attrezzo da mettere nella stanza.
 	 * @return Restituisce TRUE se riesce ad aggiungere l'attrezzo, altrimenti FALSE
 	 */
 	public boolean addAttrezzo(Attrezzo attrezzo) {
@@ -113,7 +115,7 @@ public class Stanza {
 	}
 
 	/**
-	 * Restituisce una rappresentazione stringa di questa stanza,
+	 * Riporta una rappresentazione stringa di questa stanza,
 	 * stampadone la descrizione, le uscite e gli eventuali attrezzi contenuti
 	 * @return Restituisce una stringa
 	 */
@@ -141,6 +143,7 @@ public class Stanza {
 	/**
 	 * Controlla se un attrezzo esiste nella stanza (uguaglianza sul nome).
 	 * @return Restituisce TRUE se l'attrezzo esiste nella stanza, altrimenti FALSE 
+	 * @see Attrezzo
 	 */
 	public boolean hasAttrezzo(String nomeAttrezzo) {
 		boolean trovato;
@@ -154,9 +157,10 @@ public class Stanza {
 	}
 
 	/**
-	 * Restituisce l'attrezzo nomeAttrezzo se presente nella stanza.
-	 * @param nomeAttrezzo
-	 * @return l'attrezzo presente nella stanza, NULL se l'attrezzo non e' presente.
+	 * Riporta, se presente nella stanza, un attrezzo a partire da un nome.
+	 * @param nomeAttrezzo Stringa che identifica il nome dell'attrezzo
+	 * @return Restituisce un oggetto istanza della classe Attrezzo, NULL se l'attrezzo non esiste.
+	 * @see Attrezzo
 	 */
 	public Attrezzo getAttrezzo(String nomeAttrezzo) {
 		Attrezzo a = null;
@@ -188,7 +192,10 @@ public class Stanza {
 		return false;
 	}
 
-
+	/**
+	 * Riporta le direzioni in cui ci si può muovere a partire da una stanza
+	 * @return Restituisce un array di stringhe
+	 */
 	public String[] getDirezioni() {
 		String[] direzioni = new String[this.numeroStanzeAdiacenti];
 		for(int i=0; i<this.numeroStanzeAdiacenti; i++)

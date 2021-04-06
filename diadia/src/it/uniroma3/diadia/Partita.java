@@ -10,8 +10,8 @@ import it.uniroma3.diadia.giocatore.Giocatore;
  * Partita è caratterizzara da un "Labirinto" in cui sono situate le stanze del gioco,
  * da un Giocatore responasbile della gestione del punteggio e dell'inventario,
  * una "stanzaVincente" considerata come la stanza finale del gioco
- * una "stanzaCorrente" considerata come la stanza in cui è situato il giocatore
- * e una variabile bolleana "finita" che dichiara la fine del gioco
+ * una "stanzaCorrente" considerata come la stanza di partenza in cui è situato il giocatore
+ * e una variabile booleana "finita" che dichiara la fine del gioco
  * 
  * @author  docente di POO
  * @see Stanza
@@ -28,8 +28,9 @@ public class Partita {
 	private boolean finita;
 	
 	/**
-	 * Genere la Partita a partire da un labirinto ed imposta il punteggio iniziale
+	 * Genera la Partita inizializzando il Giocatore e il Labirinto
 	 * @see Labirinto
+	 * @see Giocatore
 	 */
 	public Partita(){
 		this.labirinto = new Labirinto();
@@ -40,8 +41,8 @@ public class Partita {
 	}
 
 	/**
-	 * Imposta la stanza finale del gioco 
-	 * @param stanzaVincente Oggetto della classe stanza
+	 * Imposta la stanza che decreta la fine del gioco
+	 * @param stanzaVincente Oggetto istanza della classe Stanza che identifica la stanza vincente
 	 * @see Stanza
 	 */
 	private void setStanzaVincente(Stanza stanzaVincente) {
@@ -49,8 +50,8 @@ public class Partita {
 	}
 	
 	/**
-	 * Restituisce la stanza finale del gioco
-	 * @return Restituisce un oggetto della classe stanza: stanzaVincente
+	 * Riporta la stanza finale del gioco
+	 * @return Restituisce un oggetto istanza della classe Stanza
 	 * @see Stanza
 	 */
 	public Stanza getStanzaVincente() {
@@ -58,8 +59,8 @@ public class Partita {
 	}
 	
 	/**
-	 * Imposta la stanza in cui è situato il giocatore
-	 * @param stanzaCorrente Oggetto della classe stanza
+	 * Imposta la stanza in cui si trova il giocatore
+	 * @param stanzaCorrente Oggetto istanza della classe stanza che identifica la stanza in cui si trvoa il giocatore
 	 * @see Stanza
 	 */
 	public void setStanzaCorrente(Stanza stanzaCorrente) {
@@ -67,8 +68,8 @@ public class Partita {
 	}
 	
 	/**
-	 * Restituisce la stanza in cui è situato il giocatore
-	 * @return Restituisce un oggetto della classe stanza: stanzaCorrente
+	 * Riporta la stanza in cui si trova il giocatore
+	 * @return Restituisce un oggetto istanza della classe Stanza
 	 * @see Stanza
 	 */
 	public Stanza getStanzaCorrente() {
@@ -76,7 +77,7 @@ public class Partita {
 	}
 
 	/**
-	 * Restituisce TRUE se e solo se il giocatore e' nella stanza vincente
+	 * Verifica se la partita è stata vinta
 	 * @return Restituisce il booleano TRUE se il giocatore e' nella stanza vincente, altrimenti FALSE
 	 */
 	public boolean vinta() {
@@ -84,8 +85,8 @@ public class Partita {
 	}
 
 	/**
-	 * Restituisce TURE se e solo se la partita e' finita
-	 * @return Restituisce il booleano TRUE se la partita e' stata vinta, altrimenti FALSE
+	 * Verifica se la partita è finita
+	 * @return Restituisce il booleano TRUE se la partita e' terminata, altrimenti FALSE
 	 */
 	public boolean isFinita() {
 		return finita || vinta() || (this.giocatore.getCfu() == 0);
@@ -98,6 +99,10 @@ public class Partita {
 		this.finita = true;
 	}
 	
+	/**
+	 * Riporta il giocatore
+	 * @return Restituisce un oggetto istanza della classe Giocatore
+	 */
 	public Giocatore getGiocatore() {
 		return this.giocatore;
 	}

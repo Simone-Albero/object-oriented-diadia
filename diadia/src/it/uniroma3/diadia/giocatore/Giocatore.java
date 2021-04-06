@@ -47,6 +47,9 @@ public class Giocatore {
 	}
 	
 	public boolean storeAttrezzo(String nomeAttrezzo, Stanza stanzaCorrente) {
+		if(stanzaCorrente == null)
+			return false;
+		
 		Attrezzo a= stanzaCorrente.getAttrezzo(nomeAttrezzo);
 		if(a!=null) {
 			if(this.borsa.addAttrezzo(a)) {
@@ -63,7 +66,7 @@ public class Giocatore {
 	public boolean dropAttrezzo(String  nomeAttrezzo, Stanza stanzaCorrente) {
 		
 		Attrezzo a = this.borsa.getAttrezzo(nomeAttrezzo);
-		if(a!=null) {
+		if(a!=null && stanzaCorrente!=null) {
 			if(stanzaCorrente.addAttrezzo(a)) {
 				this.borsa.removeAttrezzo(nomeAttrezzo);
 				return true;

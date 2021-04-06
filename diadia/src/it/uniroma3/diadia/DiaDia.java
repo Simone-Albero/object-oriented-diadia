@@ -7,7 +7,6 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 /**
  * Classe principale di diadia, un semplice gioco di ruolo ambientato al dia.
  * Per giocare crea un'istanza di questa classe e invoca il metodo gioca
- *
  * Questa e' la classe principale crea e istanzia tutte le altre
  *
  * @author  docente di POO 
@@ -37,11 +36,19 @@ public class DiaDia {
 	private Partita partita;
 	private IOConsole console;
 
+	/**
+	 * Crea una partita a partire da una cosole di input-output
+	 * @param console Oggetto istanza della classe IOConsole
+	 * @see IOConsole 
+	 */
 	public DiaDia(IOConsole console) {
 		this.partita = new Partita();
 		this.console = console;
 	}
 	
+	/**
+	 * Avvia la partita e gestisce le istruzioni passate dall'utente
+	 */
 	public void gioca() {
 		String istruzione; 
 		this.console.mostraMessaggio(MESSAGGIO_BENVENUTO);
@@ -56,8 +63,7 @@ public class DiaDia {
 
 	/**
 	 * Processa una istruzione 
-	 *
-	 * @return true se l'istruzione e' eseguita e il gioco continua, false altrimenti
+	 * @return  Restituisce TRUE se l'istruzione e' eseguita e il gioco continua, altrimenti FALSE
 	 */
 	private boolean processaIstruzione(String istruzione) {
 		Comando comandoDaEseguire = new Comando(istruzione);
@@ -109,6 +115,8 @@ public class DiaDia {
 	/**
 	 * Cerca di andare in una direzione. Se c'e' una stanza ci entra 
 	 * e ne stampa il nome, altrimenti stampa un messaggio di errore
+	 * 
+	 *@param direzione Stringa che identifica la direzione 
 	 */
 	private void vai(String direzione) {
 		if(direzione==null) {
@@ -141,9 +149,8 @@ public class DiaDia {
 	}
 
 	/**
-	 * 
-	 * @param nomeAttrezzo
-	 * @param scannerDiLinee
+	 * Cerca, se possibile, di prendere un attrezzo, altrimenti stampa un messaggio di errore
+	 * @param nomeAttrezzo Stringa che identifica il nome dell'attrezzo
 	 */
 	private void prendi(String nomeAttrezzo) {
 		
@@ -164,9 +171,8 @@ public class DiaDia {
 	}
 	
 	/**
-	 * 
-	 * @param nomeAttrezzo
-	 * @param scannerDiLinee
+	 * Cerca, se possibile, di posare un attrezzo nella stanza, altrimenti stampa un messaggio di errore
+	 * @param nomeAttrezzo Stringa che identifica il nome dell'attrezzo
 	 */
 	private void posa(String nomeAttrezzo) {
 		

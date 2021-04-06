@@ -102,7 +102,7 @@ public class Stanza {
 	 * @return Restituisce TRUE se riesce ad aggiungere l'attrezzo, altrimenti FALSE
 	 */
 	public boolean addAttrezzo(Attrezzo attrezzo) {
-		if (this.numeroAttrezzi < NUMERO_MASSIMO_ATTREZZI) {
+		if (this.numeroAttrezzi < NUMERO_MASSIMO_ATTREZZI && attrezzo!=null) {
 			this.attrezzi[numeroAttrezzi] = attrezzo;
 			this.numeroAttrezzi++;
 			return true;

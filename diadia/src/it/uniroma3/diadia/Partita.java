@@ -107,5 +107,13 @@ public class Partita {
 		return this.giocatore;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean giocatoreIsVivo() {
+		return this.giocatore.isVivo();
+	}
+	
 	
 }

@@ -40,7 +40,17 @@ public class Giocatore {
 	 */
 	public void setCfu(int cfu) {
 		this.cfu = cfu;		
-	}	
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean isVivo() {
+		if(this.cfu > 0)
+			return true;
+		return false;
+	}
 	
 	/**
 	 * Riporta l'inventario del giocatore
@@ -99,5 +109,4 @@ public class Giocatore {
 			return false;
 	}
 
-	
 }

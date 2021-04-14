@@ -11,7 +11,7 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
  */
 public class ComandoPrendi implements Comando {
 	
-	private static final String NOME = "ComandoVai"; 
+	private static final String NOME = "ComandoPrendi"; 
 	private String nomeAttrezzo;
 	private IO console;
 	

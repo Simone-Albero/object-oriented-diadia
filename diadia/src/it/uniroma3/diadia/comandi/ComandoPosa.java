@@ -10,6 +10,7 @@ import it.uniroma3.diadia.Partita;
  */
 public class ComandoPosa implements Comando {
 	
+	private static final String NOME = "ComandoPosa";
 	private String nomeAttrezzo;
 	private IO console;
 	
@@ -37,6 +38,16 @@ public class ComandoPosa implements Comando {
 	@Override
 	public void setIO(IO console) {
 		this.console = console;
+	}
+
+	@Override
+	public String getNome() {
+		return NOME;
+	}
+
+	@Override
+	public String getParametro() {
+		return this.nomeAttrezzo;
 	}
 
 }

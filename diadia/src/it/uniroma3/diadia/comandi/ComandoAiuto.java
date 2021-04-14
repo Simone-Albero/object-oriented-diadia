@@ -9,6 +9,8 @@ import it.uniroma3.diadia.Partita;
  */
 public class ComandoAiuto implements Comando {
 	
+	private static final String NOME = "ComandoAiuto";
+
 	static final private String[] elencoComandi = {
 			   "- vai: Permette di cambiare stanza inserendo la direzione in cui ci si vuole spostare", 
 			   "- aiuto: Lista dei comandi diponibili", 
@@ -36,6 +38,16 @@ public class ComandoAiuto implements Comando {
 	@Override
 	public void setIO(IO console) {
 		this.console = console;
+	}
+
+	@Override
+	public String getNome() {
+		return NOME;
+	}
+
+	@Override
+	public String getParametro() {
+		return null;
 	}
 
 }

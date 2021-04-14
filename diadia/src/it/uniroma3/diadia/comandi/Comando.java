@@ -32,4 +32,17 @@ public interface Comando {
 	 * set console del comando
 	 */
 	public void setIO(IO console);
+	
+	/**
+	 * getter del nome del comando
+	 * @return
+	 */
+	public String getNome();
+	
+	/**
+	 * getter del parametro del comando
+	 * @return
+	 */
+	public String getParametro();
+	
 }

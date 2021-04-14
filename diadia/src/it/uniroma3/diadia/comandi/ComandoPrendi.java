@@ -11,6 +11,7 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
  */
 public class ComandoPrendi implements Comando {
 	
+	private static final String NOME = "ComandoVai"; 
 	private String nomeAttrezzo;
 	private IO console;
 	
@@ -41,6 +42,16 @@ public class ComandoPrendi implements Comando {
 	@Override
 	public void setIO(IO console) {
 		this.console = console;
+	}
+
+	@Override
+	public String getNome() {
+		return NOME;
+	}
+
+	@Override
+	public String getParametro() {
+		return this.nomeAttrezzo;
 	}
 
 }

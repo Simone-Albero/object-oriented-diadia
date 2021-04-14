@@ -8,6 +8,7 @@ import it.uniroma3.diadia.Partita;
  */
 public class ComandoFine implements Comando {
 	
+	private static final String NOME = "ComandoFine";
 	IO console;
 	
 	@Override
@@ -24,6 +25,16 @@ public class ComandoFine implements Comando {
 	@Override
 	public void setIO(IO console) {
 		this.console = console;
+	}
+
+	@Override
+	public String getNome() {
+		return NOME;
+	}
+
+	@Override
+	public String getParametro() {
+		return null;
 	}
 
 }

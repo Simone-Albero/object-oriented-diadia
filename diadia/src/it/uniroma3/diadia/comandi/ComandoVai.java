@@ -11,6 +11,7 @@ import it.uniroma3.diadia.ambienti.Stanza;
  */
 public class ComandoVai implements Comando {
 	
+	private static final String NOME = "ComandoVai";
 	private String direzione;
 	private IO console;
 	
@@ -49,6 +50,16 @@ public class ComandoVai implements Comando {
 	@Override
 	public void setIO(IO console) {
 		this.console = console;
+	}
+
+	@Override
+	public String getNome() {
+		return NOME;
+	}
+
+	@Override
+	public String getParametro() {
+		return this.direzione;
 	}
 
 }

@@ -34,9 +34,12 @@ public class BorsaTest {
 		assertEquals(false, this.borsa.addAttrezzo(null));
 	}
 	
-	void borsaPiena() {
-		for(int i=0; i<10; i++) 
-			this.borsa.addAttrezzo(new Attrezzo("martello", 7));
+	private void borsaPiena() {
+		boolean flag;
+		do {
+			flag = this.borsa.addAttrezzo(new Attrezzo("martello", 1));
+		}
+		while(flag);
 	}
 	
 	@Test

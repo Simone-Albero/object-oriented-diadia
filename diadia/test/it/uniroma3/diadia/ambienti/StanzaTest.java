@@ -34,9 +34,12 @@ public class StanzaTest {
 		assertEquals(false , stanze[0].addAttrezzo(null));
 	}
 	
-	void stanzaPiena() {
-		for(int i=0; i<10; i++) 
-			this.stanze[0].addAttrezzo(new Attrezzo("piccone", 5));
+	private void stanzaPiena() {
+		boolean flag;
+		do {
+			flag = this.stanze[0].addAttrezzo(new Attrezzo("martello", 1));
+		}
+		while(flag);
 	}
 	
 	@Test

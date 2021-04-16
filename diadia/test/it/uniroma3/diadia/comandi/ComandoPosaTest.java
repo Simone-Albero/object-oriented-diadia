@@ -25,7 +25,7 @@ public class ComandoPosaTest {
 		this.partita.getGiocatore().getBorsa().addAttrezzo(new Attrezzo("matita", 1));
 		
 		comando = new ComandoPosa();
-		comando.setIO(console);
+		comando.setIO(this.console);
 	}
 
 	@Test

@@ -23,4 +23,8 @@ public class StanzaBuia extends Stanza {
 		else
 			return Buio;
 	}
+	
+	public String getDescrizioneBuio() {
+		return Buio;
+	}
 }

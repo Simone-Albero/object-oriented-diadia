@@ -119,6 +119,7 @@ public class Stanza {
 	 * stampadone la descrizione, le uscite e gli eventuali attrezzi contenuti
 	 * @return Restituisce una stringa
 	 */
+	@Override
 	public String toString() {
 		StringBuilder risultato = new StringBuilder();
 		risultato.append(this.nome);

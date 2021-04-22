@@ -28,7 +28,7 @@ public class StanzaBuiaTest {
 	
 	@Test
 	public void testGetDescrizioneSuStanzaBuia() {
-		assertEquals(this.stanzaLuminosa.getDescrizioneBuio(), this.stanzaBuia.getDescrizione());
+		assertEquals(this.stanzaLuminosa.getDescrizioneTest(), this.stanzaBuia.getDescrizione());
 	}
 
 }

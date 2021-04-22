@@ -24,7 +24,7 @@ public class StanzaBuia extends Stanza {
 			return Buio;
 	}
 	
-	public String getDescrizioneBuio() {
+	public String getDescrizioneTest() {
 		return Buio;
 	}
 }

@@ -1,3 +1,4 @@
+
 package it.uniroma3.diadia.ambienti;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
@@ -28,5 +29,14 @@ public class StanzaBloccataTest {
 	public void testGetStanzaAdiacenteSuStanzaBloccataSenzaSblocco() {
 		assertEquals(this.stanzaBloccata, this.stanzaBloccata.getStanzaAdiacente("ovest") );
 	}
-
+	
+	@Test
+	public void testGetStanzaAdiacenteSuDirezioneNulla() {
+		assertEquals(this.stanzaBloccata, this.stanzaBloccata.getStanzaAdiacente(null) );
+	}
+	
+	@Test
+	public void testGetStanzaAdiacenteSuDirezioneInesistente() {
+		assertEquals(this.stanzaBloccata, this.stanzaBloccata.getStanzaAdiacente("pippo") );
+	}
 }

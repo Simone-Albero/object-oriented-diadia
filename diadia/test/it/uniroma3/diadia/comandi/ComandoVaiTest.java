@@ -3,6 +3,7 @@ package it.uniroma3.diadia.comandi;
 import it.uniroma3.diadia.*;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Stanza;
+import it.uniroma3.diadia.fixture.Fixture;
 
 import static org.junit.Assert.*;
 
@@ -40,6 +41,22 @@ public class ComandoVaiTest {
 		comando.setParametro("pippo");
 		comando.esegui(this.partita);
 		assertEquals(this.partita.getStanzaCorrente() ,this.partita.getStanzaCorrente());
+	}
+	
+	@Test
+	public void testPartitaComandoVai() {
+		String[] comandi = {"vai sud","fine"};
+		IOSimulator io = Fixture.creaSimulazioneEGioca(comandi);
+		assertTrue(io.hasNextMessaggio());
+		assertEquals(DiaDia.MESSAGGIO_BENVENUTO , io.nextMessaggio());
+		assertTrue(io.hasNextMessaggio());
+		assertContains("Aula N10", io.nextMessaggio());
+		assertTrue(io.hasNextMessaggio());
+		assertEquals(ComandoFine.MESSAGGIO_FINE , io.nextMessaggio());
+	}
+	
+	public void assertContains(String expected, String interaRiga) {
+		assertTrue(interaRiga.contains(expected));
 	}
 
 }

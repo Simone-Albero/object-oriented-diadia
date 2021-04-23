@@ -8,12 +8,14 @@ import it.uniroma3.diadia.Partita;
  */
 public class ComandoFine implements Comando {
 	
+	public static final String MESSAGGIO_FINE = "Grazie di aver giocato!";
 	private static final String NOME = "ComandoFine";
 	IO console;
 	
 	@Override
 	public void esegui(Partita partita) {
-		this.console.mostraMessaggio("Grazie di aver giocato!");
+		this.console.mostraMessaggio(MESSAGGIO_FINE);
+		partita.setFinita();
 	}
 
 	@Override

@@ -35,9 +35,9 @@ public class IOSimulator implements IO {
 
 	@Override
 	public String leggiRiga() {
-		String temp = this.comandi[this.comandoCorrente];
+		String lettura = this.comandi[this.comandoCorrente];
 		this.comandoCorrente++;
-		return temp;
+		return lettura;
 	}
 	
 	public String nextMessaggio() {

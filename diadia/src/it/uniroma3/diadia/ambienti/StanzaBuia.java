@@ -3,7 +3,7 @@ package it.uniroma3.diadia.ambienti;
 
 public class StanzaBuia extends Stanza {
 	
-	private static final String Buio = "Quì c'è buio pesto!!";
+	public static final String Buio = "Quì c'è buio pesto!!";
 	private final static String attrezzoLuminosoDef = "lanterna"; 
 	private String attrezzoLuminoso;
 	
@@ -22,9 +22,5 @@ public class StanzaBuia extends Stanza {
 			return super.getDescrizione();
 		else
 			return Buio;
-	}
-	
-	public String getDescrizioneTest() {
-		return Buio;
 	}
 }

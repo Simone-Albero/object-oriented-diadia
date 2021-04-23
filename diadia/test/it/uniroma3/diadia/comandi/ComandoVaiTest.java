@@ -46,9 +46,11 @@ public class ComandoVaiTest {
 	@Test
 	public void testPartitaComandoVai() {
 		String[] comandi = {"vai sud","fine"};
-		IOSimulator io = Fixture.creaSimulazioneEGioca(comandi);
+		IOSimulator io = Fixture.creaSimulazioneEGioca(comandi);		
 		assertTrue(io.hasNextMessaggio());
 		assertEquals(DiaDia.MESSAGGIO_BENVENUTO , io.nextMessaggio());
+		assertTrue(io.hasNextMessaggio());
+		assertContains("Atrio", io.nextMessaggio());
 		assertTrue(io.hasNextMessaggio());
 		assertContains("Aula N10", io.nextMessaggio());
 		assertTrue(io.hasNextMessaggio());
@@ -56,7 +58,7 @@ public class ComandoVaiTest {
 	}
 	
 	public void assertContains(String expected, String interaRiga) {
-		assertTrue(interaRiga.contains(expected));
+		assertEquals(true, interaRiga.contains(expected));
 	}
 
 }

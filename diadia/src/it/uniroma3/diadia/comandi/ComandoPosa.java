@@ -10,7 +10,10 @@ import it.uniroma3.diadia.Partita;
  */
 public class ComandoPosa implements Comando {
 	
+	public static final String MESSAGGIO_DI_CONFERMA = "Attrezzo posato con successo!";
+	public static final String MESSAGGIO_DI_ERRORE = "Impossibile posare l'attrezzo!";
 	private static final String NOME = "ComandoPosa";
+	
 	private String nomeAttrezzo;
 	private IO console;
 	
@@ -25,9 +28,9 @@ public class ComandoPosa implements Comando {
 		boolean flag =  partita.getGiocatore().dropAttrezzo(nomeAttrezzo, partita.getStanzaCorrente());
 		
 		if(flag)
-			this.console.mostraMessaggio("Attrezzo posato con successo!");
+			this.console.mostraMessaggio(MESSAGGIO_DI_CONFERMA);
 		else
-			this.console.mostraMessaggio("Impossibile posare l'attrezzo!");
+			this.console.mostraMessaggio(MESSAGGIO_DI_ERRORE);
 	}
 
 	@Override

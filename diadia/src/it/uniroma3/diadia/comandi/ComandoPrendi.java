@@ -11,7 +11,10 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
  */
 public class ComandoPrendi implements Comando {
 	
+	public static final String MESSAGGIO_DI_ERRORE = "Impossibile prendere l'attrezzo!";
+	public static final String MESSAGGIO_DI_CONFERMA = "Attrezzo preso con successo!";
 	private static final String NOME = "ComandoPrendi"; 
+	
 	private String nomeAttrezzo;
 	private IO console;
 	
@@ -28,9 +31,9 @@ public class ComandoPrendi implements Comando {
 		
 		boolean flag= partita.getGiocatore().storeAttrezzo(nomeAttrezzo, partita.getStanzaCorrente());
 		if(flag)
-			this.console.mostraMessaggio("Attrezzo preso con successo!");
+			this.console.mostraMessaggio(MESSAGGIO_DI_CONFERMA);
 		else
-			this.console.mostraMessaggio("Impossibile prendere l'attrezzo!");
+			this.console.mostraMessaggio(MESSAGGIO_DI_ERRORE);
 	}
 
 	@Override

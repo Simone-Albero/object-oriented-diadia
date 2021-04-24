@@ -44,7 +44,7 @@ public class ComandoVaiTest {
 	}
 	
 	@Test
-	public void testPartitaComandoVai() {
+	public void testSimulazioneComandoVai() {
 		String[] comandi = {"vai sud","fine"};
 		IOSimulator io = Fixture.creaSimulazioneEGioca(comandi);		
 		assertTrue(io.hasNextMessaggio());

@@ -9,6 +9,8 @@ import it.uniroma3.diadia.Partita;
  */
 public class ComandoAiuto implements Comando {
 	
+	public static final String MESSAGGIO_DI_CONFERMA = "Ecco i comandi che hai a disposizione:";
+
 	private static final String NOME = "ComandoAiuto";
 
 	static final private String[] elencoComandi = {
@@ -24,7 +26,7 @@ public class ComandoAiuto implements Comando {
 	
 	@Override
 	public void esegui(Partita partita) {
-		this.console.mostraMessaggio("Ecco i comandi che hai a disposizione:");
+		this.console.mostraMessaggio(MESSAGGIO_DI_CONFERMA);
 		for(int i=0; i< elencoComandi.length; i++) 
 			this.console.mostraMessaggio(elencoComandi[i]+" ");
 	}

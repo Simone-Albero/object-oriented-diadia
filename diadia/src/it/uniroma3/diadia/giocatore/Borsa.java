@@ -1,10 +1,16 @@
 
 package it.uniroma3.diadia.giocatore;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.attrezzi.ComparaAttrezzoPerNome;
+import it.uniroma3.diadia.attrezzi.ComparaAttrezzoPerPeso;
 
 /**
  * Borsa:
@@ -138,11 +144,27 @@ public class Borsa {
 		StringBuilder s = new StringBuilder();
 		if (!this.isEmpty()) {
 			s.append("Contenuto borsa ("+this.getPeso()+"kg/"+this.getPesoMax()+"kg): ");
-			s.append(this.attrezzi.toString());
+			s.append(this.getSortedSetOrdinatoPerPeso().toString());
 		}
 		else 
 			s.append("Borsa vuota");
 		
 		return s.toString();
 	}
+	
+	 List<Attrezzo> getContenutoOrdinatoPerPeso(){
+		Collections.sort(this.attrezzi, new ComparaAttrezzoPerPeso());
+		return this.attrezzi;
+	 }
+	 
+	 SortedSet<Attrezzo> getContenutoOrdinatoPerNome(){
+		 TreeSet<Attrezzo> sort = new TreeSet<Attrezzo>(new ComparaAttrezzoPerNome());
+		 sort.addAll(this.attrezzi);
+		 return sort;
+	 }
+	 
+	 SortedSet<Attrezzo> getSortedSetOrdinatoPerPeso(){
+		 return new TreeSet<Attrezzo>(this.attrezzi);
+	 }
+
 }

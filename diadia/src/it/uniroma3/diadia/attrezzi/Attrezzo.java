@@ -54,13 +54,19 @@ public class Attrezzo {
 	
 	@Override
 	public boolean equals(Object o) {
-		if(o == null)
-			return false;
-		
 		Attrezzo attrezzo = (Attrezzo)o;
+		if(this == attrezzo)
+			return true;
+			
 		if(attrezzo.getNome().equals(this.getNome()))
 			return true;
 		
 		return false;
+	}
+	
+	@Override 
+	public int hashCode() {
+		return this.nome.hashCode();
+		
 	}
 }

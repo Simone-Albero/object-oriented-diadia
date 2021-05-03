@@ -1,9 +1,7 @@
 
 package it.uniroma3.diadia.ambienti;
 
-import java.util.Iterator;
 import java.util.LinkedList;
-
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 /**
@@ -25,9 +23,7 @@ public class Stanza {
 	
 	private String nome;
 	private LinkedList<Attrezzo> attrezzi;
-	private int numeroAttrezzi;
 	private LinkedList<Stanza> stanzeAdiacenti;
-	private int numeroStanzeAdiacenti;
 	private LinkedList<String> direzioni;
 
 
@@ -38,8 +34,6 @@ public class Stanza {
 	 */
 	public Stanza(String nome) {
 		this.nome = nome;
-		this.numeroStanzeAdiacenti = 0;
-		this.numeroAttrezzi = 0;
 		this.direzioni = new LinkedList<String>();
 		this.stanzeAdiacenti = new LinkedList<Stanza>();
 		this.attrezzi = new LinkedList<Attrezzo>();
@@ -65,10 +59,9 @@ public class Stanza {
 		}
 			
 		if(!aggiornato)
-			if(this.numeroStanzeAdiacenti < NUMERO_MASSIMO_DIREZIONI) {
+			if(this.stanzeAdiacenti.size() < NUMERO_MASSIMO_DIREZIONI) {
 				this.direzioni.add(direzione);
 				this.stanzeAdiacenti.add(stanza);
-				this.numeroStanzeAdiacenti++;
 			}
 	}
 
@@ -76,18 +69,6 @@ public class Stanza {
 	 * Riporta la stanza nella direzione specificata
 	 * @param direzione Stringa che identifica la direzione
 	 */
-//	public Stanza getStanzaAdiacente(String direzione) {
-//		Iterator<String> p_d = this.direzioni.iterator();
-//		Iterator<Stanza> p_s = this.stanzeAdiacenti.iterator();
-//		while(p_d.hasNext()) {
-//			Stanza currStanza = p_s.next();
-//			if(p_d.next().equals(direzione))
-//				return currStanza;	
-//		}
-//		
-//		return null;
-//	}
-	
 	public Stanza getStanzaAdiacente(String direzione) {
 		int index = this.direzioni.indexOf(direzione);
 		
@@ -128,9 +109,8 @@ public class Stanza {
 	 * @return Restituisce TRUE se riesce ad aggiungere l'attrezzo, altrimenti FALSE
 	 */
 	public boolean addAttrezzo(Attrezzo attrezzo) {
-		if (attrezzo!=null && this.numeroAttrezzi<NUMERO_MASSIMO_ATTREZZI) {
+		if (attrezzo!=null && this.attrezzi.size()<NUMERO_MASSIMO_ATTREZZI) {
 			this.attrezzi.add(attrezzo);
-			this.numeroAttrezzi++;
 			return true;
 		}
 		
@@ -142,18 +122,6 @@ public class Stanza {
 	 * @return Restituisce TRUE se l'attrezzo esiste nella stanza, altrimenti FALSE 
 	 * @see Attrezzo
 	 */
-//	public boolean hasAttrezzo(String nomeAttrezzo) {
-//		Iterator<Attrezzo> p_a = this.attrezzi.iterator();
-//		
-//		while(p_a.hasNext()) {
-//			Attrezzo attrezzo = p_a.next();
-//			if(attrezzo.getNome().equals(nomeAttrezzo))
-//				return true;
-//		}
-//		
-//		return  false;
-//	}
-	
 	public boolean hasAttrezzo(String nomeAttrezzo) {
 		return this.attrezzi.contains(new Attrezzo(nomeAttrezzo, 1));
 	}
@@ -163,18 +131,7 @@ public class Stanza {
 	 * @param nomeAttrezzo Stringa che identifica il nome dell'attrezzo
 	 * @return Restituisce un oggetto istanza della classe Attrezzo, NULL se l'attrezzo non esiste.
 	 * @see Attrezzo
-	 */
-//	public Attrezzo getAttrezzo(String nomeAttrezzo) {
-//		Iterator<Attrezzo> p_a = this.attrezzi.iterator();
-//		
-//		while(p_a.hasNext()) {
-//			Attrezzo attrezzo = p_a.next();
-//			if(attrezzo.getNome().equals(nomeAttrezzo))
-//				return attrezzo;
-//		}
-//		return null;
-//	}
-	
+	 */	
 	public Attrezzo getAttrezzo(String nomeAttrezzo) {
 		int index = this.attrezzi.indexOf(new Attrezzo(nomeAttrezzo, 1));
 		
@@ -190,23 +147,7 @@ public class Stanza {
 	 * @param attrezzo Oggetto istanza della classe Attrezzo
 	 * @return Restituisce il booleano TRUE se l'attrezzo e' stato rimosso, altrimenti FALSE
 	 * @see Attrezzo
-	 */
-//	public boolean removeAttrezzo(Attrezzo attrezzo) {
-//		Iterator<Attrezzo> p_a = this.attrezzi.iterator();
-//		
-//		if(attrezzo == null)
-//			return false;
-//		
-//		while(p_a.hasNext()) {
-//			if(p_a.next().getNome().equals(attrezzo.getNome())) {
-//				p_a.remove();
-//				this.numeroAttrezzi--;
-//				return true;
-//			}
-//		}
-//		return false;
-//	}
-	
+	 */	
 	public boolean removeAttrezzo(Attrezzo attrezzo) {
 		int index = this.attrezzi.indexOf(attrezzo);
 		
@@ -227,20 +168,13 @@ public class Stanza {
 		StringBuilder risultato = new StringBuilder();
 		risultato.append(this.nome);
 		risultato.append("\nUscite: ");
-		Iterator<String> p_d = this.direzioni.iterator(); 
-		while(p_d.hasNext()) {
-			risultato.append(p_d.next()+" ");
-		}
+		risultato.append(this.direzioni.toString());
 		risultato.append("\nAttrezzi nella stanza: ");
 
 		if(this.attrezzi.isEmpty())
 			risultato.append("Nessun Oggetto");
-		else {
-			Iterator<Attrezzo> p_a = this.attrezzi.iterator(); 
-			while(p_a.hasNext()) {
-				risultato.append(p_a.next().toString()+" ");
-			}
-		}
+		else 
+			risultato.append(this.attrezzi.toString());
 		
 		return risultato.toString();
 	}

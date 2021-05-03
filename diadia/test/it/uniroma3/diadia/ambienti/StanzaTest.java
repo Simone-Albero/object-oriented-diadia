@@ -15,9 +15,9 @@ public class StanzaTest {
 	@Before
 	public void setUp() {
 		this.stanze = new Stanza[2];
-		this.stanze[0] = new Stanza("atrio"); 
+		this.stanze[0] = new Stanza("cucina"); 
 		this.stanze[1] = new Stanza("biblioteca");
-		this.stanze[0].impostaStanzaAdiacente("nord", stanze[1]);
+		this.stanze[0].setStanzaAdiacente("nord", stanze[1]);
 		
 		this.stanza = new Stanza("atrio");
 		this.attrezzo = new Attrezzo("osso", 10);
@@ -61,6 +61,24 @@ public class StanzaTest {
 	@Test
 	public void testGetStanzaAdiacenteDirezioneInesistente() {
 		assertEquals(null, this.stanze[0].getStanzaAdiacente("pippo"));
+	}
+	
+	@Test
+	public void testSetStanzaAdiacenteNonNulla() { 
+		this.stanze[0].setStanzaAdiacente("ovest", stanza);
+		assertEquals(this.stanza, this.stanze[0].getStanzaAdiacente("ovest"));
+	}
+	
+	@Test
+	public void testSetStanzaAdiacenteNulla() { 
+		this.stanze[0].setStanzaAdiacente(null, stanza);
+		assertNull(this.stanze[0].getStanzaAdiacente("ovest"));
+	}
+	
+	@Test
+	public void testSetStanzaAdiacenteSuDirezioneEsistente() { 
+		this.stanze[0].setStanzaAdiacente("nord", stanza);
+		assertEquals(this.stanza, this.stanze[0].getStanzaAdiacente("nord"));
 	}
 	
 	@Test

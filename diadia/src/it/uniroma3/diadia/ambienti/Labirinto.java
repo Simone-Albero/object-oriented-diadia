@@ -71,22 +71,22 @@ public class Labirinto {
 		this.addStanza(new Stanza("Biblioteca")); //4
 
 		/* collega le stanze */
-		this.stanze[0].impostaStanzaAdiacente("nord", this.stanze[4]);
-		this.stanze[0].impostaStanzaAdiacente("est", this.stanze[1]);
-		this.stanze[0].impostaStanzaAdiacente("sud", this.stanze[2]);
-		this.stanze[0].impostaStanzaAdiacente("ovest", this.stanze[3]);
+		this.stanze[0].setStanzaAdiacente("nord", this.stanze[4]);
+		this.stanze[0].setStanzaAdiacente("est", this.stanze[1]);
+		this.stanze[0].setStanzaAdiacente("sud", this.stanze[2]);
+		this.stanze[0].setStanzaAdiacente("ovest", this.stanze[3]);
 
-		this.stanze[1].impostaStanzaAdiacente("est", this.stanze[3]);
-		this.stanze[1].impostaStanzaAdiacente("ovest", this.stanze[0]);
+		this.stanze[1].setStanzaAdiacente("est", this.stanze[3]);
+		this.stanze[1].setStanzaAdiacente("ovest", this.stanze[0]);
 		
-		this.stanze[2].impostaStanzaAdiacente("nord", this.stanze[0]);
-		this.stanze[2].impostaStanzaAdiacente("est", this.stanze[1]);
-		this.stanze[2].impostaStanzaAdiacente("ovest", this.stanze[3]);
+		this.stanze[2].setStanzaAdiacente("nord", this.stanze[0]);
+		this.stanze[2].setStanzaAdiacente("est", this.stanze[1]);
+		this.stanze[2].setStanzaAdiacente("ovest", this.stanze[3]);
 		
-		this.stanze[3].impostaStanzaAdiacente("est", this.stanze[0]);
-		this.stanze[3].impostaStanzaAdiacente("ovest", this.stanze[1]);
+		this.stanze[3].setStanzaAdiacente("est", this.stanze[0]);
+		this.stanze[3].setStanzaAdiacente("ovest", this.stanze[1]);
 
-		this.stanze[4].impostaStanzaAdiacente("sud", this.stanze[0]);
+		this.stanze[4].setStanzaAdiacente("sud", this.stanze[0]);
 
 		/* pone gli attrezzi nelle stanze */
 		this.stanze[2].addAttrezzo(this.attrezzi[0]);

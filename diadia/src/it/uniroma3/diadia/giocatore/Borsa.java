@@ -153,14 +153,15 @@ public class Borsa {
 	}
 	
 	 List<Attrezzo> getContenutoOrdinatoPerPeso(){
-		Collections.sort(this.attrezzi, new ComparaAttrezzoPerPeso());
-		return this.attrezzi;
+		List<Attrezzo> sortedList = new LinkedList<Attrezzo>(this.attrezzi);
+		Collections.sort(sortedList, new ComparaAttrezzoPerPeso());
+		return sortedList;
 	 }
 	 
 	 SortedSet<Attrezzo> getContenutoOrdinatoPerNome(){
-		 TreeSet<Attrezzo> sort = new TreeSet<Attrezzo>(new ComparaAttrezzoPerNome());
-		 sort.addAll(this.attrezzi);
-		 return sort;
+		 TreeSet<Attrezzo> sortedSet = new TreeSet<Attrezzo>(new ComparaAttrezzoPerNome());
+		 sortedSet.addAll(this.attrezzi);
+		 return sortedSet;
 	 }
 	 
 	 SortedSet<Attrezzo> getSortedSetOrdinatoPerPeso(){

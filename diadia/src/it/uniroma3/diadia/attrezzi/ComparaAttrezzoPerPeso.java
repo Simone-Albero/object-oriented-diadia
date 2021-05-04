@@ -10,7 +10,7 @@ public class ComparaAttrezzoPerPeso implements Comparator<Attrezzo> {
 		Integer a = o1.getPeso();
 		Integer b = o2.getPeso();
 		
-		return a.compareTo(b);
+		return b.compareTo(a);
 	}
 
 }

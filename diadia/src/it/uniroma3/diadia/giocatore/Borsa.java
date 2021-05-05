@@ -9,7 +9,6 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
-import it.uniroma3.diadia.attrezzi.ComparaAttrezzoPerNome;
 import it.uniroma3.diadia.attrezzi.ComparaAttrezzoPerPeso;
 
 /**
@@ -159,13 +158,14 @@ public class Borsa {
 	 }
 	 
 	 SortedSet<Attrezzo> getContenutoOrdinatoPerNome(){
-		 TreeSet<Attrezzo> sortedSet = new TreeSet<Attrezzo>(new ComparaAttrezzoPerNome());
-		 sortedSet.addAll(this.attrezzi);
+		 SortedSet<Attrezzo> sortedSet = new TreeSet<Attrezzo>(this.attrezzi);
 		 return sortedSet;
 	 }
 	 
 	 SortedSet<Attrezzo> getSortedSetOrdinatoPerPeso(){
-		 return new TreeSet<Attrezzo>(this.attrezzi);
+		 SortedSet<Attrezzo> sortedSet = new TreeSet<Attrezzo>(new ComparaAttrezzoPerPeso());
+		 sortedSet.addAll(this.attrezzi);
+		 return sortedSet;
 	 }
 
 }

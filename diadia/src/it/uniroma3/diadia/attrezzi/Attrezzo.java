@@ -72,12 +72,6 @@ public class Attrezzo implements Comparable<Attrezzo>{
 
 	@Override
 	public int compareTo(Attrezzo o) {
-		Integer a = o.getPeso();
-		 int flag = a.compareTo(this.getPeso());
-		 
-		 if(flag == 0)
-			 return o.getNome().compareTo(this.getNome());
-		 
-		 return flag;
+		return this.getNome().compareTo(o.getNome());
 	}
 }

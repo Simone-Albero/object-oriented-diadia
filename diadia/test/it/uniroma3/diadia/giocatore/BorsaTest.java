@@ -85,12 +85,9 @@ public class BorsaTest {
 	
 	private Borsa borsaNonOrdinata() {
 		Borsa borsa = new Borsa ();
-		Attrezzo piuma = new Attrezzo("piuma", 1);
-		Attrezzo libro = new Attrezzo("libro", 3);
-		Attrezzo martello = new Attrezzo("martello", 5);
-		borsa.addAttrezzo(martello);
-		borsa.addAttrezzo(piuma);
-		borsa.addAttrezzo(libro);
+		borsa.addAttrezzo(new Attrezzo("martello", 5));
+		borsa.addAttrezzo(new Attrezzo("piuma", 1));
+		borsa.addAttrezzo(new Attrezzo("libro", 3));
 		return borsa;
 		
 	}
@@ -100,9 +97,21 @@ public class BorsaTest {
 		Borsa borsaDisordinata = borsaNonOrdinata();
 		List<Attrezzo> sortedList = borsaDisordinata.getContenutoOrdinatoPerPeso();
 		Iterator<Attrezzo> iter = sortedList.iterator();
-		assertEquals(5 , iter.next().getPeso());
-		assertEquals(3 , iter.next().getPeso());
 		assertEquals(1 , iter.next().getPeso());
+		assertEquals(3 , iter.next().getPeso());
+		assertEquals(5 , iter.next().getPeso());
+	}
+	
+	@Test
+	public void testGetContenutoOrdinatoPerPesoSuSequenzaDisordinataConAttrezziStessoPeso() {
+		Borsa borsaDisordinata = borsaNonOrdinata();
+		borsaDisordinata.addAttrezzo(new Attrezzo("osso", 1));
+		List<Attrezzo> sortedList = borsaDisordinata.getContenutoOrdinatoPerPeso();
+		Iterator<Attrezzo> iter = sortedList.iterator();
+		assertEquals("osso" , iter.next().getNome());
+		assertEquals("piuma" , iter.next().getNome());
+		assertEquals(3 , iter.next().getPeso());
+		assertEquals(5 , iter.next().getPeso());
 	}
 	
 	@Test
@@ -132,9 +141,9 @@ public class BorsaTest {
 		Borsa borsaDisordinata = borsaNonOrdinata();
 		Set<Attrezzo> sortedSet = borsaDisordinata.getSortedSetOrdinatoPerPeso();
 		Iterator<Attrezzo> iter = sortedSet.iterator();
-		assertEquals(5 , iter.next().getPeso());
-		assertEquals(3 , iter.next().getPeso());
 		assertEquals(1 , iter.next().getPeso());
+		assertEquals(3 , iter.next().getPeso());
+		assertEquals(5 , iter.next().getPeso());
 	}
 	
 	@Test
@@ -143,10 +152,10 @@ public class BorsaTest {
 		borsaDisordinata.addAttrezzo(new Attrezzo("osso", 1));
 		Set<Attrezzo> sortedSet = borsaDisordinata.getSortedSetOrdinatoPerPeso();
 		Iterator<Attrezzo> iter = sortedSet.iterator();
-		assertEquals(5 , iter.next().getPeso());
-		assertEquals(3 , iter.next().getPeso());
-		assertEquals("piuma" , iter.next().getNome());
 		assertEquals("osso" , iter.next().getNome());
+		assertEquals("piuma" , iter.next().getNome());
+		assertEquals(3 , iter.next().getPeso());
+		assertEquals(5 , iter.next().getPeso());
 	}
 	
 	@Test

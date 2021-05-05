@@ -2,6 +2,10 @@
 package it.uniroma3.diadia.ambienti;
 
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 /**
@@ -22,9 +26,11 @@ public class Stanza {
 	
 	
 	private String nome;
-	private LinkedList<Attrezzo> attrezzi;
-	private LinkedList<Stanza> stanzeAdiacenti;
-	private LinkedList<String> direzioni;
+	private List<Attrezzo> attrezzi;
+	private Map<String, Stanza> stanzeAdiacenti;
+	
+	//private LinkedList<Stanza> stanzeAdiacenti;
+	//private LinkedList<String> direzioni;
 
 
 	/**
@@ -34,8 +40,7 @@ public class Stanza {
 	 */
 	public Stanza(String nome) {
 		this.nome = nome;
-		this.direzioni = new LinkedList<String>();
-		this.stanzeAdiacenti = new LinkedList<Stanza>();
+		this.stanzeAdiacenti = new TreeMap<String, Stanza>();
 		this.attrezzi = new LinkedList<Attrezzo>();
 	}
 
@@ -45,24 +50,11 @@ public class Stanza {
 	 * @param direzione Stringa che identifica la direzione della stanza adiacente.
 	 * @param stanza Stringa che identifica la stanza adiacente.
 	 */
-	public void setStanzaAdiacente(String direzione, Stanza stanza) {
-		
+	public void setStanzaAdiacente(String direzione, Stanza stanza) {	
 		if(direzione == null || stanza == null)
 			return;
 		
-		boolean aggiornato = false;
-		
-		int index = this.direzioni.indexOf(direzione);
-		if(index != -1) {
-			this.stanzeAdiacenti.set(index, stanza);
-			aggiornato = true;
-		}
-			
-		if(!aggiornato)
-			if(this.stanzeAdiacenti.size() < NUMERO_MASSIMO_DIREZIONI) {
-				this.direzioni.add(direzione);
-				this.stanzeAdiacenti.add(stanza);
-			}
+		this.stanzeAdiacenti.put(direzione, stanza);
 	}
 
 	/**
@@ -70,12 +62,7 @@ public class Stanza {
 	 * @param direzione Stringa che identifica la direzione
 	 */
 	public Stanza getStanzaAdiacente(String direzione) {
-		int index = this.direzioni.indexOf(direzione);
-		
-		if(index != -1)
-			return this.stanzeAdiacenti.get(index);
-		
-		return null;
+		return this.stanzeAdiacenti.get(direzione);
 	}
 
 	/**
@@ -99,7 +86,7 @@ public class Stanza {
 	 * @return Restituisce un array di oggetti istanza della classe Attrezzo
 	 * @see Attrezzo
 	 */
-	public LinkedList<Attrezzo> getAttrezzi() {
+	public List<Attrezzo> getAttrezzi() {
 		return this.attrezzi;
 	}
 
@@ -168,9 +155,8 @@ public class Stanza {
 		StringBuilder risultato = new StringBuilder();
 		risultato.append(this.nome);
 		risultato.append("\nUscite: ");
-		risultato.append(this.direzioni.toString());
+		risultato.append(this.stanzeAdiacenti.keySet().toString());
 		risultato.append("\nAttrezzi nella stanza: ");
-
 		if(this.attrezzi.isEmpty())
 			risultato.append("Nessun Oggetto");
 		else 
@@ -183,8 +169,26 @@ public class Stanza {
 	 * Riporta le direzioni in cui ci si può muovere a partire da una stanza
 	 * @return Restituisce un array di stringhe
 	 */
-	public LinkedList<String> getDirezioni() {
-		return this.direzioni;
+	public List<String> getDirezioni() {
+		return new LinkedList<String>(this.stanzeAdiacenti.keySet());
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		Stanza stanza = (Stanza)o;
+		if(this == stanza)
+			return true;
+			
+		if(stanza.getNome().equals(this.getNome()))
+			return true;
+		
+		return false;
+	}
+	
+	@Override 
+	public int hashCode() {
+		return this.nome.hashCode();
+		
 	}
 
 }

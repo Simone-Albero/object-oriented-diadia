@@ -29,7 +29,7 @@ public class ComandoVaiTest {
 
 	@Test
 	public void testVaiInDirezioneEsistente() {
-		String direzione = this.partita.getStanzaCorrente().getDirezioni().getFirst();
+		String direzione = this.partita.getStanzaCorrente().getDirezioni().get(0);
 		comando.setParametro(direzione);
 		Stanza nuovaStanza = this.partita.getStanzaCorrente().getStanzaAdiacente(direzione);
 		comando.esegui(this.partita);

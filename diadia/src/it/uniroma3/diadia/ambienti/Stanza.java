@@ -21,16 +21,13 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
  */
 public class Stanza {
 
-	static final private int NUMERO_MASSIMO_DIREZIONI = 4;
+	//static final private int NUMERO_MASSIMO_DIREZIONI = 4;
 	static final private int NUMERO_MASSIMO_ATTREZZI = 10;
 	
 	
 	private String nome;
 	private List<Attrezzo> attrezzi;
 	private Map<String, Stanza> stanzeAdiacenti;
-	
-	//private LinkedList<Stanza> stanzeAdiacenti;
-	//private LinkedList<String> direzioni;
 
 
 	/**

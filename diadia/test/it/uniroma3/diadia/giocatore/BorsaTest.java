@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.junit.Before;
@@ -134,6 +135,23 @@ public class BorsaTest {
 	public void testGetContenutoOrdinatoPerNomeSuSequenzaVuota() {
 		Borsa borsaVuota = new Borsa();
 		assertTrue(borsaVuota.getContenutoOrdinatoPerNome().isEmpty());
+	}
+	
+
+	@Test
+	public void testgetContenutoRaggruppatoPerPesoSuSequenzaDisordinata() {
+		Borsa borsaDisordinata = borsaNonOrdinata();
+		Map<Integer,Set<Attrezzo>> map = borsaDisordinata.getContenutoRaggruppatoPerPeso();
+
+		for(Map.Entry<Integer, Set<Attrezzo>> entry: map.entrySet()) 
+			for(Attrezzo curr : entry.getValue())
+				assertEquals(entry.getKey() , (Integer)curr.getPeso());
+	}
+	
+	@Test
+	public void testgetContenutoRaggruppatoPerPesoSuSequenzaVuota() {
+		Borsa borsaVuota = new Borsa();
+		assertTrue(borsaVuota.getContenutoRaggruppatoPerPeso().isEmpty());
 	}
 	
 	@Test

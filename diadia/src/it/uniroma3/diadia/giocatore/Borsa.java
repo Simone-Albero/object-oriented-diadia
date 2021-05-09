@@ -2,9 +2,13 @@
 package it.uniroma3.diadia.giocatore;
 
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -151,18 +155,39 @@ public class Borsa {
 		return s.toString();
 	}
 	
-	 List<Attrezzo> getContenutoOrdinatoPerPeso(){
+	public List<Attrezzo> getContenutoOrdinatoPerPeso(){
 		List<Attrezzo> sortedList = new LinkedList<Attrezzo>(this.attrezzi);
 		Collections.sort(sortedList, new ComparaAttrezzoPerPeso());
 		return sortedList;
 	 }
 	 
-	 SortedSet<Attrezzo> getContenutoOrdinatoPerNome(){
+	public SortedSet<Attrezzo> getContenutoOrdinatoPerNome(){
 		 SortedSet<Attrezzo> sortedSet = new TreeSet<Attrezzo>(this.attrezzi);
 		 return sortedSet;
 	 }
 	 
-	 SortedSet<Attrezzo> getSortedSetOrdinatoPerPeso(){
+	public Map<Integer,Set<Attrezzo>> getContenutoRaggruppatoPerPeso(){
+		 Iterator<Attrezzo> iter = this.attrezzi.iterator();
+		 Map<Integer,Set<Attrezzo>> map = new HashMap<Integer,Set<Attrezzo>>();
+		 
+		 while(iter.hasNext()) {
+			 Attrezzo curr = iter.next();
+			 
+			 if(map.containsKey(curr.getPeso())) 
+				 map.get(curr.getPeso()).add(curr);
+			 
+			 else {
+				 Set<Attrezzo> set = new HashSet<Attrezzo>();
+				 set.add(curr);
+				 map.put(curr.getPeso(), set);
+			 }
+		 }
+		 
+		 return map;
+	 }
+
+	 
+	public SortedSet<Attrezzo> getSortedSetOrdinatoPerPeso(){
 		 SortedSet<Attrezzo> sortedSet = new TreeSet<Attrezzo>(new ComparaAttrezzoPerPeso());
 		 sortedSet.addAll(this.attrezzi);
 		 return sortedSet;

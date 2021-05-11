@@ -46,6 +46,8 @@ public class Labirinto {
 		this.maxStanze = maxStanze;
 		this.attrezzi = new HashSet<Attrezzo>();
 		this.maxAttrezzi = maxAttrezzi;
+		this.entrata = null;
+		this.uscita = null;
 	}
 	
 	

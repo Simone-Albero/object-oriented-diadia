@@ -16,39 +16,43 @@ public class LabirintoBuilder {
 	}
 	
 	public LabirintoBuilder addEntrata(String stanza) {
-		Stanza that = new Stanza(stanza);
-		if(!this.labirinto.getStanze().contains(that)) {
-			this.labirinto.addStanza(that);
-			this.labirinto.setEntrata(that);
-		}
-		
-		else {
-			Stanza entrata = this.labirinto.getStanze().get(this.labirinto.getStanze().indexOf(that));
-			this.labirinto.setUscita(entrata);
+		if(stanza != null) {
+			Stanza that = new Stanza(stanza);
+			if(!this.labirinto.getStanze().contains(that)) {
+				this.labirinto.addStanza(that);
+				this.labirinto.setEntrata(that);
+			}
+
+			else {
+				Stanza entrata = this.labirinto.getStanze().get(this.labirinto.getStanze().indexOf(that));
+				this.labirinto.setUscita(entrata);
+			}
 		}
 		return this;
-		
 	}
 	
 	public LabirintoBuilder addUscita(String stanza) {
-		Stanza that = new Stanza(stanza);
-		if(!this.labirinto.getStanze().contains(that)) {
-			this.labirinto.addStanza(that);
-			this.labirinto.setUscita(that);
+		if(stanza != null) {
+			Stanza that = new Stanza(stanza);
+			if(!this.labirinto.getStanze().contains(that)) {
+				this.labirinto.addStanza(that);
+				this.labirinto.setUscita(that);
+			}
+			else {
+				Stanza uscita = this.labirinto.getStanze().get(this.labirinto.getStanze().indexOf(that));
+				this.labirinto.setUscita(uscita);
+			}
 		}
-		else {
-			Stanza uscita = this.labirinto.getStanze().get(this.labirinto.getStanze().indexOf(that));
-			this.labirinto.setUscita(uscita);
-		}
-		return this;
-			
+		return this;	
 	}
 	
 	public LabirintoBuilder addAttrezzo(String nome, int peso) {
-		Attrezzo attrezzo = new Attrezzo(nome, peso);
-		if (this.labirinto.addAttrezzo(attrezzo)) {
-			Stanza last = this.labirinto.getStanze().get(this.labirinto.getStanze().size()-1);
-			last.addAttrezzo(attrezzo);
+		if(nome != null) {
+			Attrezzo attrezzo = new Attrezzo(nome, peso);
+			if (this.labirinto.addAttrezzo(attrezzo)) {
+				Stanza last = this.labirinto.getStanze().get(this.labirinto.getStanze().size()-1);
+				last.addAttrezzo(attrezzo);
+			}
 		}
 		return this;
 	}

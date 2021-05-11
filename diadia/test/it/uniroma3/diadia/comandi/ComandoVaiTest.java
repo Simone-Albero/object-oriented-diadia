@@ -2,6 +2,8 @@ package it.uniroma3.diadia.comandi;
 
 import it.uniroma3.diadia.*;
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.Labirinto;
+import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.fixture.Fixture;
 
@@ -20,7 +22,8 @@ public class ComandoVaiTest {
 
 	@Before
 	public void setUp() {
-		this.partita = new Partita();
+		Labirinto labirinto = new LabirintoBuilder().addEntrata("Atrio").addUscita("Biblioteca").addAdiacenza("Atrio", "Biblioteca", "nord").getLabirinto();
+		this.partita = new Partita(labirinto);
 		this.console = new IOConsole();
 		
 		comando = new ComandoVai();
@@ -29,9 +32,8 @@ public class ComandoVaiTest {
 
 	@Test
 	public void testVaiInDirezioneEsistente() {
-		String direzione = this.partita.getStanzaCorrente().getDirezioni().get(0);
-		comando.setParametro(direzione);
-		Stanza nuovaStanza = this.partita.getStanzaCorrente().getStanzaAdiacente(direzione);
+		comando.setParametro("nord");
+		Stanza nuovaStanza = this.partita.getStanzaCorrente().getStanzaAdiacente("nord");
 		comando.esegui(this.partita);
 		assertEquals(nuovaStanza ,this.partita.getStanzaCorrente());
 	}
@@ -39,8 +41,9 @@ public class ComandoVaiTest {
 	@Test
 	public void testVaiInDirezioneInesistente() {
 		comando.setParametro("pippo");
+		Stanza expected = this.partita.getStanzaCorrente();
 		comando.esegui(this.partita);
-		assertEquals(this.partita.getStanzaCorrente() ,this.partita.getStanzaCorrente());
+		assertEquals(expected ,this.partita.getStanzaCorrente());
 	}
 	
 	@Test

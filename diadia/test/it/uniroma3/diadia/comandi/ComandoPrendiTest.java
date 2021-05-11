@@ -1,6 +1,8 @@
 package it.uniroma3.diadia.comandi;
 
 import it.uniroma3.diadia.*;
+import it.uniroma3.diadia.ambienti.Labirinto;
+import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.fixture.Fixture;
 
@@ -20,10 +22,9 @@ public class ComandoPrendiTest {
 	
 	@Before
 	public void setUp() {
-		this.partita = new Partita();
+		Labirinto labirinto = new LabirintoBuilder().addEntrata("Atrio").addAttrezzo("matita", 1).getLabirinto();
+		this.partita = new Partita(labirinto);
 		this.console = new IOConsole();
-
-		this.partita.getStanzaCorrente().addAttrezzo(new Attrezzo("matita", 1));
 		
 		comando = new ComandoPrendi();
 		comando.setIO(console);
@@ -54,7 +55,7 @@ public class ComandoPrendiTest {
 	}
 	
 	@Test
-	public void testPrendiAttrezzoSuStanzaPiena() {
+	public void testPrendiAttrezzoSuBorsaPiena() {
 		borsaPiena();
 		comando.setParametro("matita");
 		comando.esegui(this.partita);

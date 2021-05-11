@@ -1,5 +1,7 @@
 package it.uniroma3.diadia;
 
+import it.uniroma3.diadia.ambienti.Labirinto;
+import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.ambienti.Stanza;
 import static org.junit.Assert.*;
 
@@ -13,7 +15,8 @@ public class PartitaTest {
 	
 	@Before
 	public void setUp() {
-		this.partita = new Partita();
+		Labirinto labirinto = new LabirintoBuilder().addEntrata("Atrio").addUscita("Biblioteca").getLabirinto();
+		this.partita = new Partita(labirinto);
 	}
 	
 	

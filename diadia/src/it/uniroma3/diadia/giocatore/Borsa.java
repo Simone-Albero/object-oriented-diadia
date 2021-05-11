@@ -30,7 +30,7 @@ public class Borsa {
 	
 	public final static int DEFAULT_PESO_MAX_BORSA = 10;
 	
-	private LinkedList<Attrezzo> attrezzi;
+	private List<Attrezzo> attrezzi;
 	private int pesoMax;
 	
 	/**

@@ -1,6 +1,11 @@
 
 package it.uniroma3.diadia.ambienti;
 
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
+
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 /**
@@ -20,14 +25,10 @@ public class Labirinto {
 	private Stanza entrata;
 	private Stanza uscita;
 	
-	private Stanza stanze[];
-	private int nStanze;
+	private List<Stanza> stanze;
 	private int maxStanze;
-	private Attrezzo attrezzi[];
-	private int nAttrezzi;
+	private Set<Attrezzo> attrezzi;
 	private int maxAttrezzi;
-	
-	
 	
 	
 	/**
@@ -41,61 +42,12 @@ public class Labirinto {
 	 * Crea un labirinto 
 	 */
 	public Labirinto(int maxStanze, int maxAttrezzi){
-		this.stanze = new Stanza[maxStanze];
+		this.stanze = new LinkedList<Stanza>();
 		this.maxStanze = maxStanze;
-		this.nStanze = 0;
-		this.attrezzi = new Attrezzo[maxAttrezzi];
+		this.attrezzi = new HashSet<Attrezzo>();
 		this.maxAttrezzi = maxAttrezzi;
-		this.nAttrezzi = 0;
-		initLabirinto();
 	}
 	
-	/**
-	 * Inizializza il labirinto a partire da un "template"
-	 * impostando le stanze principali "entrata" e "uscita",
-	 * collegando tra loro le stanze secondarie
-	 * e generando gli attrezzi che figurano all'interno di esse
-	 * @see Attrezzo
-	 */
-	private void initLabirinto() {
-
-		/* crea gli attrezzi */
-		this.addAttrezzo(new Attrezzo("lanterna",3)); //0
-		this.addAttrezzo(new Attrezzo("osso",1)); //1
-
-		/* crea stanze del labirinto */
-		this.addStanza(new Stanza("Atrio")); //0
-		this.addStanza(new Stanza("Aula N11")); //1
-		this.addStanza(new Stanza("Aula N10")); //2
-		this.addStanza(new Stanza("Laboratorio Campus")); //3
-		this.addStanza(new Stanza("Biblioteca")); //4
-
-		/* collega le stanze */
-		this.stanze[0].setStanzaAdiacente("nord", this.stanze[4]);
-		this.stanze[0].setStanzaAdiacente("est", this.stanze[1]);
-		this.stanze[0].setStanzaAdiacente("sud", this.stanze[2]);
-		this.stanze[0].setStanzaAdiacente("ovest", this.stanze[3]);
-
-		this.stanze[1].setStanzaAdiacente("est", this.stanze[3]);
-		this.stanze[1].setStanzaAdiacente("ovest", this.stanze[0]);
-		
-		this.stanze[2].setStanzaAdiacente("nord", this.stanze[0]);
-		this.stanze[2].setStanzaAdiacente("est", this.stanze[1]);
-		this.stanze[2].setStanzaAdiacente("ovest", this.stanze[3]);
-		
-		this.stanze[3].setStanzaAdiacente("est", this.stanze[0]);
-		this.stanze[3].setStanzaAdiacente("ovest", this.stanze[1]);
-
-		this.stanze[4].setStanzaAdiacente("sud", this.stanze[0]);
-
-		/* pone gli attrezzi nelle stanze */
-		this.stanze[2].addAttrezzo(this.attrezzi[0]);
-		this.stanze[0].addAttrezzo(this.attrezzi[1]);
-
-		// il gioco comincia nell'atrio
-		this.setEntrata(this.stanze[0]); 
-		this.setUscita(this.stanze[4]);
-	}
 	
 	/**
 	 * Riporta la stanza iniziale "entrata"
@@ -111,7 +63,7 @@ public class Labirinto {
 	 * @param entrata Oggetto istanza della classe Stanza 
 	 * @see Stanza
 	 */
-	private void setEntrata(Stanza entrata) {
+	public void setEntrata(Stanza entrata) {
 		this.entrata = entrata;
 	}
 	
@@ -129,7 +81,7 @@ public class Labirinto {
 	 * @param uscita Oggetto istanza della classe Stanza 
 	 * @see stanza
 	 */
-	private void setUscita(Stanza uscita) {
+	public void setUscita(Stanza uscita) {
 		this.uscita = uscita;
 	}
 	
@@ -140,16 +92,10 @@ public class Labirinto {
 	 * @see Stanza
 	 */
 	public boolean addStanza(Stanza stanza) {
-		if(stanza == null)
+		if (this.stanze.size()<this.maxStanze && stanza != null)
+			return this.stanze.add(stanza);
+		else
 			return false;
-					
-		if(this.nStanze < this.maxStanze) {
-			this.stanze[this.nStanze]= stanza;
-			this.nStanze++;
-			return true;
-		}
-		
-		return false;
 	}
 	
 	/**
@@ -159,15 +105,17 @@ public class Labirinto {
 	 * @see Attrezzo
 	 */
 	public boolean addAttrezzo(Attrezzo attrezzo) {
-		if(attrezzo == null)
+		if(this.attrezzi.size()<this.maxAttrezzi)
+			return this.attrezzi.add(attrezzo);
+		else
 			return false;
-		
-		if(this.nAttrezzi < this.maxAttrezzi) {
-			this.attrezzi[this.nAttrezzi]= attrezzo;
-			this.nAttrezzi++;
-			return true;
-		}
-		
-		return false;
+	}
+	
+	public List<Stanza> getStanze(){
+		return this.stanze;
+	}
+	
+	public Set<Attrezzo> getAttrezzi(){
+		return this.attrezzi;
 	}
 }

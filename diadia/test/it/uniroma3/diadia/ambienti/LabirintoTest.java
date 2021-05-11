@@ -8,44 +8,44 @@ import org.junit.Test;
 
 
 public class LabirintoTest {
-	private Labirinto labirinto;
+	private Labirinto monolocale;
+	private Labirinto bilocale;
 	
 	@Before
 	public void setUp() {
-		this.labirinto = new Labirinto(6,3);
+		this.monolocale = new LabirintoBuilder(1,0).addEntrata("atrio").addUscita("atrio").getLabirinto();
+		this.bilocale = new LabirintoBuilder(2,5).addEntrata("atrio").addUscita("atrio").getLabirinto();
 	}
 	
 	
 	@Test
 	public void testAddStanzaNonNulla() {
-		assertEquals(true, this.labirinto.addStanza(new Stanza("bagno")));
+		assertEquals(true, this.bilocale.addStanza(new Stanza("bagno")));
 	}
 	
 	@Test
 	public void testAddStanzaNulla() {
-		assertEquals(false, this.labirinto.addStanza(null));
+		assertEquals(false, this.bilocale.addStanza(null));
 	}
 	
 	@Test
 	public void testAddStanzaSuLabirintoPieno() {
-		this.labirinto.addStanza(new Stanza("cucina"));
-		assertEquals(false, this.labirinto.addStanza(new Stanza("bagno")));
+		assertEquals(false, this.monolocale.addStanza(new Stanza("bagno")));
 	}
 	
 	@Test
 	public void testAddAttrezzoNonNullo() {
-		assertEquals(true, this.labirinto.addAttrezzo(new Attrezzo("osso", 1)));
+		assertEquals(true, this.bilocale.addAttrezzo(new Attrezzo("osso", 1)));
 	}
 	
 	@Test
 	public void testAddAttrezzoNullo() {
-		assertEquals(false, this.labirinto.addAttrezzo(null));
+		assertEquals(false, this.monolocale.addAttrezzo(null));
 	}
 	
 	@Test
 	public void testAddAttrezzoSuLabirintoPieno() {
-		this.labirinto.addAttrezzo(new Attrezzo("martello", 1));
-		assertEquals(false, this.labirinto.addAttrezzo(new Attrezzo("osso", 1)));
+		assertEquals(false, this.monolocale.addAttrezzo(new Attrezzo("osso", 1)));
 	}
 
 }

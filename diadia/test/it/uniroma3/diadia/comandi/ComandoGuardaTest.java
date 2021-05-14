@@ -16,20 +16,17 @@ public class ComandoGuardaTest {
 	public void testSimulazioneComandoGuarda() {
 		String[] comandi = {"vai sud", "guarda", "fine"};
 		IOSimulator io = Fixture.creaSimulazioneEGioca(comandi);		
-		assertTrue(io.hasNextMessaggio());
-		assertEquals(DiaDia.MESSAGGIO_BENVENUTO , io.nextMessaggio());
-		assertTrue(io.hasNextMessaggio());
-		assertContains("Atrio", io.nextMessaggio());
-		assertTrue(io.hasNextMessaggio());
-		assertContains("Aula N10", io.nextMessaggio());
-		assertTrue(io.hasNextMessaggio());
-		assertContains("punteggio", io.nextMessaggio());
-		assertTrue(io.hasNextMessaggio());
-		assertContains("inventario", io.nextMessaggio());
-		assertTrue(io.hasNextMessaggio());
-		assertContains("Aula N10", io.nextMessaggio());
-		assertTrue(io.hasNextMessaggio());
-		assertEquals(ComandoFine.MESSAGGIO_FINE , io.nextMessaggio());
+		assertTrue(io.hasMessaggio(IOSimulator.BENVENUTO));
+		assertContains(DiaDia.MESSAGGIO_BENVENUTO , io.getMessaggio(IOSimulator.BENVENUTO));
+		assertContains("Atrio", io.getMessaggio(IOSimulator.BENVENUTO));
+		assertTrue(io.hasMessaggio(comandi[0]));
+		assertContains("Aula N10", io.getMessaggio(comandi[0]));
+		assertTrue(io.hasMessaggio(comandi[1]));
+		assertContains("punteggio", io.getMessaggio(comandi[1]));
+		assertContains("inventario", io.getMessaggio(comandi[1]));
+		assertContains("Aula N10", io.getMessaggio(comandi[1]));
+		assertTrue(io.hasMessaggio(comandi[2]));
+		assertEquals(ComandoFine.MESSAGGIO_FINE , io.getMessaggio(comandi[2]));
 	}
 	
 	public void assertContains(String expected, String interaRiga) {

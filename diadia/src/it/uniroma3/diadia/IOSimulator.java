@@ -1,52 +1,52 @@
+
 package it.uniroma3.diadia;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class IOSimulator implements IO {
 	
-	private static final int MAX_MESSAGGI = 50;
-	private int maxMessaggi;
-	
-	private String [] comandi;
+	public static final String BENVENUTO = "benvenuto";
+	private Map<String, String> messaggiProdotti;
+	private List<String> comandi;
 	private int comandoCorrente;
-	private String[] messaggiProdotti;
-	private int numeroMessaggiProdotti;
-	private int numeroMessaggiMostrati;
-	
 	
 	public IOSimulator(String[] comandi) {
-		this(comandi, MAX_MESSAGGI);
-	}
-	
-	public IOSimulator(String[] comandi, int maxMessaggi) {
-		this.comandi = comandi;
 		this.comandoCorrente = 0;
-		this.messaggiProdotti = new String[maxMessaggi];
-		this.maxMessaggi = maxMessaggi;
-		this.numeroMessaggiMostrati = 0;
-		this.numeroMessaggiProdotti = 0;
+		this.messaggiProdotti = new HashMap<String, String>();
+		this.comandi = new ArrayList<String>(Arrays.asList(comandi));
+		this.comandi.add(0,BENVENUTO);
 	}
 
 	@Override
 	public void mostraMessaggio(String messaggio) {
-		if(this.numeroMessaggiProdotti < this.maxMessaggi){
-			this.messaggiProdotti[this.numeroMessaggiProdotti] = messaggio;
-			this.numeroMessaggiProdotti++;
-		}
+		if(this.comandoCorrente > this.comandi.size()-1)
+			return;
+		
+		String prev = this.messaggiProdotti.get(this.comandi.get(comandoCorrente));
+		
+		if(prev == null)
+			this.messaggiProdotti.put(this.comandi.get(this.comandoCorrente), messaggio);
+		
+		else
+			this.messaggiProdotti.put(this.comandi.get(this.comandoCorrente), prev+messaggio);
 	}
 
 	@Override
 	public String leggiRiga() {
-		String lettura = this.comandi[this.comandoCorrente];
+		String lettura = this.comandi.get(comandoCorrente+1);
 		this.comandoCorrente++;
 		return lettura;
 	}
 	
-	public String nextMessaggio() {
-		String next = this.messaggiProdotti[this.numeroMessaggiMostrati];
-		this.numeroMessaggiMostrati++;
-		return next;
+	public String getMessaggio(String comando) {
+		return this.messaggiProdotti.get(comando);
 	}
 	
-	public boolean hasNextMessaggio() {
-		return this.numeroMessaggiMostrati < this.numeroMessaggiProdotti;
+	public boolean hasMessaggio(String comando) {
+		return this.messaggiProdotti.containsKey(comando);
 	}
 }

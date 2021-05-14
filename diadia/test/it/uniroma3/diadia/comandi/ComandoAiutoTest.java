@@ -17,14 +17,15 @@ public class ComandoAiutoTest {
 	public void testSimulazioneComandoAiuto() {
 		String[] comandi = {"vai sud", "aiuto", "fine"};
 		IOSimulator io = Fixture.creaSimulazioneEGioca(comandi);		
-		assertTrue(io.hasNextMessaggio());
-		assertEquals(DiaDia.MESSAGGIO_BENVENUTO , io.nextMessaggio());
-		assertTrue(io.hasNextMessaggio());
-		assertContains("Atrio", io.nextMessaggio());
-		assertTrue(io.hasNextMessaggio());
-		assertContains("Aula N10", io.nextMessaggio());
-		assertTrue(io.hasNextMessaggio());
-		assertEquals(ComandoAiuto.MESSAGGIO_DI_CONFERMA, io.nextMessaggio());
+		assertTrue(io.hasMessaggio(IOSimulator.BENVENUTO));
+		assertContains(DiaDia.MESSAGGIO_BENVENUTO , io.getMessaggio(IOSimulator.BENVENUTO));
+		assertContains("Atrio", io.getMessaggio(IOSimulator.BENVENUTO));
+		assertTrue(io.hasMessaggio(comandi[0]));
+		assertContains("Aula N10", io.getMessaggio(comandi[0]));
+		assertTrue(io.hasMessaggio(comandi[1]));
+		assertContains(ComandoAiuto.MESSAGGIO_DI_CONFERMA, io.getMessaggio(comandi[1]));
+		assertTrue(io.hasMessaggio(comandi[2]));
+		assertEquals(ComandoFine.MESSAGGIO_FINE , io.getMessaggio(comandi[2]));
 	}
 	
 	public void assertContains(String expected, String interaRiga) {

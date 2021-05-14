@@ -1,7 +1,6 @@
 package it.uniroma3.diadia.comandi;
 
 import it.uniroma3.diadia.*;
-import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.ambienti.Stanza;
@@ -50,14 +49,13 @@ public class ComandoVaiTest {
 	public void testSimulazioneComandoVai() {
 		String[] comandi = {"vai sud","fine"};
 		IOSimulator io = Fixture.creaSimulazioneEGioca(comandi);		
-		assertTrue(io.hasNextMessaggio());
-		assertEquals(DiaDia.MESSAGGIO_BENVENUTO , io.nextMessaggio());
-		assertTrue(io.hasNextMessaggio());
-		assertContains("Atrio", io.nextMessaggio());
-		assertTrue(io.hasNextMessaggio());
-		assertContains("Aula N10", io.nextMessaggio());
-		assertTrue(io.hasNextMessaggio());
-		assertEquals(ComandoFine.MESSAGGIO_FINE , io.nextMessaggio());
+		assertTrue(io.hasMessaggio(IOSimulator.BENVENUTO));
+		assertContains(DiaDia.MESSAGGIO_BENVENUTO , io.getMessaggio(IOSimulator.BENVENUTO));
+		assertContains("Atrio", io.getMessaggio(IOSimulator.BENVENUTO));
+		assertTrue(io.hasMessaggio(comandi[0]));
+		assertContains("Aula N10", io.getMessaggio(comandi[0]));
+		assertTrue(io.hasMessaggio(comandi[1]));
+		assertEquals(ComandoFine.MESSAGGIO_FINE , io.getMessaggio(comandi[1]));
 	}
 	
 	public void assertContains(String expected, String interaRiga) {

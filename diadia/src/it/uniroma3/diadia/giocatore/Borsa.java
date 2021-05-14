@@ -167,15 +167,11 @@ public class Borsa {
 	 }
 	 
 	public Map<Integer,Set<Attrezzo>> getContenutoRaggruppatoPerPeso(){
-		 Iterator<Attrezzo> iter = this.attrezzi.iterator();
 		 Map<Integer,Set<Attrezzo>> map = new HashMap<Integer,Set<Attrezzo>>();
 		 
-		 while(iter.hasNext()) {
-			 Attrezzo curr = iter.next();
-			 
+		 for(Attrezzo curr : this.attrezzi) {
 			 if(map.containsKey(curr.getPeso())) 
 				 map.get(curr.getPeso()).add(curr);
-			 
 			 else {
 				 Set<Attrezzo> set = new HashSet<Attrezzo>();
 				 set.add(curr);

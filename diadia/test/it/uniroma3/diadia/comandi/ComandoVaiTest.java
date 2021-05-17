@@ -48,7 +48,7 @@ public class ComandoVaiTest {
 	@Test
 	public void testSimulazioneComandoVai() {
 		String[] comandi = {"vai sud","fine"};
-		IOSimulator io = Fixture.creaSimulazioneEGioca(comandi);		
+		IOSimulator io = Fixture.creaSimulazioneEGioca(comandi, Fixture.labirintoDefault());		
 		assertTrue(io.hasMessaggio(IOSimulator.BENVENUTO));
 		assertContains(DiaDia.MESSAGGIO_BENVENUTO , io.getMessaggio(IOSimulator.BENVENUTO));
 		assertContains("Atrio", io.getMessaggio(IOSimulator.BENVENUTO));

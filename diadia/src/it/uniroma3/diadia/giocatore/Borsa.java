@@ -17,10 +17,10 @@ import it.uniroma3.diadia.attrezzi.ComparaAttrezzoPerPeso;
 
 /**
  * Borsa:
- * Questa classe modella l'inventario del giocatore.
- * Borsa contiene un array di attrezzi.
- * Il limite relativo alla quantità di attrezzi trasportabili
- * è dettato dalla vaiebile pesoMax 
+ * Questa classe modella l'inventario del Giocatore.
+ * Borsa contiene una collezione di Attrezzi.
+ * Si assume che il Nome degli Attrezzi sia univoco.
+ * Un limite di peso relativo alla quantità di attrezzi trasportabili dettato dalla vaiebile pesoMax 
  * 
  * @author Simone
  * @see Attrezzo
@@ -41,7 +41,7 @@ public class Borsa {
 	}
 	
 	/**
-	 * Genera una borsa a partire da un pesoMax passato in input
+	 * Genera una borsa a partire da un pesoMax passato come parametro
 	 * @param pesoMax Intero che identifica il limite di peso della borsa
 	 */
 	public Borsa(int pesoMax) {
@@ -155,17 +155,41 @@ public class Borsa {
 		return s.toString();
 	}
 	
+	/**
+	 * Riporta una collezione ordinata di oggetti istanza della classe Attrezzo
+	 * Per ordinare la collezione viene definito un criterio di ordinamento esterno
+	 * Tale criterio ordina gli Attrezzi in ordine crescente per Peso, e a parità di peso per Nome
+	 * @see ComparaAttrezzoPerPeso
+	 * 
+	 * @return Restituisce una Lista di oggetti istanza della classe Attrezzo
+	 */
 	public List<Attrezzo> getContenutoOrdinatoPerPeso(){
 		List<Attrezzo> sortedList = new LinkedList<Attrezzo>(this.attrezzi);
 		Collections.sort(sortedList, new ComparaAttrezzoPerPeso());
 		return sortedList;
 	 }
-	 
+	
+	/**
+	 * Riporta una collezione ordinata di oggetti istanza della classe Attrezzo
+	 * Per ordinare la collezione viene definito un criterio di ordinamento naturale definito nella classe Attrezzo
+	 * Tale criterio ordina gli Attrezzi in ordine crescente per Nome
+	 * Si assume che il nome degli Attrezzi sia univoco
+	 * 
+	 * @return Restituisce un Set di oggetti istanza della classe Attrezzo
+	 * @see Attrezzo
+	 */
 	public SortedSet<Attrezzo> getContenutoOrdinatoPerNome(){
 		 SortedSet<Attrezzo> sortedSet = new TreeSet<Attrezzo>(this.attrezzi);
 		 return sortedSet;
 	 }
 	 
+	/**
+	 * Riporta una collezione che raggruppa per peso oggetti istanza della classe Attrezzo
+	 * Si associa un intero  con l’insieme (comunque non vuoto) degli Attrezzi di tale Peso
+	 * 
+	 * @return Restituisce una Mappa di oggetti istanza della classe Attrezzo
+	 * @see Attrezzo
+	 */
 	public Map<Integer,Set<Attrezzo>> getContenutoRaggruppatoPerPeso(){
 		 Map<Integer,Set<Attrezzo>> map = new HashMap<Integer,Set<Attrezzo>>();
 		 
@@ -182,7 +206,15 @@ public class Borsa {
 		 return map;
 	 }
 
-	 
+	/**
+	 * Riporta una collezione ordinata di oggetti istanza della classe Attrezzo
+	 * Per ordinare la collezione viene definito un criterio di ordinamento esterno
+	 * Tale criterio ordina gli Attrezzi in ordine crescente per Peso, e a parità di peso per Nome
+	 * Si assume che il nome degli Attrezzi sia univoco
+	 * 
+	 * @return Restituisce un Set di oggetti istanza della classe Attrezzo
+	 * @see Attrezzo
+	 */
 	public SortedSet<Attrezzo> getSortedSetOrdinatoPerPeso(){
 		 SortedSet<Attrezzo> sortedSet = new TreeSet<Attrezzo>(new ComparaAttrezzoPerPeso());
 		 sortedSet.addAll(this.attrezzi);

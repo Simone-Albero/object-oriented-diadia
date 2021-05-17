@@ -10,7 +10,7 @@ import it.uniroma3.diadia.comandi.*;
  * Per giocare crea un'istanza di questa classe e invoca il metodo gioca
  * Questa e' la classe principale crea e istanzia tutte le altre
  *
- * @author  docente di POO 
+ * @author  Simone 
  *         (da un'idea di Michael Kolling and David J. Barnes) 
  *          
  * @version base
@@ -33,8 +33,8 @@ public class DiaDia {
 
 	/**
 	 * Crea una partita a partire da una cosole di input-output
-	 * @param console Oggetto istanza della classe IOConsole
-	 * @see IOConsole 
+	 * @param console Oggetto istanza della classe IO
+	 * @see IO
 	 */
 	public DiaDia(IO console, Labirinto labirinto) {
 		this.partita = new Partita(labirinto);
@@ -42,7 +42,8 @@ public class DiaDia {
 	}
 	
 	/**
-	 * Avvia la partita e gestisce le istruzioni passate dall'utente
+	 * Avvia la partita e gestisce i comandi passati dall'utente
+	 * @see Comando
 	 */
 	public void gioca() {
 		String istruzione; 
@@ -57,8 +58,9 @@ public class DiaDia {
 
 
 	/**
-	 * Processa una istruzione 
-	 * @return  Restituisce TRUE se l'istruzione e' eseguita e il gioco continua, altrimenti FALSE
+	 * Processa un comando
+	 * @return  Restituisce TRUE se il comando e' eseguito e il gioco continua, altrimenti FALSE
+	 * @see Comando
 	 */
 	private boolean processaIstruzione(String istruzione) {
 		Comando comandoDaEseguire;

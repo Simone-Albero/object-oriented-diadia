@@ -8,7 +8,7 @@ import it.uniroma3.diadia.ambienti.Stanza;
  * Giocatore:
  * Questa classe modella il giocatore di in un gioco di ruolo.
  * Gestisce il punteggio del giocatore rappresentato dalla variabile cfu
- * e l'inventario creato come istanza della classe Borsa
+ * e l'inventario creato da un istanza della classe Borsa
  * 
  * @author Simone
  * @see Borsa
@@ -20,7 +20,9 @@ public class Giocatore {
 	
 	private Borsa borsa;
 	private int cfu;
-	
+	/**
+	 * Crea un Giocatore 
+	 */
 	public Giocatore() {
 		this.cfu = CFU_INIZIALI;
 		this.borsa = new Borsa(); 
@@ -43,8 +45,8 @@ public class Giocatore {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Verifica che il Giocatore abbia ancora a disposizione dei CFU
+	 * @return Resituisce il booleano TRUE se la quantità di CFU è maggiore di zero, altrimenti FALSE
 	 */
 	public boolean isVivo() {
 		if(this.cfu > 0)

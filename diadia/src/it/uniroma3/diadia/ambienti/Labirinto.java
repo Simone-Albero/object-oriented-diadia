@@ -11,11 +11,13 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 /**
  * Labirinto:
  * Questa classe modella un labirinto.
- * Un labirinto è caratterizzato da due stanze principali: "entrata" e "uscita"; 
- * le altre stanze vengono generate e connesse tra loro a partire da quelle principali
+ * Un labirinto è caratterizzato da due stanze principali: "entrata" e "uscita"
+ * Le altre Stanze ed eventuali Attrezzi contenuti in esse vengono generate e connesse a partire da quelle principali
+ * Si assume che non possano esistere due Attrezzi con lo stesso Nome
  * 
  * @author Simone
  * @see Stanza
+ * @see Attrezzo
  * @version base
  */
 public class Labirinto {
@@ -32,14 +34,14 @@ public class Labirinto {
 	
 	
 	/**
-	 * Crea un labirinto 
+	 * Crea un labirinto di dimensione predefinita 
 	 */
 	public Labirinto(){
 		this(DEF_MAX_STANZE, DEF_MAX_ATTREZZI);
 	}
 	
 	/**
-	 * Crea un labirinto 
+	 * Crea un labirinto a partire da dimensioni passate come parametro
 	 */
 	public Labirinto(int maxStanze, int maxAttrezzi){
 		this.stanze = new LinkedList<Stanza>();
@@ -101,7 +103,8 @@ public class Labirinto {
 	}
 	
 	/**
-	 * Aggiunge, se possibile, un attrezzo al labirinto
+	 * Aggiunge, se possibile, un attrezzo al labirinto, 
+	 * si assume che il nome degli attrezzi debba essere Univoco
 	 * @param attrezzo Oggetto istanza della classe Attrezzo
 	 * @return Restituisce TRUE se è possibile aggiungere l'attrezzo, altrimenti FALSE
 	 * @see Attrezzo
@@ -113,10 +116,20 @@ public class Labirinto {
 			return false;
 	}
 	
+	/**
+	 * Riporta la collezione di Stanze di cui è composto il Labirinto  
+	 * @return Restituisce una Lista di oggetti istanza della classe Stanza
+	 * @see Stanza
+	 */
 	public List<Stanza> getStanze(){
 		return this.stanze;
 	}
 	
+	/**
+	 * Riporta una collezione di Attrezzi contenuti all'interno del Labirinto
+	 * @return Restituisce un Set di oggetti istanza della classe Attrezzo
+	 * @see Attrezzo
+	 */
 	public Set<Attrezzo> getAttrezzi(){
 		return this.attrezzi;
 	}

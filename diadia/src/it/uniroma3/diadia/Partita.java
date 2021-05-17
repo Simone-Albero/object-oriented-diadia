@@ -13,9 +13,9 @@ import it.uniroma3.diadia.giocatore.Giocatore;
  * una "stanzaCorrente" considerata come la stanza di partenza in cui è situato il giocatore
  * e una variabile booleana "finita" che dichiara la fine del gioco
  * 
- * @author  docente di POO
- * @see Stanza
+ * @author Simone
  * @see Labirinto
+ * @see Borsa
  * @version 0.1
  */
 
@@ -108,13 +108,19 @@ public class Partita {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Verifica che il giocatore non abbia perso la partita
+	 * @return Restituisce TRUE se il Giocatore non ha ancora perso, altrimenti FALSE
+	 * @see Giocatore
 	 */
 	public boolean giocatoreIsVivo() {
 		return this.giocatore.isVivo();
 	}
 	
+	/**
+	 * Imposta il labirinto su cui viene giocata la partita
+	 * @param labirinto Oggetto istanza della classe Labirinto
+	 * @see Labirinto
+	 */
 	public void setLabirinto(Labirinto labirinto) {
 		this.labirinto = labirinto;
 	}

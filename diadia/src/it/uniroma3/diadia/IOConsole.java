@@ -8,7 +8,7 @@ import java.util.Scanner;
  * Questa classe modella la gestione dell’Input e dell’Output.
  * Centralizza l’accesso a System.out/System.in
  *
- * @author  docente di POO
+ * @author  Simone
  * @version base
  */
 public class IOConsole implements IO{

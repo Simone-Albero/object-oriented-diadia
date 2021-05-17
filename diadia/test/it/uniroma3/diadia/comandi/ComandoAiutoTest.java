@@ -16,7 +16,7 @@ public class ComandoAiutoTest {
 	@Test
 	public void testSimulazioneComandoAiuto() {
 		String[] comandi = {"vai sud", "aiuto", "fine"};
-		IOSimulator io = Fixture.creaSimulazioneEGioca(comandi);		
+		IOSimulator io = Fixture.creaSimulazioneEGioca(comandi, Fixture.labirintoDefault());		
 		assertTrue(io.hasMessaggio(IOSimulator.BENVENUTO));
 		assertContains(DiaDia.MESSAGGIO_BENVENUTO , io.getMessaggio(IOSimulator.BENVENUTO));
 		assertContains("Atrio", io.getMessaggio(IOSimulator.BENVENUTO));

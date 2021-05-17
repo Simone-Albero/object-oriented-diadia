@@ -67,7 +67,7 @@ public class ComandoPosaTest {
 	@Test
 	public void testSimulazioneComandoPosa() {
 		String[] comandi = {"vai sud", "posa osso", "prendi lanterna", "posa lanterna", "fine"};
-		IOSimulator io = Fixture.creaSimulazioneEGioca(comandi);		
+		IOSimulator io = Fixture.creaSimulazioneEGioca(comandi, Fixture.labirintoDefault());		
 		assertTrue(io.hasMessaggio(IOSimulator.BENVENUTO));
 		assertContains(DiaDia.MESSAGGIO_BENVENUTO , io.getMessaggio(IOSimulator.BENVENUTO));
 		assertContains("Atrio", io.getMessaggio(IOSimulator.BENVENUTO));

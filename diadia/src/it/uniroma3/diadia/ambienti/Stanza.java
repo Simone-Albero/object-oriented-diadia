@@ -14,14 +14,15 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
  * Una stanza e' un luogo fisico nel gioco.
  * E' collegata ad altre stanze attraverso delle uscite.
  * Ogni uscita e' associata ad una direzione.
+ * La stanza può contenere degli attrezzi 
+ * Si assume che due attrezzi non possono avere lo stesso Nome
  * 
- * @author docente di POO 
+ * @author Simone 
  * @see Attrezzo
  * @version base
  */
 public class Stanza {
 
-	//static final private int NUMERO_MASSIMO_DIREZIONI = 4;
 	static final private int NUMERO_MASSIMO_ATTREZZI = 10;
 	
 	
@@ -33,7 +34,7 @@ public class Stanza {
 	/**
 	 * Crea una stanza a partire da un nome. 
 	 * Non ci sono stanze adiacenti, non ci sono attrezzi.
-	 * @param nome Stringa che identifica il nome della stanza
+	 * @param nome Oggetto istanza della classe String che identifica il nome della stanza
 	 */
 	public Stanza(String nome) {
 		this.nome = nome;
@@ -80,7 +81,7 @@ public class Stanza {
 
 	/**
 	 * Riporta la collezione di attrezzi presenti nella stanza.
-	 * @return Restituisce un array di oggetti istanza della classe Attrezzo
+	 * @return Restituisce una Lista di oggetti istanza della classe Attrezzo
 	 * @see Attrezzo
 	 */
 	public List<Attrezzo> getAttrezzi() {
@@ -142,10 +143,11 @@ public class Stanza {
 		
 		return false;
 	}
+	
 	/**
 	 * Riporta una rappresentazione stringa di questa stanza,
 	 * stampadone la descrizione, le uscite e gli eventuali attrezzi contenuti
-	 * @return Restituisce una stringa
+	 * @return Restituisce un oggetto istanza della classe String
 	 */
 	@Override
 	public String toString() {
@@ -164,12 +166,18 @@ public class Stanza {
 
 	/**
 	 * Riporta le direzioni in cui ci si può muovere a partire da una stanza
-	 * @return Restituisce un array di stringhe
+	 * @return Restituisce una Lista di oggetti istanza della classe String
 	 */
 	public List<String> getDirezioni() {
 		return new LinkedList<String>(this.stanzeAdiacenti.keySet());
 	}
 	
+	/**
+	 * Verifica l'uguaglianza tra due oggetti istanza della classe Stanza
+	 * Il criterio di uguaglianza è basato esclusivamente sul nome della Stanza
+	 * 
+	 * @return Restituisce il booleano TRUE se le dua stanze hanno lo stesso nome, altrimenti False
+	 */
 	@Override
 	public boolean equals(Object o) {
 		Stanza stanza = (Stanza)o;
@@ -182,6 +190,11 @@ public class Stanza {
 		return false;
 	}
 	
+	/**
+	 * Riporta una rappresentazione intera del Nome della Stanza
+	 * 
+	 * @return Restituisce un intero che rappresenta il Nome della Stanza
+	 */
 	@Override 
 	public int hashCode() {
 		return this.nome.hashCode();

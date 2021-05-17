@@ -6,11 +6,12 @@ import it.uniroma3.diadia.ambienti.Stanza;
 /**
  * Attrezzo:
  * Questa classe modella un attrezzo.
- * Gli attrezzi possono trovarsi all'interno delle stanze del labirinto.
+ * Gli attrezzi possono trovarsi all'interno delle Stanze del Labirinto.
  * Ogni attrezzo ha un nome ed un peso.
  *
- * @author  docente di POO
+ * @author  Simone
  * @see Stanza
+ * @see Labirinto
  * @version base
  */
 public class Attrezzo implements Comparable<Attrezzo>{
@@ -52,6 +53,13 @@ public class Attrezzo implements Comparable<Attrezzo>{
 		return this.getNome()+" ("+this.getPeso()+"kg)";
 	}
 	
+	/**
+	 * Verifica l'uguaglianza tra due oggetti istanza della classe Attrezzo
+	 * Si assume che il nome degli Attrezzi sia univoco
+	 * Il criterio di uguaglianza è basato esclusivamente sul nome dell'Attrezzo
+	 * 
+	 * @return Restituisce il booleano TRUE se le dua stanze hanno lo stesso nome, altrimenti False
+	 */
 	@Override
 	public boolean equals(Object o) {
 		Attrezzo attrezzo = (Attrezzo)o;
@@ -64,12 +72,25 @@ public class Attrezzo implements Comparable<Attrezzo>{
 		return false;
 	}
 	
+	/**
+	 * Riporta una rappresentazione intera del Nome dell'Attrezzo
+	 * Si assume che il nome degli Attrezzi sia univoco
+	 * 
+	 * @return Restituisce un intero che rappresenta il Nome dell'Attrezzp
+	 */
 	@Override 
 	public int hashCode() {
 		return this.nome.hashCode();
 		
 	}
 
+	/**
+	 * Definisce un criterio di ordinamento crescente tra Attrezzi basato esclusivamente sul Nome
+	 * Si assume che il nome degli Attrezzi sia univoco
+	 * 
+	 * @return Restituisce -1 se l'Attrezzo corrente è più piccolo di quello passato come parametro, 0 se sono uguali
+	 * 		   ed 1 se l'Attrezzo corrente è più grande
+	 */
 	@Override
 	public int compareTo(Attrezzo o) {
 		return this.getNome().compareTo(o.getNome());

@@ -28,7 +28,7 @@ public class Stanza {
 	
 	private String nome;
 	private List<Attrezzo> attrezzi;
-	private Map<String, Stanza> stanzeAdiacenti;
+	private Map<Direzione, Stanza> stanzeAdiacenti;
 
 
 	/**
@@ -38,21 +38,21 @@ public class Stanza {
 	 */
 	public Stanza(String nome) {
 		this.nome = nome;
-		this.stanzeAdiacenti = new TreeMap<String, Stanza>();
+		this.stanzeAdiacenti = new TreeMap<Direzione, Stanza>();
 		this.attrezzi = new LinkedList<Attrezzo>();
 	}
 
 	
 	/**
-	 * Imposta una stanza adiacente.
+	 * Imposta l'adiacenza tra due stanze.
 	 * @param direzione Stringa che identifica la direzione della stanza adiacente.
 	 * @param stanza Stringa che identifica la stanza adiacente.
 	 */
 	public void setStanzaAdiacente(String direzione, Stanza stanza) {	
 		if(direzione == null || stanza == null)
 			return;
-		
-		this.stanzeAdiacenti.put(direzione, stanza);
+		this.stanzeAdiacenti.put(Direzione.valueOf(direzione.toUpperCase()), stanza);
+		stanza.stanzeAdiacenti.put(Direzione.valueOf(direzione.toUpperCase()).opposta(), this);
 	}
 
 	/**
@@ -60,7 +60,18 @@ public class Stanza {
 	 * @param direzione Stringa che identifica la direzione
 	 */
 	public Stanza getStanzaAdiacente(String direzione) {
-		return this.stanzeAdiacenti.get(direzione);
+		boolean flag = false;
+		
+		for(Direzione curr : Direzione.values())
+			if(curr.toString().equals(direzione.toUpperCase()))
+				flag = true;
+		
+		if(flag)
+			return this.stanzeAdiacenti.get(Direzione.valueOf(direzione.toUpperCase()));
+		else
+			return null;
+		
+		
 	}
 
 	/**
@@ -168,8 +179,8 @@ public class Stanza {
 	 * Riporta le direzioni in cui ci si può muovere a partire da una stanza
 	 * @return Restituisce una Lista di oggetti istanza della classe String
 	 */
-	public List<String> getDirezioni() {
-		return new LinkedList<String>(this.stanzeAdiacenti.keySet());
+	public List<Direzione> getDirezioni() {
+		return new LinkedList<Direzione>(this.stanzeAdiacenti.keySet());
 	}
 	
 	/**

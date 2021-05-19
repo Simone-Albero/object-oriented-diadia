@@ -3,6 +3,7 @@ package it.uniroma3.diadia.comandi;
 
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.Direzione;
 import it.uniroma3.diadia.ambienti.Stanza;
 
 /**
@@ -22,8 +23,8 @@ public class ComandoVai implements Comando {
 		
 		if(this.direzione==null) {
 			this.console.mostraMessaggio("Ecco le direzioni in cui puoi andare:");
-			for(String currDirezione : stanzaCorrente.getDirezioni())
-				this.console.mostraMessaggio("- "+currDirezione);
+			for(Direzione currDirezione : stanzaCorrente.getDirezioni())
+				this.console.mostraMessaggio("- "+currDirezione.toString());
 			
 			this.console.mostraMessaggio("Dove vuoi andare?");
 			direzione = this.console.leggiRiga();

@@ -94,13 +94,8 @@ public class DiaDia {
 			.addAdiacenza("Atrio", "Aula N11", "est")
 			.addAdiacenza("Atrio", "Laboratorio Campus", "ovest")
 			.addAdiacenza("Aula N11", "Laboratorio Campus", "est")
-			.addAdiacenza("Aula N11", "Atrio", "ovest")
-			.addAdiacenza("Aula N10", "Atrio", "nord")
 			.addAdiacenza("Aula N10", "Aula N11", "est")
 			.addAdiacenza("Aula N10", "Laboratorio Campus", "ovest")
-			.addAdiacenza("Laboratorio Campus", "Atrio", "est")
-			.addAdiacenza("Laboratorio Campus", "Aula N11", "ovest")
-			.addAdiacenza("Biblioteca", "Atrio", "sud")
 			.getLabirinto();
 		DiaDia gioco = new DiaDia(io, labirinto);
 		

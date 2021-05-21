@@ -13,7 +13,7 @@ import it.uniroma3.diadia.Partita;
  * (Ad es. alla riga digitata dall'utente "vai nord"
  *  corrisponde un comando di nome "vai" e parametro "nord").
  *
- * @author  docente di POO
+ * @author  Simone
  * @version base
  */
 public interface Comando {

@@ -63,7 +63,7 @@ public class DiaDia {
 	 * @see Comando
 	 */
 	private boolean processaIstruzione(String istruzione) {
-		Comando comandoDaEseguire;
+		AbstractComando comandoDaEseguire;
 		FabbricaDiComandi factory = new FabbricaDiComandiFisarmonica();
 		comandoDaEseguire = factory.costruisciComando(istruzione, this.console);
 		comandoDaEseguire.esegui(this.partita);

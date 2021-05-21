@@ -15,7 +15,7 @@ public class ComandoVaiTest {
 
 	public Partita partita;
 	private IO console;
-	private Comando comando;
+	private AbstractComando comando;
 
 	@Before
 	public void setUp() {

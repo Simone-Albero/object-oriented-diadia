@@ -22,50 +22,50 @@ public class FabbricaDiComandiFisarmonicaTest {
 
 	@Test
 	public void testComandoNonValido() {
-		Comando comando = this.factory.costruisciComando("pippo", this.console);
-		assertEquals("ComandoNonValido", comando.getNome());
+		AbstractComando comando = this.factory.costruisciComando("pippo", this.console);
+		assertEquals("nonvalido", comando.getNome());
 		assertNull(comando.getParametro());
 	}
 	
 	@Test
 	public void testComandoVai() {
-		Comando comando = this.factory.costruisciComando("vai nord", this.console);
-		assertEquals("ComandoVai", comando.getNome());
+		AbstractComando comando = this.factory.costruisciComando("vai nord", this.console);
+		assertEquals("vai", comando.getNome());
 		assertEquals("nord", comando.getParametro());
 	}
 	
 	@Test
 	public void testComandoPrendi() {
-		Comando comando = this.factory.costruisciComando("prendi osso", this.console);
-		assertEquals("ComandoPrendi", comando.getNome());
+		AbstractComando comando = this.factory.costruisciComando("prendi osso", this.console);
+		assertEquals("prendi", comando.getNome());
 		assertEquals("osso", comando.getParametro());
 	}
 	
 	@Test
 	public void testComandoPosa() {
-		Comando comando = this.factory.costruisciComando("posa osso", this.console);
-		assertEquals("ComandoPosa", comando.getNome());
+		AbstractComando comando = this.factory.costruisciComando("posa osso", this.console);
+		assertEquals("posa", comando.getNome());
 		assertEquals("osso", comando.getParametro());
 	}
 	
 	@Test
 	public void testComandoAiuto() {
-		Comando comando = this.factory.costruisciComando("aiuto", this.console);
-		assertEquals("ComandoAiuto", comando.getNome());
+		AbstractComando comando = this.factory.costruisciComando("aiuto", this.console);
+		assertEquals("aiuto", comando.getNome());
 		assertNull(comando.getParametro());
 	}
 	
 	@Test
 	public void testComandoFine() {
-		Comando comando = this.factory.costruisciComando("fine", this.console);
-		assertEquals("ComandoFine", comando.getNome());
+		AbstractComando comando = this.factory.costruisciComando("fine", this.console);
+		assertEquals("fine", comando.getNome());
 		assertNull(comando.getParametro());
 	}
 	
 	@Test
 	public void testComandoGuarda() {
-		Comando comando = this.factory.costruisciComando("guarda", this.console);
-		assertEquals("ComandoGuarda", comando.getNome());
+		AbstractComando comando = this.factory.costruisciComando("guarda", this.console);
+		assertEquals("guarda", comando.getNome());
 		assertNull(comando.getParametro());
 	}
 }

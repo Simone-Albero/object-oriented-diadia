@@ -18,6 +18,7 @@ public class ComandoAiuto extends AbstractComando {
 			"- fine: Termina la partita", 
 			"- prendi: Permette se possibile di prendere un oggetto da una stanza", 
 			"- posa: Permette se possibile di posare un oggetto in una stanza",
+			"- interagisci: Permette di interagire con un personaggio presente nella stanza corrente",
 	"- guarda: Da informazioni sullo stato della partita (stanza corrente e punteggio)"};
 
  

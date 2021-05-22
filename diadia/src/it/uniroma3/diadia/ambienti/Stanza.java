@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.personaggi.AbstractPersonaggio;
 
 /**
  * Stanza:
@@ -24,11 +25,12 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 public class Stanza {
 
 	static final private int NUMERO_MASSIMO_ATTREZZI = 10;
-	
-	
+
+
 	private String nome;
 	private List<Attrezzo> attrezzi;
 	private Map<Direzione, Stanza> stanzeAdiacenti;
+	private AbstractPersonaggio personaggio;
 
 
 	/**
@@ -42,7 +44,7 @@ public class Stanza {
 		this.attrezzi = new LinkedList<Attrezzo>();
 	}
 
-	
+
 	/**
 	 * Imposta l'adiacenza tra due stanze.
 	 * @param direzione Stringa che identifica la direzione della stanza adiacente.
@@ -61,17 +63,17 @@ public class Stanza {
 	 */
 	public Stanza getStanzaAdiacente(String direzione) {
 		boolean flag = false;
-		
+
 		for(Direzione curr : Direzione.values())
 			if(curr.toString().equals(direzione.toUpperCase()))
 				flag = true;
-		
+
 		if(flag)
 			return this.stanzeAdiacenti.get(Direzione.valueOf(direzione.toUpperCase()));
 		else
 			return null;
-		
-		
+
+
 	}
 
 	/**
@@ -109,7 +111,7 @@ public class Stanza {
 			this.attrezzi.add(attrezzo);
 			return true;
 		}
-		
+
 		return false;
 	}
 
@@ -130,11 +132,11 @@ public class Stanza {
 	 */	
 	public Attrezzo getAttrezzo(String nomeAttrezzo) {
 		int index = this.attrezzi.indexOf(new Attrezzo(nomeAttrezzo, 1));
-		
+
 		if(index != -1) {
 			return this.attrezzi.get(index);
 		}
-		
+
 		return null;
 	}
 
@@ -146,15 +148,72 @@ public class Stanza {
 	 */	
 	public boolean removeAttrezzo(Attrezzo attrezzo) {
 		int index = this.attrezzi.indexOf(attrezzo);
-		
+
 		if(index != -1) {
 			this.attrezzi.remove(index);
 			return true;
 		}
-		
+
 		return false;
 	}
+
+
+	/**
+	 * Riporta le direzioni in cui ci si può muovere a partire da una stanza
+	 * @return Restituisce una Lista di oggetti istanza della classe String
+	 */
+	public List<Direzione> getDirezioni() {
+		return new LinkedList<Direzione>(this.stanzeAdiacenti.keySet());
+	}
 	
+	/**
+	 * Riporta il personaggio presente nella stanza
+	 * @return Restituisce un oggetto istanza della classe AbstractPersonaggio
+	 * @see AbstractPersonaggio
+	 */
+	public AbstractPersonaggio getPersonaggio() {
+		return personaggio;
+	}
+
+	/**
+	 * Imposta il personaggio presente all'interno della stanza
+	 * @param personaggio Oggetto istanza della classe AbstractPersonaggio
+	 * @see AbstractPersonaggio
+	 */
+	public void setPersonaggio(AbstractPersonaggio personaggio) {
+		this.personaggio = personaggio;
+	}
+
+
+	/**
+	 * Verifica l'uguaglianza tra due oggetti istanza della classe Stanza
+	 * Il criterio di uguaglianza è basato esclusivamente sul nome della Stanza
+	 * 
+	 * @return Restituisce il booleano TRUE se le dua stanze hanno lo stesso nome, altrimenti False
+	 */
+	@Override
+	public boolean equals(Object o) {
+		Stanza stanza = (Stanza)o;
+		if(this == stanza)
+			return true;
+
+		if(stanza.getNome().equals(this.getNome()))
+			return true;
+
+		return false;
+	}
+
+	/**
+	 * Riporta una rappresentazione intera del Nome della Stanza
+	 * 
+	 * @return Restituisce un intero che rappresenta il Nome della Stanza
+	 */
+	@Override 
+	public int hashCode() {
+		return this.nome.hashCode();
+
+	}
+
 	/**
 	 * Riporta una rappresentazione stringa di questa stanza,
 	 * stampadone la descrizione, le uscite e gli eventuali attrezzi contenuti
@@ -171,45 +230,7 @@ public class Stanza {
 			risultato.append("Nessun Oggetto");
 		else 
 			risultato.append(this.attrezzi.toString());
-		
+
 		return risultato.toString();
 	}
-
-	/**
-	 * Riporta le direzioni in cui ci si può muovere a partire da una stanza
-	 * @return Restituisce una Lista di oggetti istanza della classe String
-	 */
-	public List<Direzione> getDirezioni() {
-		return new LinkedList<Direzione>(this.stanzeAdiacenti.keySet());
-	}
-	
-	/**
-	 * Verifica l'uguaglianza tra due oggetti istanza della classe Stanza
-	 * Il criterio di uguaglianza è basato esclusivamente sul nome della Stanza
-	 * 
-	 * @return Restituisce il booleano TRUE se le dua stanze hanno lo stesso nome, altrimenti False
-	 */
-	@Override
-	public boolean equals(Object o) {
-		Stanza stanza = (Stanza)o;
-		if(this == stanza)
-			return true;
-			
-		if(stanza.getNome().equals(this.getNome()))
-			return true;
-		
-		return false;
-	}
-	
-	/**
-	 * Riporta una rappresentazione intera del Nome della Stanza
-	 * 
-	 * @return Restituisce un intero che rappresenta il Nome della Stanza
-	 */
-	@Override 
-	public int hashCode() {
-		return this.nome.hashCode();
-		
-	}
-
 }

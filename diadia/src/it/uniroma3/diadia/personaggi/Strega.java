@@ -1,5 +1,6 @@
 package it.uniroma3.diadia.personaggi;
 
+import java.util.Collections;
 import java.util.List;
 
 import it.uniroma3.diadia.Partita;
@@ -34,14 +35,13 @@ public class Strega extends AbstractPersonaggio {
 	
 	private Stanza getStanzaMinAttrezzi(Stanza stanza) {
 		List<Stanza> list = stanza.getStanzeAdiacenti();
-		list.sort(new ComparatoreStanzaPerNumeroAttrezzi());
-		return list.get(0);
+		return Collections.min(list, new ComparatoreStanzaPerNumeroAttrezzi());
+		
 	}
 	
 	private Stanza getStanzaMaxAttrezzi(Stanza stanza) {
 		List<Stanza> list = stanza.getStanzeAdiacenti();
-		list.sort(new ComparatoreStanzaPerNumeroAttrezzi());
-		return list.get(list.size()-1);
+		return Collections.max(list, new ComparatoreStanzaPerNumeroAttrezzi());
 	}
 
 	@Override

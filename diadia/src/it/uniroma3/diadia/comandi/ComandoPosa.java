@@ -16,6 +16,9 @@ public class ComandoPosa extends AbstractComando {
 	public void esegui(Partita partita) {
 		if(this.parametro==null) {
 			this.console.mostraMessaggio("Ecco il tuo inventario:\n"+partita.getGiocatore().getBorsa().toString());
+			if(partita.getGiocatore().getBorsa().isEmpty())
+				return;
+			
 			this.console.mostraMessaggio("Cosa vuoi posare?");
 			this.parametro = this.console.leggiRiga();
 		}

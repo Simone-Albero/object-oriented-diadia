@@ -26,8 +26,10 @@ public class ComandoPrendi extends AbstractComando {
 					trovatoAttrezzi = true;
 				}
 
-			if(!trovatoAttrezzi)
+			if(!trovatoAttrezzi) {
 				this.console.mostraMessaggio("Non ci sono attrezzi nella stanza!");
+				return;
+			}
 
 			this.console.mostraMessaggio("Cosa vuoi prendere?");
 			this.parametro = this.console.leggiRiga();

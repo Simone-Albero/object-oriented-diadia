@@ -9,6 +9,16 @@ public class ComandoRegala extends AbstractComando {
 
 	@Override
 	public void esegui(Partita partita) {
+		if(this.parametro==null) {
+			
+			this.console.mostraMessaggio("Ecco il tuo inventario:\n"+partita.getGiocatore().getBorsa().toString());
+			if(partita.getGiocatore().getBorsa().isEmpty())
+				return;
+			
+			this.console.mostraMessaggio("Cosa vuoi regalare?");
+			this.parametro = this.console.leggiRiga();
+		}
+		
 		if(partita.getGiocatore().getBorsa().hasAttrezzo(this.parametro)) {
 			Attrezzo present = partita.getGiocatore().getBorsa().removeAttrezzo(this.parametro);
 			this.console.mostraMessaggio(partita.getStanzaCorrente().getPersonaggio().riceviRegalo(present, partita));

@@ -24,8 +24,7 @@ import it.uniroma3.diadia.personaggi.AbstractPersonaggio;
  */
 public class Stanza {
 
-	static final private int NUMERO_MASSIMO_ATTREZZI = 10;
-
+	static final public int NUMERO_MASSIMO_ATTREZZI = 10;
 
 	private String nome;
 	private List<Attrezzo> attrezzi;
@@ -182,6 +181,15 @@ public class Stanza {
 	 */
 	public void setPersonaggio(AbstractPersonaggio personaggio) {
 		this.personaggio = personaggio;
+	}
+	
+	
+	/**
+	 * Riporta la lista delle stanze adiacenenti alla stanza corrente
+	 * @return Restituisce una lista di oggetti Istanza della classe Stanza
+	 */
+	public List<Stanza> getStanzeAdiacenti() {
+		return new LinkedList<Stanza>(stanzeAdiacenti.values());
 	}
 
 

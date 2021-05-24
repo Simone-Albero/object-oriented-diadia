@@ -5,9 +5,11 @@ import java.util.List;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.ComparatoreStanzaPerNumeroAttrezzi;
 import it.uniroma3.diadia.ambienti.Stanza;
+import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class Strega extends AbstractPersonaggio {
 	
+	private static final String MESSAGGIO_REGALO = "HaHaHaHa...";
 	private static final String MESSAGGIO_NEGATIVO = "Ma come... non si saluta?! ecco cosa ti meriti... puff!";
 	private static final String MESSAGGIO_POSITIVO = "Sei di buone maniere! che la fortuna ti assista... puff!";
 
@@ -40,6 +42,11 @@ public class Strega extends AbstractPersonaggio {
 		List<Stanza> list = stanza.getStanzeAdiacenti();
 		list.sort(new ComparatoreStanzaPerNumeroAttrezzi());
 		return list.get(list.size()-1);
+	}
+
+	@Override
+	public String riceviRegalo(Attrezzo attrezzo, Partita partita) {
+		return MESSAGGIO_REGALO;
 	}
 
 }

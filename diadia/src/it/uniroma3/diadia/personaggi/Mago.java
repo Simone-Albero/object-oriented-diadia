@@ -5,6 +5,8 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class Mago extends AbstractPersonaggio {
 
+	private static final String MESSAGGIO_REGALO = "Ho apprezzato il tuo regalo, permettimi di ricompensarti!";
+
 	private static final String MESSAGGIO_DONO = "Sei un vero simpaticone, " +
 			"con una mia magica azione, troverai un nuovo oggetto " +
 			"per il tuo borsone!";
@@ -31,6 +33,13 @@ public class Mago extends AbstractPersonaggio {
 			messaggio = MESSAGGIO_SCUSE;
 		}
 		return messaggio;
+	}
+
+	@Override
+	public String riceviRegalo(Attrezzo attrezzo, Partita partita) {
+		Attrezzo present = new Attrezzo (attrezzo.getNome(), attrezzo.getPeso()/2);
+		partita.getStanzaCorrente().addAttrezzo(present);
+		return MESSAGGIO_REGALO;
 	}
 
 }

@@ -20,6 +20,7 @@ public class ComandoAiuto extends AbstractComando {
 			"- posa: Permette se possibile di posare un oggetto in una stanza",
 			"- interagisci: Permette di interagire con un personaggio presente nella stanza",
 			"- saluta: permette di salutare un personaggio presente nella stanza",
+			"- regala: permette di regalare un attrezzo al personaggio presente nella stanza",
 	"- guarda: Da informazioni sullo stato della partita (stanza corrente e punteggio)"};
 
  

@@ -22,7 +22,7 @@ public class ComandoPrendiTest {
 	
 	@Before
 	public void setUp() {
-		Labirinto labirinto = new LabirintoBuilder().addEntrata("Atrio").addAttrezzo("matita", 1).getLabirinto();
+		Labirinto labirinto = new LabirintoBuilder().addEntrata("Atrio").addAttrezzo("matita", 1, "Atrio").getLabirinto();
 		this.partita = new Partita(labirinto);
 		this.console = new IOConsole();
 		

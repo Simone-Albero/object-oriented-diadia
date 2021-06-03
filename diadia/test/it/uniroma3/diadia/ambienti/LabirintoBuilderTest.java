@@ -15,7 +15,7 @@ public class LabirintoBuilderTest {
 	@Before
 	public void setUp() {
 		this.builder = new LabirintoBuilder(2,2);
-		this.builder.addStanza("Atrio").addAttrezzo("chiave", 1);
+		this.builder.addStanza("Atrio").addAttrezzo("chiave", 1, "Atrio");
 	}
 
 	@Test
@@ -57,24 +57,24 @@ public class LabirintoBuilderTest {
 	
 	@Test
 	public void testAddAttrezzoSuLabirintoNonPieno() {
-		assertTrue(this.builder.addAttrezzo("osso", 0).getLabirinto().getAttrezzi().contains(new Attrezzo("osso", 0)));
+		assertTrue(this.builder.addAttrezzo("osso", 0, "Atrio").getLabirinto().getAttrezzi().contains(new Attrezzo("osso", 0)));
 		assertEquals(2, this.builder.getLabirinto().getAttrezzi().size());
 	}
 	
 	@Test
 	public void testAddAttrezzoSuLabirintoPieno() {
-		assertFalse(this.builder.addAttrezzo("osso", 0).addAttrezzo("martello", 3).getLabirinto().getAttrezzi().contains(new Attrezzo("martello", 3)));
+		assertFalse(this.builder.addAttrezzo("osso", 0, "Atrio").addAttrezzo("martello", 3, "Atrio").getLabirinto().getAttrezzi().contains(new Attrezzo("martello", 3)));
 		assertEquals(2, this.builder.getLabirinto().getAttrezzi().size());
 	}
 	
 	@Test
 	public void testAddAttrezzoConNomeNonUnivoco() {
-		assertEquals(1, this.builder.addAttrezzo("chiave", 1).getLabirinto().getAttrezzi().size());
+		assertEquals(1, this.builder.addAttrezzo("chiave", 1, "Atrio").getLabirinto().getAttrezzi().size());
 	}
 	
 	@Test
 	public void testAddAttrezzoNullo() {
-		assertEquals(1, this.builder.addAttrezzo(null, 1).getLabirinto().getAttrezzi().size());
+		assertEquals(1, this.builder.addAttrezzo(null, 1, "Atrio").getLabirinto().getAttrezzi().size());
 	}
 
 	@Test
@@ -94,9 +94,9 @@ public class LabirintoBuilderTest {
 		assertEquals("Atrio", this.builder.addEntrata("Cucina").addAdiacenza("Cucina", "Atrio", "nord").getLabirinto().getEntrata().getStanzaAdiacente("nord").getNome());
 	}
 	
-	@Test
+	@Test (expected = IllegalArgumentException.class)
 	public void testAddAdiacenzaSuStanzeInesistenti() {
-		assertNull(this.builder.addEntrata("Cucina").addAdiacenza("Cucina", "Bagno", "nord").getLabirinto().getEntrata().getStanzaAdiacente("nord"));
+		this.builder.addEntrata("Cucina").addAdiacenza("Cucina", "Bagno", "nord").getLabirinto();
 	}
 
 }

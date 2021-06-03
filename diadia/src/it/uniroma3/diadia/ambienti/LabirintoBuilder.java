@@ -88,13 +88,17 @@ public class LabirintoBuilder {
 	 * @return Restituisce una istanza della medesima classe per permettere il method-chaining
 	 * @see Attrezzo
 	 */
-	public LabirintoBuilder addAttrezzo(String nome, int peso) {
+	public LabirintoBuilder addAttrezzo(String nome, int peso, String stanza) {
 		if(nome != null) {
 			Attrezzo attrezzo = new Attrezzo(nome, peso);
-			if (this.labirinto.addAttrezzo(attrezzo)) {
-				Stanza last = this.labirinto.getStanze().get(this.labirinto.getStanze().size()-1);
-				last.addAttrezzo(attrezzo);
+			Stanza curr = new Stanza(stanza);
+			if(this.labirinto.getStanze().contains(curr)) {
+				if (this.labirinto.addAttrezzo(attrezzo)) {
+					this.labirinto.getStanze().get(this.labirinto.getStanze().indexOf(curr)).addAttrezzo(attrezzo);
+				}
 			}
+			else
+				throw new IllegalArgumentException("Stanza inesistente");
 		}
 		return this;
 	}
@@ -182,6 +186,8 @@ public class LabirintoBuilder {
 				
 		if(index1 != -1 && index2 != -1)
 			this.labirinto.getStanze().get(index1).setStanzaAdiacente(direzione, this.labirinto.getStanze().get(index2));
+		else 
+			throw new IllegalArgumentException();
 		return this;
 	}
 	

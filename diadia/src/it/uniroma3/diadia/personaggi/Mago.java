@@ -13,20 +13,22 @@ public class Mago extends AbstractPersonaggio {
 	
 	private static final String MESSAGGIO_SCUSE = "Mi spiace, ma non ho piu' nulla...";
 	
-	private Attrezzo attrezzo;
-	
 	public Mago(String nome, String presentazione, Attrezzo attrezzo) {
 		super(nome, presentazione);
-		this.attrezzo = attrezzo;
+		this.setPresent(attrezzo);
+	}
+	
+	public Mago() {
+		super();
 	}
 	
 	@Override
 	public String agisci(Partita partita) {
 		String messaggio;
 	
-		if (this.attrezzo!=null) {
-			partita.getStanzaCorrente().addAttrezzo(this.attrezzo);
-			this.attrezzo = null;
+		if (this.getPresent()!=null) {
+			partita.getStanzaCorrente().addAttrezzo(this.getPresent());
+			this.setPresent(null);
 			messaggio = MESSAGGIO_DONO;
 		}
 		else {
@@ -37,8 +39,10 @@ public class Mago extends AbstractPersonaggio {
 
 	@Override
 	public String riceviRegalo(Attrezzo attrezzo, Partita partita) {
-		Attrezzo present = new Attrezzo (attrezzo.getNome(), attrezzo.getPeso()/2);
-		partita.getStanzaCorrente().addAttrezzo(present);
+		StringBuilder nome = new StringBuilder(attrezzo.getNome());
+		nome.reverse();
+		Attrezzo regalo = new Attrezzo (nome.toString(), attrezzo.getPeso()/2);
+		partita.getStanzaCorrente().addAttrezzo(regalo);
 		return MESSAGGIO_REGALO;
 	}
 

@@ -8,11 +8,20 @@ public abstract class AbstractPersonaggio {
 	private String nome;
 	private String presentazione;
 	private boolean haSalutato;
+	private Attrezzo present;
 
 	public AbstractPersonaggio(String nome, String presentazione) {
 		this.nome = nome;
 		this.presentazione = presentazione;
 		this.haSalutato = false;
+		this.present = null;
+	}
+	
+	public AbstractPersonaggio() {
+		this.nome = null;
+		this.presentazione = null;
+		this.haSalutato = false;
+		this.present = null;
 	}
 
 	public String getNome() {
@@ -30,6 +39,14 @@ public abstract class AbstractPersonaggio {
 	public void setPresentazione(String presentazione) {
 		this.presentazione = presentazione;
 	}
+	
+	public void setPresent(Attrezzo present) {
+		this.present = present;
+	}
+	
+	public Attrezzo getPresent() {
+		return this.present;
+	}
 
 	public boolean haSalutato() {
 		return this.haSalutato;
@@ -37,7 +54,7 @@ public abstract class AbstractPersonaggio {
 
 	public String saluta() {
 		StringBuilder risposta = new StringBuilder("Ciao, io sono ");
-		risposta.append(this.getNome()+".");
+		risposta.append(this.getNome()+". ");
 		
 		if (!haSalutato)
 			risposta.append(this.presentazione);

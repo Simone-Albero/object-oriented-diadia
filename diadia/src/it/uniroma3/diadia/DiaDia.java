@@ -2,7 +2,6 @@
 package it.uniroma3.diadia;
 
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.comandi.*;
 
 /**
@@ -81,22 +80,7 @@ public class DiaDia {
 	
 	public static void main(String[] argc) {
 		IO io = new IOConsole();
-		Labirinto labirinto = new LabirintoBuilder()
-			.addEntrata("Atrio")
-			.addUscita("Biblioteca")
-			.addStanza("Aula N10")
-			.addStanza("Aula N11")
-			.addStanza("Laboratorio Campus")
-			.addAttrezzo("osso",1,"atrio")
-			.addAttrezzo("lanterna", 3, "Aula N10")
-			.addAdiacenza("Atrio", "Biblioteca", "nord")
-			.addAdiacenza("Atrio", "Aula N10", "sud")
-			.addAdiacenza("Atrio", "Aula N11", "est")
-			.addAdiacenza("Atrio", "Laboratorio Campus", "ovest")
-			.addAdiacenza("Aula N11", "Laboratorio Campus", "est")
-			.addAdiacenza("Aula N10", "Aula N11", "est")
-			.addAdiacenza("Aula N10", "Laboratorio Campus", "ovest")
-			.getLabirinto();
+		Labirinto labirinto = new Labirinto("resources/labirinto1.txt");
 		DiaDia gioco = new DiaDia(io, labirinto);
 		
 		gioco.gioca();

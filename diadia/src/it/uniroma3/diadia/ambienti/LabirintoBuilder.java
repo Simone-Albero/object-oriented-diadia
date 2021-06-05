@@ -2,6 +2,7 @@
 package it.uniroma3.diadia.ambienti;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.personaggi.AbstractPersonaggio;
 
 /**
  * LabirintoBuilder:
@@ -44,14 +45,14 @@ public class LabirintoBuilder {
 	public LabirintoBuilder addEntrata(String stanza) {
 		if(stanza != null) {
 			Stanza that = new Stanza(stanza);
-			if(!this.labirinto.getStanze().contains(that)) {
+			if(this.labirinto.getStanze().indexOf(that)==-1) {
 				if(this.labirinto.addStanza(that))
 					this.labirinto.setEntrata(that);
 			}
 
 			else {
 				Stanza entrata = this.labirinto.getStanze().get(this.labirinto.getStanze().indexOf(that));
-				this.labirinto.setUscita(entrata);
+				this.labirinto.setEntrata(entrata);
 			}
 		}
 		return this;
@@ -67,7 +68,7 @@ public class LabirintoBuilder {
 	public LabirintoBuilder addUscita(String stanza) {
 		if(stanza != null) {
 			Stanza that = new Stanza(stanza);
-			if(!this.labirinto.getStanze().contains(that)) {
+			if(this.labirinto.getStanze().indexOf(that)==-1) {
 				if(this.labirinto.addStanza(that))	
 					this.labirinto.setUscita(that);
 			}
@@ -188,6 +189,33 @@ public class LabirintoBuilder {
 			this.labirinto.getStanze().get(index1).setStanzaAdiacente(direzione, this.labirinto.getStanze().get(index2));
 		else 
 			throw new IllegalArgumentException();
+		return this;
+	}
+	
+	@SuppressWarnings("deprecation")
+	public LabirintoBuilder addPersonaggio(String nome, String presentazione, String attrezzo, int peso, String stanza) {
+		AbstractPersonaggio personaggio = null;
+		
+		try {
+			StringBuilder nomeClasse = new StringBuilder("it.uniroma3.diadia.personaggi.");
+			nomeClasse.append(Character.toUpperCase(nome.charAt(0)));
+			nomeClasse.append(nome.substring(1));
+			personaggio = (AbstractPersonaggio)Class.forName(nomeClasse.toString()).newInstance();
+			personaggio.setNome(nome);
+			personaggio.setPresentazione(presentazione);
+			if(attrezzo!=null)
+				personaggio.setPresent(new Attrezzo(attrezzo, peso));
+			
+			int index = this.labirinto.getStanze().indexOf(new Stanza(stanza));
+			if(index != -1)
+				this.labirinto.getStanze().get(index).setPersonaggio(personaggio);
+			else 
+				throw new IllegalArgumentException();
+		}
+		catch(Exception e){
+			throw new IllegalArgumentException();
+		}
+		
 		return this;
 	}
 	

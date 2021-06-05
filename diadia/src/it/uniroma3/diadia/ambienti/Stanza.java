@@ -233,6 +233,8 @@ public class Stanza {
 		risultato.append(this.nome);
 		risultato.append("\nUscite: ");
 		risultato.append(this.stanzeAdiacenti.keySet().toString());
+		if(this.personaggio!=null)
+			risultato.append("\nPersonaggio: "+this.personaggio.getNome());
 		risultato.append("\nAttrezzi nella stanza: ");
 		if(this.attrezzi.isEmpty())
 			risultato.append("Nessun Oggetto");

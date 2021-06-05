@@ -16,6 +16,7 @@ public class StanzaBloccataTest {
 	@Before
 	public void setUp() {
 		this.stanzaBloccata = new StanzaBloccata("atrio", "ovest", "chiave");
+		this.stanzaBloccata.setStanzaAdiacente("nord", new Stanza("cucina"));
 	}
 
 	@Test
@@ -31,12 +32,12 @@ public class StanzaBloccataTest {
 	}
 	
 	@Test
-	public void testGetStanzaAdiacenteSuDirezioneNulla() {
-		assertEquals(this.stanzaBloccata, this.stanzaBloccata.getStanzaAdiacente(null) );
+	public void testGetStanzaAdiacenteSuDirezioneNonBloccata() {
+		assertEquals("cucina", this.stanzaBloccata.getStanzaAdiacente("nord").getNome() );
 	}
 	
 	@Test
 	public void testGetStanzaAdiacenteSuDirezioneInesistente() {
-		assertEquals(this.stanzaBloccata, this.stanzaBloccata.getStanzaAdiacente("pippo") );
+		assertEquals(null, this.stanzaBloccata.getStanzaAdiacente("pippo") );
 	}
 }

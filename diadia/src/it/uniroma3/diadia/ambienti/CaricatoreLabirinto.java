@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class CaricatoreLabirinto {
+	
+	private static final String PERSONAGGI = "Personaggi:";
+
 	private class FormatoFileNonValidoException extends Exception {
 		private static final long serialVersionUID = -531837953470380504L;
 		
@@ -16,6 +19,9 @@ public class CaricatoreLabirinto {
 	}
 
 	private final String  STANZE   = "Stanze:";
+	private static final String STANZE_BUIE = "Stanze buie:";
+	private static final String STANZE_MAGICHE = "Stanze magiche:";
+	private static final String STANZE_BLOCCATE = "Stanze bloccate:";
 	private final String  ATTREZZI = "Attrezzi:";
 	private final String  USCITE   = "Uscite:";
 	private final String  ESTREMI = "Estremi:";
@@ -38,9 +44,13 @@ public class CaricatoreLabirinto {
 	public Labirinto carica() {
 		try {
 			this.leggiStanze();
+			this.leggiStanzeBuie();
+			this.leggiStanzeBloccate();
+			this.leggiStanzeMagiche();
 			this.leggiInizialeEvincente();
 			this.leggiAttrezzi();
 			this.leggiAdiacenze();
+			this.leggiPersonaggi();
 		} catch (FormatoFileNonValidoException e) {
 			System.err.println(e.getMessage());
 			e.printStackTrace();
@@ -82,12 +92,99 @@ public class CaricatoreLabirinto {
 		if (!nomeStanza.equals(STANZE))
 			throw new FormatoFileNonValidoException("Formato file non valido [" + this.numeroLinea + "]"+": "+STANZE +" non trovato");
 		nomeStanza = this.leggiRiga(reader);
-		while (!nomeStanza.equals(ESTREMI)) {
+		while (!nomeStanza.equals(STANZE_BUIE)) {
 			this.builder.addStanza(nomeStanza);
 			nomeStanza = this.leggiRiga(reader);
 		}
 	}
 
+	private void leggiStanzeBuie() throws FormatoFileNonValidoException  {
+		String nomeStanza = null;
+		String nomeAttrezzo = null; 
+		String definizioneStanza = this.leggiRiga(reader);
+		
+		while (!definizioneStanza.equals(STANZE_BLOCCATE)) {
+			Scanner scannerDiLinea = new Scanner(definizioneStanza);
+			try {
+				nomeStanza = scannerDiLinea.next();
+				if (nomeStanza == null)
+					throw new FormatoFileNonValidoException("Terminazione inaspettata del file [" + this.numeroLinea + "].");
+				
+				nomeAttrezzo = scannerDiLinea.next();
+				if (nomeAttrezzo == null)
+					throw new FormatoFileNonValidoException("Terminazione inaspettata del file [" + this.numeroLinea + "].");
+				
+			}
+			finally {
+				if(!scannerDiLinea.hasNext())
+				scannerDiLinea.close();
+			}
+			
+			this.builder.addStanzaBuia(nomeStanza, nomeAttrezzo);
+			definizioneStanza = this.leggiRiga(reader);
+		}
+	}
+	
+	private void leggiStanzeBloccate() throws FormatoFileNonValidoException  {
+		String nomeStanza = null;
+		String direzione = null;
+		String nomeAttrezzo = null; 
+		String definizioneStanza = this.leggiRiga(reader);
+		
+		while (!definizioneStanza.equals(STANZE_MAGICHE)) {
+			Scanner scannerDiLinea = new Scanner(definizioneStanza);
+			try {
+				nomeStanza = scannerDiLinea.next();
+				if (nomeStanza == null)
+					throw new FormatoFileNonValidoException("Terminazione inaspettata del file [" + this.numeroLinea + "].");
+				
+				direzione = scannerDiLinea.next();
+				if (direzione == null)
+					throw new FormatoFileNonValidoException("Terminazione inaspettata del file [" + this.numeroLinea + "].");
+				
+				nomeAttrezzo = scannerDiLinea.next();
+				if (nomeAttrezzo == null)
+					throw new FormatoFileNonValidoException("Terminazione inaspettata del file [" + this.numeroLinea + "].");
+				
+			}
+			finally {
+				if(!scannerDiLinea.hasNext())
+				scannerDiLinea.close();
+			}
+			
+			this.builder.addStanzaBloccata(nomeStanza, direzione, nomeAttrezzo);
+			definizioneStanza = this.leggiRiga(reader);
+		}
+	}
+
+	private void leggiStanzeMagiche() throws FormatoFileNonValidoException  {
+		String nomeStanza = null;
+		int soglia = 0; 
+		String definizioneStanza = this.leggiRiga(reader);
+		
+		while (!definizioneStanza.equals(ESTREMI)) {
+			Scanner scannerDiLinea = new Scanner(definizioneStanza);
+			try {
+				nomeStanza = scannerDiLinea.next();
+				if (nomeStanza == null)
+					throw new FormatoFileNonValidoException("Terminazione inaspettata del file [" + this.numeroLinea + "].");
+				try {
+					soglia = Integer.parseInt(scannerDiLinea.next());
+				}
+				catch (NumberFormatException e) {
+					throw new FormatoFileNonValidoException("Soglia magica "+soglia+" non valida [" + this.numeroLinea + "].");
+				}
+			}
+			finally {
+				if(!scannerDiLinea.hasNext())
+				scannerDiLinea.close();
+			}
+			
+			this.builder.addStanzaMagica(nomeStanza, soglia);
+			definizioneStanza = this.leggiRiga(reader);
+		}
+	}
+	
 	private void leggiAttrezzi() throws FormatoFileNonValidoException {
 		String nomeAttrezzo = null;
 		int pesoAttrezzo = 0;
@@ -99,7 +196,7 @@ public class CaricatoreLabirinto {
 			try {
 				nomeAttrezzo = scannerDiLinea.next();
 				if (nomeAttrezzo == null)
-					throw new FormatoFileNonValidoException("Termine inaspettata del file [" + this.numeroLinea + "].");
+					throw new FormatoFileNonValidoException("Terminazione inaspettata del file [" + this.numeroLinea + "].");
 				try {
 					pesoAttrezzo = Integer.parseInt(scannerDiLinea.next());
 				}
@@ -107,6 +204,9 @@ public class CaricatoreLabirinto {
 					throw new FormatoFileNonValidoException("Peso attrezzo "+nomeAttrezzo+" non valido [" + this.numeroLinea + "].");
 				}
 				nomeStanza = scannerDiLinea.next();
+				if (nomeStanza == null)
+					throw new FormatoFileNonValidoException("Terminazione inaspettata del file [" + this.numeroLinea + "].");
+				
 			}
 			finally {
 				if(!scannerDiLinea.hasNext())
@@ -128,7 +228,7 @@ public class CaricatoreLabirinto {
 		String stanzaThat= null;
 		String direzione = null;
 		String datiAdiacenza = this.leggiRiga(reader);
-		while (datiAdiacenza != null) {
+		while (!datiAdiacenza.equals(PERSONAGGI)) {
 			Scanner scannerDiLinea = new Scanner(datiAdiacenza);	
 			try {
 			while (scannerDiLinea.hasNext()) {
@@ -152,5 +252,59 @@ public class CaricatoreLabirinto {
 			
 		}
 	}
+	
+	private void leggiPersonaggi() throws FormatoFileNonValidoException {
+		String nome = null;
+		String presentazione = null;
+		String nomeAttrezzo = null;
+		int pesoAttrezzo = 0;
+		String nomeStanza = null; 
+		String definizionePersonaggio = this.leggiRiga(reader);
+		
+		while (definizionePersonaggio != null) {
+			nomeAttrezzo = null;
+			pesoAttrezzo = 0;
+			Scanner scannerDiLinea = new Scanner(definizionePersonaggio);
+			scannerDiLinea.useDelimiter(", ");
+			try {
+				nome = scannerDiLinea.next();
+				if (nome == null)
+					throw new FormatoFileNonValidoException("Terminazione inaspettata del file [" + this.numeroLinea + "].");
+				
+				presentazione = scannerDiLinea.next();
+				if (presentazione == null)
+					throw new FormatoFileNonValidoException("Terminazione inaspettata del file [" + this.numeroLinea + "].");
+				
+				nomeStanza = scannerDiLinea.next();
+				if (nomeStanza == null)
+					throw new FormatoFileNonValidoException("Terminazione inaspettata del file [" + this.numeroLinea + "].");
+				
+				if(scannerDiLinea.hasNext()) {
+					nomeAttrezzo = scannerDiLinea.next();
+					if (nomeAttrezzo == null)
+						throw new FormatoFileNonValidoException("Terminazione inaspettata del file [" + this.numeroLinea + "].");
 
+					try {
+						pesoAttrezzo = Integer.parseInt(scannerDiLinea.next());
+					}
+					catch (NumberFormatException e) {
+						throw new FormatoFileNonValidoException("Peso attrezzo "+nomeAttrezzo+" non valido [" + this.numeroLinea + "].");
+					}
+				}
+				
+			}
+			finally {
+				if(!scannerDiLinea.hasNext())
+				scannerDiLinea.close();
+			}
+			try {
+				this.builder.addPersonaggio(nome, presentazione, nomeAttrezzo, pesoAttrezzo, nomeStanza);
+			}
+			catch (IllegalArgumentException e) {
+				throw new FormatoFileNonValidoException("Definizione personaggio "+nome+" errata [" + this.numeroLinea + "]");
+			} 
+			
+			definizionePersonaggio = this.leggiRiga(reader);
+		}
+	}
 }

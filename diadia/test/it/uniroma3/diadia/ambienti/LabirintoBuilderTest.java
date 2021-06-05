@@ -20,7 +20,7 @@ public class LabirintoBuilderTest {
 
 	@Test
 	public void testAddEntrataSuStanzaPresenteInLabirinto() {
-		assertNull(this.builder.addEntrata("Atrio").getLabirinto().getEntrata());
+		assertEquals(new Stanza("Atrio"), this.builder.addEntrata("Atrio").getLabirinto().getEntrata());
 		assertEquals(1, this.builder.getLabirinto().getStanze().size());
 	}
 	

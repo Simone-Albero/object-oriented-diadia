@@ -8,11 +8,13 @@ public class Cane extends AbstractPersonaggio {
 	private static final String CIBO_PREFERITO = "osso";
 	private static final String MESSAGGIO = "Woff-Woff!";
 	
-	private Attrezzo present;
+	public Cane() {
+		super();	
+	}
 	
 	public Cane(String nome, String presentazione, Attrezzo attrezzo) {
 		super(nome, presentazione);
-		this.present = attrezzo;
+		this.setPresent(attrezzo);
 	}
 
 	@Override
@@ -20,18 +22,18 @@ public class Cane extends AbstractPersonaggio {
 		partita.getGiocatore().setCfu(partita.getGiocatore().getCfu()-1);
 		return MESSAGGIO;
 	}
-	
-	public void setPresent(Attrezzo present) {
-		this.present = present;
-	}
 
 	@Override
 	public String riceviRegalo(Attrezzo attrezzo, Partita partita) {
 		if(attrezzo.getNome().equals(CIBO_PREFERITO)) {
-			partita.getStanzaCorrente().addAttrezzo(this.present);
+			partita.getStanzaCorrente().addAttrezzo(this.getPresent());
+			this.setPresent(attrezzo);
 		}
-		else
+		else {
 			partita.getGiocatore().setCfu(partita.getGiocatore().getCfu()-1);
+			partita.getStanzaCorrente().addAttrezzo(this.getPresent());
+			this.setPresent(attrezzo);
+		}
 		
 		return MESSAGGIO;
 	}

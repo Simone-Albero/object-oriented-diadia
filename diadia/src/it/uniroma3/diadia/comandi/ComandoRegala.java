@@ -11,9 +11,13 @@ public class ComandoRegala extends AbstractComando {
 	public void esegui(Partita partita) {
 		if(this.parametro==null) {
 			
-			this.console.mostraMessaggio("Ecco il tuo inventario:\n"+partita.getGiocatore().getBorsa().toString());
-			if(partita.getGiocatore().getBorsa().isEmpty())
+			if(partita.getGiocatore().getBorsa().isEmpty()) {
+				this.console.mostraMessaggio("Non hai oggetti da regalare!");
 				return;
+			}
+			else 
+				this.console.mostraMessaggio("Ecco il tuo inventario:\n"+partita.getGiocatore().getBorsa().toString());
+				
 			
 			this.console.mostraMessaggio("Cosa vuoi regalare?");
 			this.parametro = this.console.leggiRiga();

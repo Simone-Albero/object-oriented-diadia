@@ -17,6 +17,10 @@ public class Strega extends AbstractPersonaggio {
 	public Strega(String nome, String presentazione) {
 		super(nome, presentazione);
 	}
+	
+	public Strega() {
+		super();
+	}
 
 	@Override
 	public String agisci(Partita partita) {

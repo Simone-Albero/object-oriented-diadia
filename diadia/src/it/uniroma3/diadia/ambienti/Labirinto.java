@@ -52,6 +52,21 @@ public class Labirinto {
 		this.uscita = null;
 	}
 	
+	/**
+	 * carica un Labirinto da un file
+	 * @param nomeFile
+	 */
+	public Labirinto(String nomeFile) {
+		CaricatoreLabirinto c =	new CaricatoreLabirinto(nomeFile);
+		Labirinto load = c.carica();
+		this.stanze = load.getStanze();
+		this.maxStanze = DEF_MAX_STANZE;
+		this.attrezzi = load.getAttrezzi();
+		this.maxAttrezzi = DEF_MAX_ATTREZZI;
+		this.entrata = load.getEntrata();
+		this.uscita = load.getUscita();
+	}
+	
 	
 	/**
 	 * Riporta la stanza iniziale "entrata"

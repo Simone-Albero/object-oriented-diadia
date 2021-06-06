@@ -3,6 +3,7 @@ package it.uniroma3.diadia.personaggi;
 import java.util.Collections;
 import java.util.List;
 
+import it.uniroma3.diadia.CaricaotreCostanti;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.ComparatoreStanzaPerNumeroAttrezzi;
 import it.uniroma3.diadia.ambienti.Stanza;
@@ -10,10 +11,10 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class Strega extends AbstractPersonaggio {
 	
-	private static final String MESSAGGIO_REGALO = "HaHaHaHa...";
-	private static final String MESSAGGIO_NEGATIVO = "Ma come... non si saluta?! ecco cosa ti meriti... puff!";
-	private static final String MESSAGGIO_POSITIVO = "Sei di buone maniere! che la fortuna ti assista... puff!";
-
+	private static final String MESSAGGIO_AZIONE_NEGATIVA = CaricaotreCostanti.getCostante("strega_messaggio_azione_negativa");
+	private static final String MESSAGGIO_AZIONE_POSITIVA = CaricaotreCostanti.getCostante("strega_messaggio_azione_positiva");
+	private static final String MESSAGGIO_DONO = CaricaotreCostanti.getCostante("strega_messaggio_dono");
+	
 	public Strega(String nome, String presentazione) {
 		super(nome, presentazione);
 	}
@@ -27,11 +28,11 @@ public class Strega extends AbstractPersonaggio {
 		String messaggio;
 		
 		if(this.haSalutato()) {
-			messaggio = MESSAGGIO_POSITIVO;
+			messaggio = MESSAGGIO_AZIONE_POSITIVA;
 			partita.setStanzaCorrente(getStanzaMaxAttrezzi(partita.getStanzaCorrente()));
 		}
 		else {
-			messaggio = MESSAGGIO_NEGATIVO;
+			messaggio = MESSAGGIO_AZIONE_NEGATIVA;
 			partita.setStanzaCorrente(getStanzaMinAttrezzi(partita.getStanzaCorrente()));	
 		}
 		return messaggio;
@@ -50,7 +51,7 @@ public class Strega extends AbstractPersonaggio {
 
 	@Override
 	public String riceviRegalo(Attrezzo attrezzo, Partita partita) {
-		return MESSAGGIO_REGALO;
+		return MESSAGGIO_DONO;
 	}
 
 }

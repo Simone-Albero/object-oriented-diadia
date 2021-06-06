@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import it.uniroma3.diadia.CaricaotreCostanti;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.personaggi.AbstractPersonaggio;
 
@@ -24,7 +25,7 @@ import it.uniroma3.diadia.personaggi.AbstractPersonaggio;
  */
 public class Stanza {
 
-	static final public int NUMERO_MASSIMO_ATTREZZI = 10;
+	static final public int NUMERO_MASSIMO_ATTREZZI = Integer.parseInt(CaricaotreCostanti.getCostante("stanza_max_attrezzi"));
 
 	private String nome;
 	private List<Attrezzo> attrezzi;

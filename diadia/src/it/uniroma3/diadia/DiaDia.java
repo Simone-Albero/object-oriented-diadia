@@ -55,7 +55,6 @@ public class DiaDia {
 		while (!processaIstruzione(istruzione));
 	}   
 
-
 	/**
 	 * Processa un comando
 	 * @return  Restituisce TRUE se il comando e' eseguito e il gioco continua, altrimenti FALSE
@@ -80,7 +79,7 @@ public class DiaDia {
 	
 	public static void main(String[] argc) {
 		IO io = new IOConsole();
-		Labirinto labirinto = new Labirinto("resources/labirinto1.txt");
+		Labirinto labirinto = new Labirinto(ClassLoader.getSystemResource("labirinto1.txt").getFile());
 		DiaDia gioco = new DiaDia(io, labirinto);
 		
 		gioco.gioca();

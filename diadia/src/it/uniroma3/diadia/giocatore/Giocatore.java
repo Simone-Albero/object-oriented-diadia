@@ -2,6 +2,7 @@
 package it.uniroma3.diadia.giocatore;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.CaricaotreCostanti;
 import it.uniroma3.diadia.ambienti.Stanza;
 
 /**
@@ -16,7 +17,7 @@ import it.uniroma3.diadia.ambienti.Stanza;
  */
 public class Giocatore {
 	
-	static final private int CFU_INIZIALI = 20;
+	static final private int CFU_INIZIALI = Integer.parseInt(CaricaotreCostanti.getCostante("cfu_iniziali"));
 	
 	private Borsa borsa;
 	private int cfu;

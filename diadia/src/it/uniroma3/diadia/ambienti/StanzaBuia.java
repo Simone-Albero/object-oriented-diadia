@@ -1,6 +1,8 @@
 
 package it.uniroma3.diadia.ambienti;
 
+import it.uniroma3.diadia.CaricaotreCostanti;
+
 /**
  * StanzaBuia:
  * Questa classe è un estensione della classe Stanza
@@ -15,7 +17,7 @@ package it.uniroma3.diadia.ambienti;
 public class StanzaBuia extends Stanza {
 	
 	public static final String Buio = "Quì c'è buio pesto!!";
-	private final static String attrezzoLuminosoDef = "lanterna"; 
+	private final static String attrezzoLuminosoDef = CaricaotreCostanti.getCostante("def_attrezzo_luminoso"); 
 	private String attrezzoLuminoso;
 	
 	/**

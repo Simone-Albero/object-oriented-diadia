@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import it.uniroma3.diadia.CaricaotreCostanti;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 /**
@@ -21,8 +22,8 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
  * @version base
  */
 public class Labirinto {
-	private final static int DEF_MAX_STANZE = 5;
-	private final static int DEF_MAX_ATTREZZI = 5;
+	private final static int DEF_MAX_STANZE = Integer.parseInt(CaricaotreCostanti.getCostante("labirinto_max_stanze"));
+	private final static int DEF_MAX_ATTREZZI = Integer.parseInt(CaricaotreCostanti.getCostante("labirinto_max_attrezzi"));
 	
 	private Stanza entrata;
 	private Stanza uscita;

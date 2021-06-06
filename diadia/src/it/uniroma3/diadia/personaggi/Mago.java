@@ -1,17 +1,14 @@
 package it.uniroma3.diadia.personaggi;
 
+import it.uniroma3.diadia.CaricaotreCostanti;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class Mago extends AbstractPersonaggio {
 
-	private static final String MESSAGGIO_REGALO = "Ho apprezzato il tuo regalo, permettimi di ricompensarti!";
-
-	private static final String MESSAGGIO_DONO = "Sei un vero simpaticone, " +
-			"con una mia magica azione, troverai un nuovo oggetto " +
-			"per il tuo borsone!";
-	
-	private static final String MESSAGGIO_SCUSE = "Mi spiace, ma non ho piu' nulla...";
+	private static final String MESSAGGIO_AZIONE = CaricaotreCostanti.getCostante("mago_messaggio_azione");
+	private static final String MESSAGGIO_SCUSE = CaricaotreCostanti.getCostante("mago_messaggio_scuse");
+	private static final String MESSAGGIO_DONO = CaricaotreCostanti.getCostante("mago_messaggio_dono");
 	
 	public Mago(String nome, String presentazione, Attrezzo attrezzo) {
 		super(nome, presentazione);
@@ -29,7 +26,7 @@ public class Mago extends AbstractPersonaggio {
 		if (this.getPresent()!=null) {
 			partita.getStanzaCorrente().addAttrezzo(this.getPresent());
 			this.setPresent(null);
-			messaggio = MESSAGGIO_DONO;
+			messaggio = MESSAGGIO_AZIONE;
 		}
 		else {
 			messaggio = MESSAGGIO_SCUSE;
@@ -43,7 +40,7 @@ public class Mago extends AbstractPersonaggio {
 		nome.reverse();
 		Attrezzo regalo = new Attrezzo (nome.toString(), attrezzo.getPeso()/2);
 		partita.getStanzaCorrente().addAttrezzo(regalo);
-		return MESSAGGIO_REGALO;
+		return MESSAGGIO_DONO;
 	}
 
 }

@@ -1,5 +1,6 @@
 
 package it.uniroma3.diadia;
+import java.util.Scanner;
 
 import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.comandi.*;
@@ -78,10 +79,17 @@ public class DiaDia {
 
 	
 	public static void main(String[] argc) {
-		IO io = new IOConsole();
-		Labirinto labirinto = new Labirinto(ClassLoader.getSystemResource("labirinto1.txt").getFile());
-		DiaDia gioco = new DiaDia(io, labirinto);
+		Scanner scannerDiLinee = new Scanner(System.in);
+		IO io = new IOConsole(scannerDiLinee);
+		Labirinto labirinto = new Labirinto(ClassLoader.getSystemResourceAsStream("labirinto1.txt"));
 		
+		DiaDia gioco = new DiaDia(io, labirinto);
 		gioco.gioca();
+		
+		try {
+			scannerDiLinee.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

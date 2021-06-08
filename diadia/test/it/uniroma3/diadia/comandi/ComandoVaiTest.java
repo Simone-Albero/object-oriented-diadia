@@ -6,6 +6,8 @@ import it.uniroma3.diadia.fixture.Fixture;
 
 import static org.junit.Assert.*;
 
+import java.util.Scanner;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,9 +21,10 @@ public class ComandoVaiTest {
 
 	@Before
 	public void setUp() {
-		Labirinto labirinto = new LabirintoBuilder().addEntrata("Atrio").addUscita("Biblioteca").addAdiacenza("Atrio", "Biblioteca", "nord").getLabirinto();
+		Labirinto labirinto = Labirinto.newBuilder().addEntrata("Atrio").addUscita("Biblioteca").addAdiacenza("Atrio", "Biblioteca", "nord").getLabirinto();
 		this.partita = new Partita(labirinto);
-		this.console = new IOConsole();
+		Scanner scanner = new Scanner(System.in);
+		this.console = new IOConsole(scanner);
 		
 		comando = new ComandoVai();
 		comando.setIO(this.console);

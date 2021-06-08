@@ -4,7 +4,6 @@ package it.uniroma3.diadia.fixture;
 import it.uniroma3.diadia.DiaDia;
 import it.uniroma3.diadia.IOSimulator;
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 
 public class Fixture {
 	public static IOSimulator creaSimulazioneEGioca(String[] comandi, Labirinto lab) {
@@ -15,7 +14,7 @@ public class Fixture {
 	}
 	
 	public static Labirinto labirintoDefault() {
-		return new LabirintoBuilder()
+		return Labirinto.newBuilder()
 				.addEntrata("Atrio")
 				.addUscita("Biblioteca")
 				.addStanza("Aula N10")

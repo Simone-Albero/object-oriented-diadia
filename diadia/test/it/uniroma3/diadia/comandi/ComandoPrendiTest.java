@@ -2,11 +2,12 @@ package it.uniroma3.diadia.comandi;
 
 import it.uniroma3.diadia.*;
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.fixture.Fixture;
 
 import static org.junit.Assert.*;
+
+import java.util.Scanner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -22,9 +23,10 @@ public class ComandoPrendiTest {
 	
 	@Before
 	public void setUp() {
-		Labirinto labirinto = new LabirintoBuilder().addEntrata("Atrio").addAttrezzo("matita", 1, "Atrio").getLabirinto();
+		Labirinto labirinto = Labirinto.newBuilder().addEntrata("Atrio").addAttrezzo("matita", 1, "Atrio").getLabirinto();
 		this.partita = new Partita(labirinto);
-		this.console = new IOConsole();
+		Scanner scanner = new Scanner(System.in);
+		this.console = new IOConsole(scanner);
 		
 		comando = new ComandoPrendi();
 		comando.setIO(console);

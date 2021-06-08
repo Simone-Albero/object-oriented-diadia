@@ -12,6 +12,11 @@ import java.util.Scanner;
  * @version base
  */
 public class IOConsole implements IO{
+	private Scanner scannerDiLinee;
+	
+	public IOConsole(Scanner scanner) {
+		this.scannerDiLinee = scanner;
+	}
 	
 	/**
 	 * Stampa a schermo un messaggio a partire da una stringa 
@@ -26,9 +31,7 @@ public class IOConsole implements IO{
 	 * @return Restituisce una stringa 
 	 */
 	public String leggiRiga() {
-		Scanner scannerDiLinee = new Scanner(System.in);
 		String riga = scannerDiLinee.nextLine();
-		//scannerDiLinee.close();
 		return riga;
 	}
 }

@@ -1,10 +1,13 @@
 package it.uniroma3.diadia.ambienti;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.Scanner;
+
+import it.uniroma3.diadia.ambienti.Labirinto.LabirintoBuilder;
 
 public class CaricatoreLabirinto {
 	
@@ -30,13 +33,14 @@ public class CaricatoreLabirinto {
 	
 	private LabirintoBuilder builder; 
 	
-	public CaricatoreLabirinto(String nomeFile) {
+	public CaricatoreLabirinto(InputStream fileStream) {
 		this.numeroLinea = 0;
-		this.builder = new LabirintoBuilder();
+		this.builder = Labirinto.newBuilder();
 		try {
-			this.reader = new BufferedReader(new FileReader(nomeFile));
-		} catch (FileNotFoundException e) {
-			System.err.println("File " + nomeFile + " non trovato");
+			Reader file = new InputStreamReader(fileStream);
+			this.reader = new BufferedReader(file);
+		} catch (Exception e) {
+			System.err.println("File non trovato");
 			e.printStackTrace();
 		}
 	}

@@ -3,6 +3,8 @@ package it.uniroma3.diadia.comandi;
 import it.uniroma3.diadia.*;
 import static org.junit.Assert.*;
 
+import java.util.Scanner;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,7 +17,8 @@ public class FabbricaDiComandiFisarmonicaTest {
 
 	@Before
 	public void setUp() {
-		this.console = new IOConsole();
+		Scanner scanner = new Scanner(System.in);
+		this.console = new IOConsole(scanner);
 		this.factory = new FabbricaDiComandiFisarmonica();
 
 	}

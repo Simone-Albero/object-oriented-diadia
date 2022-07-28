@@ -1,0 +1,27 @@
+Stanze:
+Biblioteca
+Stanze buie:
+N11 lanterna
+Stanze bloccate:
+Atrio nord chiave
+Laboratorio_Campus est martello
+Stanze magiche:
+N10 3
+Estremi:
+Atrio
+Biblioteca
+Attrezzi:
+osso 1 Atrio
+lanterna 3 N10
+Uscite:
+Atrio Biblioteca nord
+Atrio N10 sud
+Atrio N11 est
+Atrio Laboratorio_Campus ovest
+N11 Laboratorio_Campus est
+N10 N11 est
+N10 Laboratorio_Campus ovest
+Personaggi:
+cane, Woof Woof!, Laboratorio_Campus, chiave, 2
+mago, La mia magia ti guiderà!, Atrio, martello, 5
+strega, Attento viandante! grossi pericoli ti attendono!, N10
